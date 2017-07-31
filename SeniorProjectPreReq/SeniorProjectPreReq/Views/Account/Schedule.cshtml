@@ -1,0 +1,22 @@
+﻿
+<div>
+       
+@foreach (var m in ViewData.Model)
+{
+    <p>
+        Title: @m.Title
+        <br />
+        Start: @m.StartTime
+        <br />
+        End: @m.EndTime
+        <br />
+      @Html.ActionLink("Remove Shift", "Remove")
+
+
+    </p>
+}   
+    @Html.ActionLink("Create Shift", "Create")
+
+    </div>
+
+
