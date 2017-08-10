@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OpportunitiesController.cs" />
     <Compile Include="Controllers\VolunteersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,6 +208,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Opportunity.cs" />
     <Compile Include="Models\Shifts.cs">
       <DependentUpon>ShiftsDBModel.tt</DependentUpon>
     </Compile>
@@ -314,6 +316,11 @@
     <Content Include="Views\Volunteers\Details.cshtml" />
     <Content Include="Views\Volunteers\Edit.cshtml" />
     <Content Include="Views\Volunteers\Index.cshtml" />
+    <Content Include="Views\Opportunities\Create.cshtml" />
+    <Content Include="Views\Opportunities\Delete.cshtml" />
+    <Content Include="Views\Opportunities\Details.cshtml" />
+    <Content Include="Views\Opportunities\Edit.cshtml" />
+    <Content Include="Views\Opportunities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -8,15 +8,15 @@ namespace SeniorProjectPreReq.Models
 {
     public class Volunteer
     {
-        public int ID { get; set; }
+        public int iD { get; set; }
 
         
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public bool PendingApproval { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+        public bool pendingApproval { get; set; }
         public bool approved { get; set; }
 
     }
