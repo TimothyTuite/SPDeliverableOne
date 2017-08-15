@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SeniorProjectPreReq.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace SeniorProjectPreReq.Controllers
 {
@@ -25,6 +27,10 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult Schedule()
         {
             ViewData.Model = _db.Shifts.ToList();
+            return View();
+        }
+        public ActionResult UserHome()
+        {
             return View();
         }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -62,6 +68,8 @@ namespace SeniorProjectPreReq.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // Create the Admin account using setting in Web.Config (if needed)
+            CreateAdminIfNeeded();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -84,7 +92,7 @@ namespace SeniorProjectPreReq.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal("/Account/UserHome");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -168,7 +176,7 @@ namespace SeniorProjectPreReq.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Account", "UserHome");
                 }
                 AddErrors(result);
             }
@@ -361,7 +369,7 @@ namespace SeniorProjectPreReq.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Account", "UserHome");
             }
 
             if (ModelState.IsValid)
@@ -486,5 +494,48 @@ namespace SeniorProjectPreReq.Controllers
             }
         }
         #endregion
+        // Utility
+        // Add RoleManager
+        #region public ApplicationRoleManager RoleManager
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+        #endregion
+        // Add CreateAdminIfNeeded
+        #region private void CreateAdminIfNeeded()
+        private void CreateAdminIfNeeded()
+        {
+            // Get Admin Account
+            string AdminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+            string AdminPassword = ConfigurationManager.AppSettings["AdminPassword"];
+            // See if Admin exists
+            var objAdminUser = UserManager.FindByEmail(AdminUserName);
+            if (objAdminUser == null)
+            {
+                //See if the Admin role exists
+                if (!RoleManager.RoleExists("Administrator"))
+                {
+                    // Create the Admin Role (if needed)
+                    IdentityRole objAdminRole = new IdentityRole("Administrator");
+                    RoleManager.Create(objAdminRole);
+                }
+                // Create Admin user
+                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminUserName };
+                var AdminUserCreateResult = UserManager.Create(objNewAdminUser, AdminPassword);
+                // Put user in Admin role
+                UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
+            }
+        }
+        #endregion
     }
+
 }
