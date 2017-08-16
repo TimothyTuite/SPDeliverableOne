@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using SeniorProjectPreReq.Models; 
 using PagedList;
 namespace SeniorProjectPreReq.Controllers
 {
@@ -43,7 +43,7 @@ namespace SeniorProjectPreReq.Controllers
                     }
                 }
                 ViewBag.CurrentFilter = searchStringUserNameOrEmail;
-                List col_UserDTO = new List();
+                List<UserRoles.ExpandedUserDTO> col_UserDTO = new List<UserRoles.ExpandedUserDTO>();
                 int intSkip = (intPage - 1) * intPageSize;
                 intTotalPageCount = UserManager.Users
                     .Where(x => x.UserName.Contains(searchStringUserNameOrEmail))
@@ -56,7 +56,7 @@ namespace SeniorProjectPreReq.Controllers
                     .ToList();
                 foreach (var item in result)
                 {
-                    ExpandedUserDTO objUserDTO = new ExpandedUserDTO();
+                    UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
                     objUserDTO.UserName = item.UserName;
                     objUserDTO.Email = item.Email;
                     objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
@@ -64,7 +64,7 @@ namespace SeniorProjectPreReq.Controllers
                 }
                 // Set the number of pages
                 var _UserDTOAsIPagedList =
-                    new StaticPagedList<ExpandedUserDTO>
+                    new StaticPagedList<UserRoles.ExpandedUserDTO>
                     (
                         col_UserDTO, intPage, intPageSize, intTotalPageCount
                         );
@@ -73,7 +73,7 @@ namespace SeniorProjectPreReq.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Error: " + ex);
-                List col_UserDTO = new List();
+                List<UserRoles.ExpandedUserDTO> col_UserDTO = new List<UserRoles.ExpandedUserDTO>();
                 return View(col_UserDTO.ToPagedList(1, 25));
             }
         }
@@ -87,7 +87,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return _userManager ??
                     HttpContext.GetOwinContext()
-                    .GetUserManager();
+                    .GetUserManager<ApplicationUserManager>();
             }
             private set
             {
@@ -102,7 +102,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return _roleManager ??
                     HttpContext.GetOwinContext()
-                    .GetUserManager();
+                    .GetUserManager<ApplicationRoleManager>();
             }
             private set
             {

@@ -11,7 +11,8 @@ using Microsoft.Owin.Security;
 using SeniorProjectPreReq.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Configuration;
-
+using System.Collections.Generic;
+using PagedList;
 namespace SeniorProjectPreReq.Controllers
 {
     [Authorize]
@@ -176,7 +177,7 @@ namespace SeniorProjectPreReq.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Account", "UserHome");
+                    return RedirectToAction("UserHome", "Account");
                 }
                 AddErrors(result);
             }
@@ -502,7 +503,7 @@ namespace SeniorProjectPreReq.Controllers
         {
             get
             {
-                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<>();
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
             private set
             {
@@ -514,11 +515,13 @@ namespace SeniorProjectPreReq.Controllers
         #region private void CreateAdminIfNeeded()
         private void CreateAdminIfNeeded()
         {
+            System.Diagnostics.Debug.WriteLine("Creat admin if needed running");
             // Get Admin Account
             string AdminUserName = ConfigurationManager.AppSettings["AdminUserName"];
             string AdminPassword = ConfigurationManager.AppSettings["AdminPassword"];
             // See if Admin exists
             var objAdminUser = UserManager.FindByEmail(AdminUserName);
+          
             if (objAdminUser == null)
             {
                 //See if the Admin role exists
@@ -529,10 +532,14 @@ namespace SeniorProjectPreReq.Controllers
                     RoleManager.Create(objAdminRole);
                 }
                 // Create Admin user
-                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminUserName };
+                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminUserName, Id = "1" };
                 var AdminUserCreateResult = UserManager.Create(objNewAdminUser, AdminPassword);
+                System.Diagnostics.Debug.WriteLine("Admin Created", AdminUserCreateResult); 
                 // Put user in Admin role
                 UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
+            }else
+            {
+                System.Diagnostics.Debug.WriteLine("Admin Found", objAdminUser);
             }
         }
         #endregion
