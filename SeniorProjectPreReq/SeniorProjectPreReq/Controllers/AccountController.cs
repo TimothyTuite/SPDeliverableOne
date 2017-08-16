@@ -93,6 +93,11 @@ namespace SeniorProjectPreReq.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    if (UserManager.IsInRole(user.Id, "Administrator"))
+                    {
+                        return RedirectToLocal("/Admin");
+                    }
                     return RedirectToLocal("/Account/UserHome");
                 case SignInStatus.LockedOut:
                     return View("Lockout");

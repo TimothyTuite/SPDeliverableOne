@@ -1,7 +1,45 @@
 ﻿
     @using PagedList.Mvc;
     @model PagedList.IPagedList<SeniorProjectPreReq.Models.UserRoles.ExpandedUserDTO>
+<div class="jumbotron">
+    <h1>Administration Page</h1>
+</div>
+@Html.ActionLink("Change Volunteer Filter", "Create", null, new { @class = "btn btn-default" })
 
-<p>
-    @Html.ActionLink("Create New","Create", null, new {  @class = "btn btn-default"})
-</p>
+<ul>
+    <li>@Html.ActionLink("Search Volunteers", "Create", null, new { @class = "btn btn-default" })</li>
+    <li>@Html.ActionLink("View Volunteer Oppertunity Matches", "Create", null, new { @class = "btn btn-default" })</li>
+    <li>@Html.ActionLink("Edit Volunteer", "Create", null, new { @class = "btn btn-default" })</li>
+    <li>@Html.ActionLink("Add New Volunteer", "Create", null, new { @class = "btn btn-default" })</li>
+</ul>
+@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+{
+    <div class="form-group">
+        Search: &nbsp; @Html.TextBox("searchStringUserNameOrEmail", ViewBag.CurrentFilter as string) 
+        <input type="submit" value="search" />
+    </div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int i = 1;}
+        @foreach (var item in Model) {
+           
+        <tr>
+            <td>@Html.Display(Convert.ToString(i))</td>
+            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+            
+            
+        </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
