@@ -9,7 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SeniorProjectPreReq.Models;
-
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
+using System.Collections.Generic;
+using PagedList;
 namespace SeniorProjectPreReq.Controllers
 {
     [Authorize]
@@ -17,11 +20,20 @@ namespace SeniorProjectPreReq.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        ShiftsEntities _db;
         public AccountController()
         {
+            _db = new ShiftsEntities();
         }
-
+        public ActionResult Schedule()
+        {
+            ViewData.Model = _db.Shifts.ToList();
+            return View();
+        }
+        public ActionResult UserHome()
+        {
+            return View();
+        }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
@@ -57,6 +69,8 @@ namespace SeniorProjectPreReq.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            // Create the Admin account using setting in Web.Config (if needed)
+            CreateAdminIfNeeded();
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -79,7 +93,12 @@ namespace SeniorProjectPreReq.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var user = await UserManager.FindAsync(model.Email, model.Password);
+                    if (UserManager.IsInRole(user.Id, "Administrator"))
+                    {
+                        return RedirectToLocal("/Admin");
+                    }
+                    return RedirectToLocal("/Account/UserHome");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -136,7 +155,7 @@ namespace SeniorProjectPreReq.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Register()
         {
             return View();
@@ -145,7 +164,7 @@ namespace SeniorProjectPreReq.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -163,7 +182,7 @@ namespace SeniorProjectPreReq.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("UserHome", "Account");
                 }
                 AddErrors(result);
             }
@@ -356,7 +375,7 @@ namespace SeniorProjectPreReq.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Account", "UserHome");
             }
 
             if (ModelState.IsValid)
@@ -481,5 +500,54 @@ namespace SeniorProjectPreReq.Controllers
             }
         }
         #endregion
+        // Utility
+        // Add RoleManager
+        #region public ApplicationRoleManager RoleManager
+        private ApplicationRoleManager _roleManager;
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+        #endregion
+        // Add CreateAdminIfNeeded
+        #region private void CreateAdminIfNeeded()
+        private void CreateAdminIfNeeded()
+        {
+            System.Diagnostics.Debug.WriteLine("Creat admin if needed running");
+            // Get Admin Account
+            string AdminUserName = ConfigurationManager.AppSettings["AdminUserName"];
+            string AdminPassword = ConfigurationManager.AppSettings["AdminPassword"];
+            // See if Admin exists
+            var objAdminUser = UserManager.FindByEmail(AdminUserName);
+          
+            if (objAdminUser == null)
+            {
+                //See if the Admin role exists
+                if (!RoleManager.RoleExists("Administrator"))
+                {
+                    // Create the Admin Role (if needed)
+                    IdentityRole objAdminRole = new IdentityRole("Administrator");
+                    RoleManager.Create(objAdminRole);
+                }
+                // Create Admin user
+                var objNewAdminUser = new ApplicationUser { UserName = AdminUserName, Email = AdminUserName, Id = "1" };
+                var AdminUserCreateResult = UserManager.Create(objNewAdminUser, AdminPassword);
+                System.Diagnostics.Debug.WriteLine("Admin Created", AdminUserCreateResult); 
+                // Put user in Admin role
+                UserManager.AddToRole(objNewAdminUser.Id, "Administrator");
+            }else
+            {
+                System.Diagnostics.Debug.WriteLine("Admin Found", objAdminUser);
+            }
+        }
+        #endregion
     }
+
 }
