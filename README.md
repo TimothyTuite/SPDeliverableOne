@@ -1,2 +1,3 @@
-# PreReq-SeniorProject
-senior project first assignment, volunteer scheduling system 
+# SeniorProject first Deliverable 
+Senior Project first deliverable 
+
