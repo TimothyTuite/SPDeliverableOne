@@ -208,16 +208,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\OpportunitiesController.cs" />
-    <Compile Include="Controllers\VolunteersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Opportunity.cs" />
     <Compile Include="Models\Shifts.cs">
       <DependentUpon>ShiftsDBModel.tt</DependentUpon>
     </Compile>
@@ -237,7 +233,6 @@
       <DependentUpon>ShiftsDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\UserRoles.cs" />
-    <Compile Include="Models\Volunteer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -389,25 +384,9 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Schedule.cshtml" />
-    <Content Include="Views\Volunteers\Create.cshtml" />
-    <Content Include="Views\Volunteers\Delete.cshtml" />
-    <Content Include="Views\Volunteers\Details.cshtml" />
-    <Content Include="Views\Volunteers\Edit.cshtml" />
-    <Content Include="Views\Volunteers\Index.cshtml" />
-    <Content Include="Views\Opportunities\Create.cshtml" />
-    <Content Include="Views\Opportunities\Delete.cshtml" />
-    <Content Include="Views\Opportunities\Details.cshtml" />
-    <Content Include="Views\Opportunities\Edit.cshtml" />
-    <Content Include="Views\Opportunities\Index.cshtml" />
     <Content Include="Views\Account\UserHome.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
   </ItemGroup>
