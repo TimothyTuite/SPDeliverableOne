@@ -10,6 +10,7 @@ Will hold the basic school data
 Attributes<br />
 
 _ID : String <br />
+EDITORS_ID : String         //THE ID OF the USER PROFILE selected to edit the school<br />
 NAME: String <br />
 PHONE: String<br />
 EMAIL: String<br />
