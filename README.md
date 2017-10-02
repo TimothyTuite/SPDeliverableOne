@@ -7,14 +7,14 @@ Tables in the application
 # Schools
 Will hold the basic school data 
 
-Attributes
+Attributes<br />
 
-_ID : String
-NAME: String
-PHONE: String
-EMAIL: String
-ADDRESS: String
-ENROLLEMNT: Int
+_ID : String <br />
+NAME: String <br />
+PHONE: String<br />
+EMAIL: String<br />
+ADDRESS: String<br />
+ENROLLEMNT: Int<br />
 
 
 
@@ -23,27 +23,27 @@ ENROLLEMNT: Int
 Relational Table, stores which schools have what programs
 in a way that allows for schools to have unlimited programs.
 
-Attributes
+Attributes<br />
 
 _ID: String
-SCHOOL_ID: String   // this will be the schools ID from the school table
-PROGRAM_ID: String  //This will be the programs ID from the program table
+SCHOOL_ID: String   // this will be the schools ID from the school table<br />
+PROGRAM_ID: String  //This will be the programs ID from the program table<br />
 
 # Programs
 Tables that stores the possible programs a school may have.
 Athletics, Performing Arts, Advanced Placement etc.
 
-Attributes
+Attributes<br />
 
-_ID: String
-PROGRAM_NAME: String
-PROGRAM_DESCRIPTION: String
+_ID: String<br />
+PROGRAM_NAME: String<br />
+PROGRAM_DESCRIPTION: String<br />
 
 # photos
 Table to store Photos 
 
-Attributes 
+Attributes <br />
 
-_ID: String
-SCHOOL_ID: String
-PICTURE: Blob
+_ID: String<br />
+SCHOOL_ID: String<br />
+PICTURE: Blob<br />
