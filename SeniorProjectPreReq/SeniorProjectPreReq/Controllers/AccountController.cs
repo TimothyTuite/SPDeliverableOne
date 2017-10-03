@@ -20,14 +20,14 @@ namespace SeniorProjectPreReq.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        ShiftsEntities _db;
+   
         public AccountController()
         {
-            _db = new ShiftsEntities();
+            
         }
         public ActionResult Schedule()
         {
-            ViewData.Model = _db.Shifts.ToList();
+        
             return View();
         }
         public ActionResult UserHome()

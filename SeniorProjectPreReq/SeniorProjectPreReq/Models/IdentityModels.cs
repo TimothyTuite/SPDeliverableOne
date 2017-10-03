@@ -29,5 +29,7 @@ namespace SeniorProjectPreReq.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Pictures> Pictures { get; set; }
     }
 }
