@@ -208,12 +208,23 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710040231352_InitialCreate.cs" />
+    <Compile Include="Migrations\201710040231352_InitialCreate.Designer.cs">
+      <DependentUpon>201710040231352_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710040251042_Update-Database.cs" />
+    <Compile Include="Migrations\201710040251042_Update-Database.Designer.cs">
+      <DependentUpon>201710040251042_Update-Database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\School.cs" />
     <Compile Include="Models\Shifts.cs">
       <DependentUpon>ShiftsDBModel.tt</DependentUpon>
     </Compile>
@@ -389,6 +400,11 @@
     <Content Include="Views\Account\Schedule.cshtml" />
     <Content Include="Views\Account\UserHome.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
+    <Content Include="Views\Schools\Create.cshtml" />
+    <Content Include="Views\Schools\Delete.cshtml" />
+    <Content Include="Views\Schools\Details.cshtml" />
+    <Content Include="Views\Schools\Edit.cshtml" />
+    <Content Include="Views\Schools\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -403,6 +419,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710040231352_InitialCreate.resx">
+      <DependentUpon>201710040231352_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710040251042_Update-Database.resx">
+      <DependentUpon>201710040251042_Update-Database.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<SeniorProjectPreReq.Models.School>
+
+@{
+    ViewBag.Title = "Schools Index";
+}
+
+<h2>School Table</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Editors_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolWebsite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolPrincipal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentsEnrolled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReducedLunchPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolGrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCharter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MHSReadingPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MHSMathPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlgebraIPassRatePercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccCourseParticipationPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PSRReadyReadingPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PSReadyMathPercentage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Editors_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolWebsite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolPrincipal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentsEnrolled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReducedLunchPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolGrade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCharter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MHSReadingPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MHSMathPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlgebraIPassRatePercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccCourseParticipationPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PSRReadyReadingPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PSReadyMathPercentage)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
