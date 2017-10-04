@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.School_id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.picture)
+            <img src="data:image;base64,@System.Convert.ToBase64String(item.picture)" width="200" height="100" />
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

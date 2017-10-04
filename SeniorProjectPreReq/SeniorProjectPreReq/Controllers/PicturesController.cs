@@ -46,16 +46,21 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,School_id,picture")] Pictures pictures)
+        public ActionResult Create( HttpPostedFileBase image1)
         {
-            if (ModelState.IsValid)
-            {
-                db.Pictures.Add(pictures);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            var newImage = new Pictures();
+            newImage.School_id = "1"; 
+            if (image1 != null)
+                {
+               
+                    newImage.picture = new byte[image1.ContentLength];
+                    image1.InputStream.Read(newImage.picture, 0, image1.ContentLength); 
+                    db.Pictures.Add(newImage);
+                    db.SaveChanges();
+                }
+            
 
-            return View(pictures);
+            return View(newImage);
         }
 
         // GET: Pictures/Edit/5
