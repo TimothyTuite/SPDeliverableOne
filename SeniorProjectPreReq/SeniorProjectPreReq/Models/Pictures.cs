@@ -11,9 +11,9 @@ namespace SeniorProjectPreReq.Models
     {
         [Key]
         public int id {get;set; }
-
+     
         public string School_id { get; set; }
-
+        
         public byte[] picture { get; set; }
 
     }
