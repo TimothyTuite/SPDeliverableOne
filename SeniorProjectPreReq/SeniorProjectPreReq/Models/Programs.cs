@@ -23,9 +23,4 @@ namespace SeniorProjectPreReq.Models
         [DisplayName("Level")]
         public string Program_Level { get; set; }
     }
-
-    public class ProgramsDBContext : DbContext
-    {
-        public DbSet<Programs> Movies { get; set; }
-    }
 }

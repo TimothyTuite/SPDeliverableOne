@@ -47,9 +47,4 @@ namespace SeniorProjectPreReq.Models
         public int PSReadyMathPercentage { get; set; }
 
     }
-
-    public class SchoolDBContext : DbContext
-    {
-        public DbSet<School> Movies { get; set; }
-    }
 }

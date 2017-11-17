@@ -12,12 +12,12 @@ namespace SeniorProjectPreReq.Controllers
 {
     public class SchoolsController : Controller
     {
-        private SchoolDBContext db = new SchoolDBContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Schools
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            return View(db.Schools.ToList());
         }
 
         // GET: Schools/Details/5
@@ -27,7 +27,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            School school = db.Movies.Find(id);
+            School school = db.Schools.Find(id);
             if (school == null)
             {
                 return HttpNotFound();
@@ -43,14 +43,14 @@ namespace SeniorProjectPreReq.Controllers
 
         // POST: Schools/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Editors_ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,SchoolGrade,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
+        public ActionResult Create([Bind(Include = "ID,Editors_ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
         {
             if (ModelState.IsValid)
             {
-                db.Movies.Add(school);
+                db.Schools.Add(school);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            School school = db.Movies.Find(id);
+            School school = db.Schools.Find(id);
             if (school == null)
             {
                 return HttpNotFound();
@@ -75,10 +75,10 @@ namespace SeniorProjectPreReq.Controllers
 
         // POST: Schools/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Editors_ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,SchoolGrade,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
+        public ActionResult Edit([Bind(Include = "ID,Editors_ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            School school = db.Movies.Find(id);
+            School school = db.Schools.Find(id);
             if (school == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace SeniorProjectPreReq.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            School school = db.Movies.Find(id);
-            db.Movies.Remove(school);
+            School school = db.Schools.Find(id);
+            db.Schools.Remove(school);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
