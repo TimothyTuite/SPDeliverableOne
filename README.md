@@ -48,3 +48,9 @@ Attributes <br />
 _ID: String<br />
 SCHOOL_ID: String<br />
 PICTURE: Blob<br />
+
+
+
+How to regenrate database after cloning the directory 
+
+https://stackoverflow.com/questions/20304058/how-to-re-create-database-for-entity-framework
