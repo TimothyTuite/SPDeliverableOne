@@ -19,6 +19,12 @@ namespace SeniorProjectPreReq.Models
             public DateTime? LockoutEndDateUtc { get; set; }
             public int AccessFailedCount { get; set; }
             public string PhoneNumber { get; set; }
+            public string FirstName { get; set; }
+
+            public string LastName { get; set; }
+
+            public string school { get; set; }
+            public string RoleName { get; set; }
 
             public IEnumerable<UserRoleDTO> Roles { get; set; }
         }

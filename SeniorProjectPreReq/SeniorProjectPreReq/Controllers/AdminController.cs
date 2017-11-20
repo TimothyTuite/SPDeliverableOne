@@ -59,6 +59,9 @@ namespace SeniorProjectPreReq.Controllers
                     UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
                     objUserDTO.UserName = item.UserName;
                     objUserDTO.Email = item.Email;
+                    objUserDTO.FirstName = item.FirstName;
+                    objUserDTO.LastName = item.LastName;
+                    objUserDTO.school = item.school; 
                     objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
                     col_UserDTO.Add(objUserDTO);
                 }
