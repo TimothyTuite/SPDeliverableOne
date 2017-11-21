@@ -49,8 +49,12 @@ _ID: String<br />
 SCHOOL_ID: String<br />
 PICTURE: Blob<br />
 
-
+#resources
 
 How to regenrate database after cloning the directory 
 
 https://stackoverflow.com/questions/20304058/how-to-re-create-database-for-entity-framework
+
+Tutorial on how to use model relations 
+
+https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application
