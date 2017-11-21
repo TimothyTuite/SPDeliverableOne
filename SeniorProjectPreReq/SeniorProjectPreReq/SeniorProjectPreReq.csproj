@@ -218,9 +218,13 @@
     <Compile Include="Migrations\201711171658061_InitialCreate.Designer.cs">
       <DependentUpon>201711171658061_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711202022132_addedFirstLast.cs" />
-    <Compile Include="Migrations\201711202022132_addedFirstLast.Designer.cs">
-      <DependentUpon>201711202022132_addedFirstLast.cs</DependentUpon>
+    <Compile Include="Migrations\201711211704277_entityconnection.cs" />
+    <Compile Include="Migrations\201711211704277_entityconnection.Designer.cs">
+      <DependentUpon>201711211704277_entityconnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711211722083_connectedUserToschool.cs" />
+    <Compile Include="Migrations\201711211722083_connectedUserToschool.Designer.cs">
+      <DependentUpon>201711211722083_connectedUserToschool.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -409,8 +413,11 @@
     <EmbeddedResource Include="Migrations\201711171658061_InitialCreate.resx">
       <DependentUpon>201711171658061_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711202022132_addedFirstLast.resx">
-      <DependentUpon>201711202022132_addedFirstLast.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711211704277_entityconnection.resx">
+      <DependentUpon>201711211704277_entityconnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711211722083_connectedUserToschool.resx">
+      <DependentUpon>201711211722083_connectedUserToschool.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

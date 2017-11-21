@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace SeniorProjectPreReq.Models
 {
     public class School
     {   
-
+        [Key]
         public string ID { get; set; }
         [DisplayName("Editor ID")]
         public string Editors_ID { get; set; }
@@ -45,6 +46,15 @@ namespace SeniorProjectPreReq.Models
         public int PSRReadyReadingPercentage { get; set; }
         [DisplayName("PSR Ready Math")]
         public int PSReadyMathPercentage { get; set; }
+
+        //The attributes below represent the relations to the other models
+
+        [DisplayName("Programs Offered")]
+        public virtual ICollection<SchoolsProgram> SchoolsProgram { get; set; }
+        [DisplayName("Pictures")]
+        public virtual ICollection<Pictures> Pictures { get; set; }
+
+        public virtual ApplicationIdentity  Administrator { get; set; }
 
     }
 }

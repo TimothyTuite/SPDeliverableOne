@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace SeniorProjectPreReq.Models
@@ -21,8 +22,10 @@ namespace SeniorProjectPreReq.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        [ForeignKey("school")]
+        public string schoolID { get; set; }
 
-        public string school { get; set; }
+        public virtual School school { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

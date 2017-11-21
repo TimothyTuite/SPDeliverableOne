@@ -176,7 +176,7 @@ namespace SeniorProjectPreReq.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    school = model.school 
+                    //school = model.school 
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

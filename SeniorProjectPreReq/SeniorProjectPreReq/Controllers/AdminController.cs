@@ -20,6 +20,7 @@ namespace SeniorProjectPreReq.Controllers
         #region public ActionResult Index(string searchStringUserNameOrEmail)
         public ActionResult Index(string searchStringUserNameOrEmail, string currentFilter, int? page)
         {
+            string joinQuery = "from ";
             try
             {
                 int intPage = 1;
@@ -61,7 +62,7 @@ namespace SeniorProjectPreReq.Controllers
                     objUserDTO.Email = item.Email;
                     objUserDTO.FirstName = item.FirstName;
                     objUserDTO.LastName = item.LastName;
-                    objUserDTO.school = item.school; 
+                    //objUserDTO.school = item.school; 
                     objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
                     col_UserDTO.Add(objUserDTO);
                 }

@@ -9,7 +9,7 @@ namespace SeniorProjectPreReq.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "SeniorProjectPreReq.Models.ApplicationDbContext";
         }
 
