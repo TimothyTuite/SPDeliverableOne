@@ -21,7 +21,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: Schools/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -46,7 +46,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Editors_ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
+        public ActionResult Create([Bind(Include = "SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: Schools/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -78,7 +78,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Editors_ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
+        public ActionResult Edit([Bind(Include = "ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,StudentsEnrolled,ReducedLunchPercentage,IsCharter,MHSReadingPercentage,MHSMathPercentage,AlgebraIPassRatePercentage,AccCourseParticipationPercentage,PSRReadyReadingPercentage,PSReadyMathPercentage")] School school)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: Schools/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,13 +107,15 @@ namespace SeniorProjectPreReq.Controllers
         // POST: Schools/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             School school = db.Schools.Find(id);
             db.Schools.Remove(school);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

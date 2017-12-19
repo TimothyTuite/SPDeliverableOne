@@ -13,7 +13,7 @@ namespace SeniorProjectPreReq.Models
         [Key]
         public int id {get;set; }
         [ForeignKey("school")]
-        public string School_id { get; set; }
+        public int School_id { get; set; }
         public virtual School school { get; set; }
 
         public byte[] picture { get; set; }

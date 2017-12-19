@@ -11,11 +11,10 @@ using System.Web.Mvc;
 namespace SeniorProjectPreReq.Models
 {
     public class School
-    {   
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string ID { get; set; }
-        [DisplayName("Editor ID")]
-        public string Editors_ID { get; set; }
+        public int ID { get; set; }
         [DisplayName("Name")]
         public string SchoolName { get; set; }
         [DisplayName("Phone")]
@@ -53,8 +52,6 @@ namespace SeniorProjectPreReq.Models
         public virtual ICollection<SchoolsProgram> SchoolsProgram { get; set; }
         [DisplayName("Pictures")]
         public virtual ICollection<Pictures> Pictures { get; set; }
-
-        public virtual ApplicationIdentity  Administrator { get; set; }
 
     }
 }

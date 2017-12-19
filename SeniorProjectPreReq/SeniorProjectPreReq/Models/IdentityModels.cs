@@ -23,7 +23,7 @@ namespace SeniorProjectPreReq.Models
 
         public string LastName { get; set; }
         [ForeignKey("school")]
-        public string schoolID { get; set; }
+        public int? schoolID { get; set; }
 
         public virtual School school { get; set; }
     }

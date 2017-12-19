@@ -10,7 +10,6 @@ namespace SeniorProjectPreReq.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "SeniorProjectPreReq.Models.ApplicationDbContext";
         }
 
         protected override void Seed(SeniorProjectPreReq.Models.ApplicationDbContext context)

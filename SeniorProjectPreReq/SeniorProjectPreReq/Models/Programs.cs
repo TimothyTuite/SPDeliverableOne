@@ -13,7 +13,7 @@ namespace SeniorProjectPreReq.Models
     { 
         [Key]
         [DisplayName("ID")]
-        public string ProgramID { get; set; }
+        public int ProgramID { get; set; }
 
         [DisplayName("Name")]
         public string Program_Name { get; set; }

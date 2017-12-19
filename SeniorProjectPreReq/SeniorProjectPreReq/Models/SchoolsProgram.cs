@@ -12,14 +12,14 @@ namespace SeniorProjectPreReq.Models
     {
         [Key]
         
-        public string ID { get; set; }
+        public int ID { get; set; }
         [ForeignKey("school")]
-        public string SchoolID { get; set; }
+        public int SchoolID { get; set; }
 
         public virtual School school { get; set; }
 
         [ForeignKey("Programs")]
-        public string ProgramID { get; set; }
+        public int ProgramID { get; set; }
 
         public virtual Programs Programs { get; set; }
     }

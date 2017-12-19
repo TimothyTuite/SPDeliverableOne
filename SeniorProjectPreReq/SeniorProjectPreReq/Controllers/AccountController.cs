@@ -20,7 +20,25 @@ namespace SeniorProjectPreReq.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-   
+        private ApplicationDbContext dataContext = new ApplicationDbContext();
+
+
+        private IEnumerable<SelectListItem> populateSchoolsList(object schoolData = null)
+        {
+            var s = dataContext.Schools;
+            var items = new HashSet<SelectListItem>(); 
+            foreach ( var i in s)
+            {
+               var  item = new SelectListItem();
+                item.Value = i.ID.ToString();
+                item.Text = i.SchoolName;
+
+                items.Add(item); 
+            }
+
+            return items;  
+        }
+
         public AccountController()
         {
             
@@ -158,6 +176,8 @@ namespace SeniorProjectPreReq.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Register()
         {
+            var ie = populateSchoolsList();
+            ViewData["schools"] = ie; 
             return View();
         }
 
@@ -176,7 +196,7 @@ namespace SeniorProjectPreReq.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    //school = model.school 
+                    schoolID = Int32.Parse(model.school)
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
