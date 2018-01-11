@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace SeniorProjectPreReq.Models
 {
@@ -23,7 +25,10 @@ namespace SeniorProjectPreReq.Models
 
             public string LastName { get; set; }
 
-            public string school { get; set; }
+            [ForeignKey("school")]
+            public int? schoolID { get; set; }
+  
+            public virtual School school { get; set; }
             public string RoleName { get; set; }
 
             public IEnumerable<UserRoleDTO> Roles { get; set; }

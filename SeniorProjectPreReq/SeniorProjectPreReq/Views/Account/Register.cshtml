@@ -1,6 +1,7 @@
 ﻿@model SeniorProjectPreReq.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    var school = (IEnumerable<SelectListItem>)ViewData["schools"];
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -41,9 +42,6 @@
             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
         </div>
     </div>
-    @{
-        var school = (IEnumerable<SelectListItem>)ViewData["schools"];
-    }
     <div class="form-group">
         @Html.LabelFor(m => m.school, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

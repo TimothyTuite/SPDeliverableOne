@@ -40,7 +40,9 @@
            
         <tr>
             <td>@Html.Display(Convert.ToString(i))</td>
-            <td>@Html.DisplayFor(modelItem => item.school)</td>
+            
+            <td>@Html.ActionLink("school","Details", "Schools", new { id = item.schoolID}, null)</td>
+            <td>@Html.DisplayFor(modelItem => item.school.SchoolName)</td>
             <td>@Html.DisplayFor(modelItem => item.Email)</td>
             <td>@Html.DisplayFor(modelItem => item.LastName)</td>
             <td>@Html.DisplayFor(modelItem => item.FirstName)</td>

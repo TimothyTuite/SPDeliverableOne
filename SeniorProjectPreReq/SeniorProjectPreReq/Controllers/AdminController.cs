@@ -62,7 +62,8 @@ namespace SeniorProjectPreReq.Controllers
                     objUserDTO.Email = item.Email;
                     objUserDTO.FirstName = item.FirstName;
                     objUserDTO.LastName = item.LastName;
-                    //objUserDTO.school = item.school; 
+                    objUserDTO.school = item.school;
+                    objUserDTO.schoolID = item.schoolID; 
                     objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
                     col_UserDTO.Add(objUserDTO);
                 }
