@@ -14,12 +14,36 @@ namespace SeniorProjectPreReq.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        private IEnumerable<SelectListItem> populateProgramsList(object ProgramsData = null)
+        {
+            var s = db.Programs;
+            var items = new HashSet<SelectListItem>();
+            foreach (var i in s)
+            {
+                var item = new SelectListItem();
+                item.Value = i.ProgramID.ToString();
+                item.Text = i.Program_Name;
+
+                items.Add(item);
+            }
+
+            return items;
+        }
         // GET: SchoolsPrograms
         public ActionResult Index()
         {
-            return View(db.SchoolsPrograms.ToList());
+            return View();
         }
-
+        public ActionResult AddSchoolsPrograms(string schoolID)
+        {
+            var s = Int32.Parse(schoolID);
+            var school = db.Schools.Find(s); 
+            var pList = populateProgramsList();
+            ViewData["SchoolName"] = school.SchoolName; 
+            ViewData["ProgramsList"] = pList;
+            return View();
+        }
         // GET: SchoolsPrograms/Details/5
         public ActionResult Details(string id)
         {

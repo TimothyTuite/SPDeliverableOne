@@ -45,5 +45,7 @@ namespace SeniorProjectPreReq.Models
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolsProgram> SchoolsPrograms { get; set; }
 
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.School> Schools { get; set; }
+
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Programs> Programs { get; set; }
     }
 }

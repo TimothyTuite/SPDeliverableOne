@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Controllers\SchoolsProgramsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -383,6 +384,7 @@
     <Content Include="Views\SchoolsPrograms\Details.cshtml" />
     <Content Include="Views\SchoolsPrograms\Edit.cshtml" />
     <Content Include="Views\SchoolsPrograms\Index.cshtml" />
+    <Content Include="Views\SchoolsPrograms\AddSchoolsPrograms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

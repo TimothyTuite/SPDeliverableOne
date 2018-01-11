@@ -57,15 +57,18 @@ namespace SeniorProjectPreReq.Controllers
                     .ToList();
                 foreach (var item in result)
                 {
-                    UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
-                    objUserDTO.UserName = item.UserName;
-                    objUserDTO.Email = item.Email;
-                    objUserDTO.FirstName = item.FirstName;
-                    objUserDTO.LastName = item.LastName;
-                    objUserDTO.school = item.school;
-                    objUserDTO.schoolID = item.schoolID; 
-                    objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
-                    col_UserDTO.Add(objUserDTO);
+                    //This If Statment removes all the users that are JPEF Admins from the list view
+                    if (!UserManager.GetRoles(item.Id).Contains("Administrator")) {
+                        UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
+                        objUserDTO.UserName = item.UserName;
+                        objUserDTO.Email = item.Email;
+                        objUserDTO.FirstName = item.FirstName;
+                        objUserDTO.LastName = item.LastName;
+                        objUserDTO.school = item.school;
+                        objUserDTO.schoolID = item.schoolID;
+                        objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
+                        col_UserDTO.Add(objUserDTO);
+                    }
                 }
                 // Set the number of pages
                 var _UserDTOAsIPagedList =
