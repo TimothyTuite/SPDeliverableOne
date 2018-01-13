@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "AddSchoolsPrograms";
     var programs = (IEnumerable<SelectListItem>)ViewData["ProgramsList"];
-    var schoolName = (string)ViewData["SchoolName"]; 
+    var schoolName = (string)ViewData["SchoolName"];
+    var schoolID = (int)ViewData["SchoolID"]; 
 }
 
 <h2>AddSchoolsPrograms</h2>
@@ -20,13 +21,13 @@
         <div class="form-group">
             @Html.LabelFor(m => m.school, schoolName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-               
+               @Html.HiddenFor(m => m.SchoolID, new { Value = schoolID }) 
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Programs, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.ListBoxFor(m => m.Programs, programs, new { id = "myList" })
+                @Html.ListBoxFor(m => m.ProgramID, programs, new { id = "myList" })
             </div>
         </div>
         <div class="form-group">

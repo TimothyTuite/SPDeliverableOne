@@ -121,8 +121,19 @@
         <dd>
             @Html.DisplayFor(model => model.PSReadyMathPercentage)
         </dd>
+@foreach (var item in Model.SchoolsProgram)
+{
 
+    <dt>
+        @Html.DisplayNameFor(modelItem => item.Programs.Program_Name)
+    </dt>
+
+        <dd>
+            @Html.DisplayFor(modelItem => item.Programs.Program_Name)
+        </dd>
+}
     </dl>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

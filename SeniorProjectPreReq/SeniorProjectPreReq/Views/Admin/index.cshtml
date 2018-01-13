@@ -9,6 +9,9 @@
     <div class="row">
         <div class="col-lg-6">
             @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Create School Program", "Create", "Progams", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
           
         </div>
         <div class="col-lg-6">
@@ -48,11 +51,11 @@
                 <tr>
                     <td>@Html.DisplayFor(modelItem => item.schoolID)</td>
 
-                    <td>@Html.ActionLink(item.school.SchoolName, "Details", "Schools", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
+                    <td>@Html.ActionLink("View " + item.school.SchoolName, "Details", "Schools", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                     <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                     <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td></td>
+                    <td>@Html.ActionLink("Edit Programs", "AddSchoolsPrograms", "SchoolsPrograms", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
                     <td></td>
                     <td></td>
 

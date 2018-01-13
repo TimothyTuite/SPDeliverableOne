@@ -20,6 +20,7 @@ namespace SeniorProjectPreReq.Controllers
             return View(db.Programs.ToList());
         }
 
+
         // GET: Programs/Details/5
         public ActionResult Details(int? id)
         {

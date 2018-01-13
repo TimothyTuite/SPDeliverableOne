@@ -33,16 +33,41 @@ namespace SeniorProjectPreReq.Controllers
         // GET: SchoolsPrograms
         public ActionResult Index()
         {
-            return View();
+
+            return View(db.SchoolsPrograms.ToList());
         }
-        public ActionResult AddSchoolsPrograms(string schoolID)
+        public ActionResult AddSchoolsPrograms(string id)
         {
-            var s = Int32.Parse(schoolID);
-            var school = db.Schools.Find(s); 
+            if (id == null)
+            {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }         
+            var schoolID = Int32.Parse(id);
+            School school = db.Schools.Find(schoolID);
+          if (school == null)
+          {
+               return HttpNotFound();
+          }
             var pList = populateProgramsList();
-            ViewData["SchoolName"] = school.SchoolName; 
+            ViewData["SchoolName"] = school.SchoolName;
+            ViewData["schoolID"] = school.ID; 
             ViewData["ProgramsList"] = pList;
             return View();
+        }
+
+        //POST: SchoolsPrograms/AddSchoolsPrograms/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddSchoolsPrograms([Bind(Include = "ID,SchoolID,ProgramID")] SchoolsProgram schoolsProgram)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SchoolsPrograms.Add(schoolsProgram);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(schoolsProgram); 
+
         }
         // GET: SchoolsPrograms/Details/5
         public ActionResult Details(string id)
@@ -51,7 +76,8 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SchoolsProgram schoolsProgram = db.SchoolsPrograms.Find(id);
+            var schoolID = Int32.Parse(id); 
+            SchoolsProgram schoolsProgram = db.SchoolsPrograms.Find(schoolID);
             if (schoolsProgram == null)
             {
                 return HttpNotFound();
