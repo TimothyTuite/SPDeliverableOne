@@ -192,7 +192,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.FirstName + " " + model.LastName,
+                    UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
