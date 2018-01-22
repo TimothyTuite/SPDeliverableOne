@@ -84,7 +84,14 @@ namespace SeniorProjectPreReq.Controllers
             {
                 db.Entry(school).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (User.IsInRole("Administrator"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("UserHome", "Account");
+                }
             }
             return View(school);
         }

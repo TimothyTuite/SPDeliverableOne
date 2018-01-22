@@ -139,9 +139,19 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@if (User.IsInRole("Administrator"))
+    {
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    }
+else
+    { 
+    <div>
+        @Html.ActionLink("Back to Principal Page", "UserHome", "Account")
+    </div>
+}
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

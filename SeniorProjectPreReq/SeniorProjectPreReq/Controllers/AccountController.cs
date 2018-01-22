@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -50,7 +51,23 @@ namespace SeniorProjectPreReq.Controllers
         }
         public ActionResult UserHome()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var result = UserManager.Users.ToList();
+            UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
+            foreach (var item in result)
+            {
+                if (item.Id == userId)
+                {
+                    objUserDTO.UserName = item.UserName;
+                    objUserDTO.Email = item.Email;
+                    objUserDTO.FirstName = item.FirstName;
+                    objUserDTO.LastName = item.LastName;
+                    objUserDTO.school = item.school;
+                    objUserDTO.schoolID = item.schoolID;
+                    objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
+                }
+            }
+            return View(objUserDTO);
         }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
