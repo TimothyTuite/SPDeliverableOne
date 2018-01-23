@@ -1,17 +1,17 @@
 ﻿@model SeniorProjectPreReq.Models.UserRoles.ExpandedUserDTO
 @{
-    ViewBag.Title = "Syncro Volunteer Portal";
+    ViewBag.Title = "Synchro Principal Portal";
 }
 
 <div class="jumbotron">
-    <h1>Welcome Volunteers</h1>
+    <h1>Welcome Principal @Model.LastName!</h1>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-
+        <h2>Getting started:</h2>
         @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "Details", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large" })
+        <br />
         @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large" })
     </div>
 </div>
