@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\middleProfilesController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Controllers\SchoolsProgramsController.cs" />
@@ -221,6 +222,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\middleProfile.cs" />
     <Compile Include="Models\Pictures.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -390,6 +392,11 @@
     <Content Include="Views\SchoolsPrograms\Edit.cshtml" />
     <Content Include="Views\SchoolsPrograms\Index.cshtml" />
     <Content Include="Views\SchoolsPrograms\AddSchoolsPrograms.cshtml" />
+    <Content Include="Views\middleProfiles\Create.cshtml" />
+    <Content Include="Views\middleProfiles\Delete.cshtml" />
+    <Content Include="Views\middleProfiles\Details.cshtml" />
+    <Content Include="Views\middleProfiles\Edit.cshtml" />
+    <Content Include="Views\middleProfiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
