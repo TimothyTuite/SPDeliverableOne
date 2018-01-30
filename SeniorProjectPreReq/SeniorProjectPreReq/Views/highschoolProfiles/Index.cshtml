@@ -1,0 +1,135 @@
+﻿@model IEnumerable<SeniorProjectPreReq.Models.highschoolProfile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.school.SchoolName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.schoolGrade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.enrollment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.freeOrReduced)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isCharter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isMagnet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gradRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emLearningGains)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accelCoursework)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emPerformance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AfricanAmerican)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.White)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asian)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hispanic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MixedOther)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unspecified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.school.SchoolName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateApproved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.schoolGrade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.enrollment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.freeOrReduced)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isCharter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isMagnet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gradRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emLearningGains)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.accelCoursework)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emPerformance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AfricanAmerican)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.White)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asian)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hispanic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MixedOther)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.unspecified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
