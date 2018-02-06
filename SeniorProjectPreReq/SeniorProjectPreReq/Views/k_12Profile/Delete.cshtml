@@ -1,0 +1,184 @@
+﻿@model SeniorProjectPreReq.Models.k_12Profile
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>k_12Profile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.school.SchoolName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.school.SchoolName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateApproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateApproved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.schoolGrade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.schoolGrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enrollment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enrollment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.freeOrReduced)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.freeOrReduced)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isCharter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isCharter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isMagnet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isMagnet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KReadiness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KReadiness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.algPassRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.algPassRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gradRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gradRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emLearningGains)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emLearningGains)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.accelCoursework)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accelCoursework)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emPerformance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emPerformance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AfricanAmerican)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AfricanAmerican)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.White)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.White)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asian)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asian)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hispanic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hispanic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MixedOther)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MixedOther)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unspecified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unspecified)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
