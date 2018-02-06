@@ -10,16 +10,34 @@ namespace SeniorProjectPreReq.Controllers
     [HandleError]
     public class HomeController : Controller
     {
-        
+        private ApplicationDbContext dataContext = new ApplicationDbContext();
 
         public HomeController()
         {
             
         }
 
+        private IEnumerable<SelectListItem> populateSchoolsList(object schoolData = null)
+        {
+            var s = dataContext.Schools;
+            var items = new HashSet<SelectListItem>();
+            foreach (var i in s)
+            {
+                var item = new SelectListItem();
+                item.Value = i.ID.ToString();
+                item.Text = i.SchoolName;
+
+                items.Add(item);
+            }
+
+            return items;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var schools = dataContext.Schools.ToList();
+            
+            return View(schools);
         }
 
         public ActionResult About()

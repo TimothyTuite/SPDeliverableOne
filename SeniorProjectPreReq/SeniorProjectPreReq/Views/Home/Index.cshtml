@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<SeniorProjectPreReq.Models.School>
+@{
     ViewBag.Title = "JPEF School Portal";
 }
 
@@ -22,14 +23,14 @@
             <div class="panel-body" style="height: 400px">
                 <h1>School Data</h1>
                 <p>
-                    This is where all the school data will show up 
+                    This is where all the school data will show up
                 </p>
             </div>
         </div>
     </div>
     <div class="col-md-8">
-      
-        <div class="container fluid" >
+
+        <div class="container fluid">
             <div class="input-group">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Go!</button>
@@ -39,10 +40,14 @@
                     <button class="btn btn-primary" type="button">Compare Schools</button>
                 </span>
             </div><!-- /input-group -->
-            <div  style="height: 380px; overflow-y: scroll;">
+            <div style="height: 380px; overflow-y: scroll;">
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio <input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
-                    <li class="list-group-item">Dapibus ac facilisis in <input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
+                    @foreach (var item in Model)
+                    {
+                        <li class="list-group-item">@Html.DisplayFor(ModelItem => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+                    }
+
+                    @*<li class="list-group-item">Dapibus ac facilisis in <input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Morbi leo risus<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Porta ac consectetur ac<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Vestibulum at eros<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
@@ -70,10 +75,10 @@
                     <li class="list-group-item">Dapibus ac facilisis in<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Morbi leo risus<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Porta ac consectetur ac<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
-                    <li class="list-group-item">Vestibulum at eros<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
+                    <li class="list-group-item">Vestibulum at eros<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>*@
                 </ul>
             </div>
         </div>
     </div>
-   
+
 </div>
