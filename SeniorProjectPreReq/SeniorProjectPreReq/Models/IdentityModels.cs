@@ -48,6 +48,11 @@ namespace SeniorProjectPreReq.Models
 
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Programs> Programs { get; set; }
 
+
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.middleProfile> middleProfiles { get; set; }
+
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.highschoolProfile> highschoolProfiles { get; set; }
+
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.k_12Profile> k_12Profile { get; set; }
     }
 }
