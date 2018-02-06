@@ -37,7 +37,8 @@
                 </span>
                 <input type="text" class="form-control" placeholder="Search for...">
                 <span>
-                    <button class="btn btn-primary" type="button">Compare Schools</button>
+                    @Html.ActionLink("Compare Schools", "Compare", "Home", 
+                            new { id0 = 0 }, new { @class = "btn btn-primary btn-large" })
                 </span>
             </div><!-- /input-group -->
             <div style="height: 380px; overflow-y: scroll;">

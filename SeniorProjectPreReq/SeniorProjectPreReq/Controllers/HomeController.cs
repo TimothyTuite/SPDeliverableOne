@@ -40,6 +40,26 @@ namespace SeniorProjectPreReq.Controllers
             return View(schools);
         }
 
+        public ActionResult Compare(int? id1, int? id2, int? id3)
+        {
+            var compareViewData= new compareViewModel(); 
+
+            if(id1 != null)
+            {
+                compareViewData.schoolOne = dataContext.Schools.Find(id1);
+            }
+            if (id1 != null)
+            {
+                compareViewData.schoolTwo = dataContext.Schools.Find(id2);
+            }
+            if (id1 != null)
+            {
+                compareViewData.schoolOne = dataContext.Schools.Find(id3);
+            }
+
+            return View(compareViewData);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
