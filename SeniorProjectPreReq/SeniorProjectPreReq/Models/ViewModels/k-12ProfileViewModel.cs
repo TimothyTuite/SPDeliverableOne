@@ -7,7 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SeniorProjectPreReq.Models
 {
-    public class k_12Profile
+    public class k_12ProfileViewModel
+
     {
             //TODO: Generate controller and Views for new model first check annotations 
             // key and connections 
