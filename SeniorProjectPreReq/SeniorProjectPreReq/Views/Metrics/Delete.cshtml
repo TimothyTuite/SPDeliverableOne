@@ -1,4 +1,4 @@
-﻿@model SeniorProjectPreReq.Models.Program
+﻿@model SeniorProjectPreReq.Models.Metrics
 
 @{
     ViewBag.Title = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Program</h4>
+    <h4>Metrics</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,19 +20,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.programName)
+            @Html.DisplayNameFor(model => model.MetricName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.programName)
+            @Html.DisplayFor(model => model.MetricName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.programDescription)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.programDescription)
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rangeTop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rangeTop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rangeBottom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rangeBottom)
         </dd>
 
     </dl>

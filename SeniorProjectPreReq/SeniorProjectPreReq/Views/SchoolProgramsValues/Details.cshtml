@@ -1,0 +1,58 @@
+﻿@model SeniorProjectPreReq.Models.SchoolProgramsValues
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SchoolProgramsValues</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.school.SchoolName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.school.SchoolName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.theProgram.programName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.theProgram.programName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hasProgram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hasProgram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

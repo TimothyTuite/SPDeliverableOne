@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SeniorProjectPreReq.Models.Program>
+﻿@model IEnumerable<SeniorProjectPreReq.Models.youtubeURL>
 
 @{
     ViewBag.Title = "Index";
@@ -12,13 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.type.Name)
+            @Html.DisplayNameFor(model => model.school.SchoolName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.programName)
+            @Html.DisplayNameFor(model => model.URL)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.programDescription)
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateCreated)
         </th>
         <th></th>
     </tr>
@@ -26,13 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.type.Name)
+            @Html.DisplayFor(modelItem => item.school.SchoolName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.programName)
+            @Html.DisplayFor(modelItem => item.URL)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.programDescription)
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateCreated)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

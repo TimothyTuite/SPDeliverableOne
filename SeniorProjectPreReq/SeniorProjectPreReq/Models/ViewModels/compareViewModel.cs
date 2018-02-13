@@ -10,9 +10,9 @@ namespace SeniorProjectPreReq.Models
 {
     public class compareViewModel
     {
-        public virtual School schoolOne {get; set;}
-        public virtual School schoolTwo { get; set; }
-        public virtual School schoolThree { get; set; }
+        public virtual SchoolPdata schoolOne {get; set;}
+        public virtual SchoolPdata schoolTwo { get; set; }
+        public virtual SchoolPdata schoolThree { get; set; }
 
     }
 }

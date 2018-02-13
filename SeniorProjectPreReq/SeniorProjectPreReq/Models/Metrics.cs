@@ -9,15 +9,23 @@ namespace SeniorProjectPreReq.Models
 {
     public class Metrics
     {
-        [key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int ID { get; set; }
-
+        [Display(Name = "Metric Name")]
+        [MaxLength(50)]
         public string MetricName { get; set; }
-
+        [Display(Name = "Metric Description")]
+        [MaxLength(450)]
         public string Description { get; set; }
 
+        [ForeignKey("type")]
         public int schoolLevel { get; set; }
 
         public virtual SchoolType type { get; set; }
+
+        public float rangeTop { get; set; }
+
+        public float rangeBottom { get; set; }
     }
 }

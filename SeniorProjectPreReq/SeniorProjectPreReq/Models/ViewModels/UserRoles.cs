@@ -28,7 +28,7 @@ namespace SeniorProjectPreReq.Models
             [ForeignKey("school")]
             public int? schoolID { get; set; }
   
-            public virtual School school { get; set; }
+            public virtual SchoolPdata school { get; set; }
             public string RoleName { get; set; }
 
             public IEnumerable<UserRoleDTO> Roles { get; set; }

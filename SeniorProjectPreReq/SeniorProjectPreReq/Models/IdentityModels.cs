@@ -25,7 +25,7 @@ namespace SeniorProjectPreReq.Models
         [ForeignKey("school")]
         public int? schoolID { get; set; }
 
-        public virtual School school { get; set; }
+        public virtual SchoolPdata school { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -40,16 +40,18 @@ namespace SeniorProjectPreReq.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Pictures> Pictures { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolPdata> SchoolPdatas { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolsProgram> SchoolsPrograms { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolType> SchoolTypes { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.School> Schools { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolMetricValues> SchoolMetricValues { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Programs> Programs { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Metrics> Metrics { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.highschoolProfile> highschoolProfiles { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolProgramsValues> SchoolProgramsValues { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.k_12Profile> k_12Profile { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Program> Programs { get; set; }
+
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.youtubeURL> youtubeURLs { get; set; }
     }
 }

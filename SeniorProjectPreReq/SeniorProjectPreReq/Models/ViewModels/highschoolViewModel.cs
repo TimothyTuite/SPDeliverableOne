@@ -18,10 +18,12 @@ namespace SeniorProjectPreReq.Models
         [ForeignKey("school")]
         public int schoolID { get; set; }
 
-        public virtual School school { get; set; }
+        public virtual SchoolPdata school { get; set; }
+
+        public string Name { get; set; }
 
         [Display(Name = "Programs Offered")]
-        public virtual ICollection<SchoolsProgram> ProfilesPrograms { get; set; }
+        public virtual ICollection<SchoolProgramsValues> ProfilesPrograms { get; set; }
 
         //TODO: group discussion on how profile timeline will work
 
