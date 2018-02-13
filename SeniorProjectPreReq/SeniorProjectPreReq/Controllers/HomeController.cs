@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using SeniorProjectPreReq.Models; 
@@ -40,24 +41,37 @@ namespace SeniorProjectPreReq.Controllers
             return View(schools);
         }
 
-        public ActionResult Compare(int? id1, int? id2, int? id3)
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Index(int?[] compare)
         {
-            var compareViewData= new compareViewModel(); 
+            var schools = dataContext.Schools.ToList();
+            var compareViewData = new compareViewModel();
 
-            if(id1 != null)
+            if (compare.Length == 1)
             {
-                compareViewData.schoolOne = dataContext.Schools.Find(id1);
+                if(compare[0] != null)
+                    compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
             }
-            if (id1 != null)
+            if (compare.Length == 2)
             {
-                compareViewData.schoolTwo = dataContext.Schools.Find(id2);
+                if (compare[0] != null && compare[1] != null)
+                {
+                    compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
+                    compareViewData.schoolTwo = dataContext.Schools.Find(compare[1]);
+                }
             }
-            if (id1 != null)
+            if (compare.Length == 3)
             {
-                compareViewData.schoolOne = dataContext.Schools.Find(id3);
+                if (compare[0] != null && compare[1] != null && compare[2] != null)
+                {
+                    compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
+                    compareViewData.schoolTwo = dataContext.Schools.Find(compare[1]);
+                    compareViewData.schoolOne = dataContext.Schools.Find(compare[2]);
+                }
             }
 
-            return View(compareViewData);
+            return View("Compare", compareViewData);
         }
 
         public ActionResult About()
