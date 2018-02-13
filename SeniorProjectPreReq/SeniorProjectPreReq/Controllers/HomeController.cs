@@ -67,7 +67,7 @@ namespace SeniorProjectPreReq.Controllers
                 {
                     compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
                     compareViewData.schoolTwo = dataContext.Schools.Find(compare[1]);
-                    compareViewData.schoolOne = dataContext.Schools.Find(compare[2]);
+                    compareViewData.schoolThree = dataContext.Schools.Find(compare[2]);
                 }
             }
 

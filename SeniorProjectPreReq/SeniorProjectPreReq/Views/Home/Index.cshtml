@@ -36,10 +36,7 @@
                     <button class="btn btn-default" type="button">Go!</button>
                 </span>
                 <input type="text" class="form-control" placeholder="Search for...">
-                <span>
-                    @Html.ActionLink("Compare Schools", "Compare", "Home", 
-                            new { id0 = 0 }, new { @class = "btn btn-primary btn-large" })
-                </span>
+                
             </div><!-- /input-group -->
             <div style="height: 380px; overflow-y: scroll;">
                @using (Html.BeginForm())
@@ -50,7 +47,7 @@
                               <li class="list-group-item">@Html.DisplayFor(ModelItem => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
                           }
                         </ul>
-                        <input type="submit" value="Compare" />
+                        <input type="submit" value="Compare" class = "btn btn-primary btn-large"/>
                  }
             </div>
         </div>
