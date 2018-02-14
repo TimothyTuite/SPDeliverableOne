@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SeniorProjectPreReq.Models.School>
+﻿@model IEnumerable<SeniorProjectPreReq.Models.SchoolPdata>
 @{
     ViewBag.Title = "JPEF School Portal";
 }
@@ -43,11 +43,11 @@
             </div><!-- /input-group -->
             <div style="height: 380px; overflow-y: scroll;">
                 <ul class="list-group">
-                    @foreach (var item in Model)
-                    {
-                        <li class="list-group-item">@Html.DisplayFor(ModelItem => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
-                    }
-
+                    @*@foreach (var item in Model)
+    {
+        <li class="list-group-item">@Html.DisplayFor(ModelItem => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+    }
+                    *@
                     @*<li class="list-group-item">Dapibus ac facilisis in <input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Morbi leo risus<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>
                     <li class="list-group-item">Porta ac consectetur ac<input style="float: right;" type="checkbox" name="compare" value="Bike"></li>

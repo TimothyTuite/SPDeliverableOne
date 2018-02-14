@@ -39,7 +39,6 @@ namespace SeniorProjectPreReq.Models
         {
             return new ApplicationDbContext();
         }
-
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolPdata> SchoolPdatas { get; set; }
 
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolType> SchoolTypes { get; set; }

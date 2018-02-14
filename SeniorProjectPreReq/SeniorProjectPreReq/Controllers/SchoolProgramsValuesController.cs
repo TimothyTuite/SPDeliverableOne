@@ -14,6 +14,21 @@ namespace SeniorProjectPreReq.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //returns a selectable list of school types for forms and drop downs
+        public List<SelectListItem> GetTypesListItems()
+        {
+            var listOfSchoolTypes = new List<SelectListItem>();
+            var schoolTypes = db.SchoolTypes;
+            foreach(var type in schoolTypes)
+            {
+                listOfSchoolTypes.Add(new SelectListItem
+                {
+                    Text = type.Name,
+                    Value = type.ID.ToString()
+                });
+            }
+            return listOfSchoolTypes; 
+        }
         // GET: SchoolProgramsValues
         public ActionResult Index()
         {

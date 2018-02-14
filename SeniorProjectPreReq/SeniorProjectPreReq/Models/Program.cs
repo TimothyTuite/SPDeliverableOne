@@ -19,10 +19,10 @@ namespace SeniorProjectPreReq.Models
         [Display(Name = "Program Description")]
         [MaxLength(450)]
         public string programDescription { get; set; }
-
+        [ForeignKey("programtype")]
         public int TypeID { get; set; }
 
-        public virtual SchoolType type { get; set; }
+        public virtual SchoolType programtype { get; set; }
         
     }
 }
