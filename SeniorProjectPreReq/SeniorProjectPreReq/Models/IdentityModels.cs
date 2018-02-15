@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace SeniorProjectPreReq.Models
 {
@@ -38,6 +39,12 @@ namespace SeniorProjectPreReq.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // need this line or identity error 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
         }
         public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolPdata> SchoolPdatas { get; set; }
 
