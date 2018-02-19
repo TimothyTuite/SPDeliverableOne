@@ -209,6 +209,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MetricsController.cs" />
+    <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SchoolMetricValuesController.cs" />
     <Compile Include="Controllers\SchoolPdatasController.cs" />
     <Compile Include="Controllers\SchoolProgramsValuesController.cs" />
@@ -397,6 +399,16 @@
     <Content Include="Views\SchoolTypes\Details.cshtml" />
     <Content Include="Views\SchoolTypes\Edit.cshtml" />
     <Content Include="Views\SchoolTypes\Index.cshtml" />
+    <Content Include="Views\Programs\Create.cshtml" />
+    <Content Include="Views\Programs\Delete.cshtml" />
+    <Content Include="Views\Programs\Details.cshtml" />
+    <Content Include="Views\Programs\Edit.cshtml" />
+    <Content Include="Views\Programs\Index.cshtml" />
+    <Content Include="Views\Metrics\Create.cshtml" />
+    <Content Include="Views\Metrics\Delete.cshtml" />
+    <Content Include="Views\Metrics\Details.cshtml" />
+    <Content Include="Views\Metrics\Edit.cshtml" />
+    <Content Include="Views\Metrics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

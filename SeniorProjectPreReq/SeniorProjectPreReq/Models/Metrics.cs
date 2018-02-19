@@ -19,10 +19,7 @@ namespace SeniorProjectPreReq.Models
         [MaxLength(450)]
         public string Description { get; set; }
 
-        [ForeignKey("metrictype")]
         public int schoolLevel { get; set; }
-
-        public virtual SchoolType metrictype { get; set; }
 
         public float rangeTop { get; set; }
 
