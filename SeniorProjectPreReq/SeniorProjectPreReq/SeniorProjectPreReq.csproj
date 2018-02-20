@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\highschoolProfilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\middleProfilesController.cs" />
     <Compile Include="Controllers\k_12ProfileController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
@@ -223,6 +224,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\middleProfile.cs" />
     <Compile Include="Models\mainPageViewModel.cs" />
     <Compile Include="Models\compareViewModel.cs" />
     <Compile Include="Models\highschoolProfile.cs" />
@@ -396,6 +398,12 @@
     <Content Include="Views\SchoolsPrograms\Edit.cshtml" />
     <Content Include="Views\SchoolsPrograms\Index.cshtml" />
     <Content Include="Views\SchoolsPrograms\AddSchoolsPrograms.cshtml" />
+
+    <Content Include="Views\middleProfiles\Create.cshtml" />
+    <Content Include="Views\middleProfiles\Delete.cshtml" />
+    <Content Include="Views\middleProfiles\Details.cshtml" />
+    <Content Include="Views\middleProfiles\Edit.cshtml" />
+    <Content Include="Views\middleProfiles\Index.cshtml" />
     <Content Include="Views\highschoolProfiles\Create.cshtml" />
     <Content Include="Views\highschoolProfiles\Delete.cshtml" />
     <Content Include="Views\highschoolProfiles\Details.cshtml" />
@@ -406,7 +414,11 @@
     <Content Include="Views\k_12Profile\Details.cshtml" />
     <Content Include="Views\k_12Profile\Edit.cshtml" />
     <Content Include="Views\k_12Profile\Index.cshtml" />
+
+
+
     <Content Include="Views\Home\Compare.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
