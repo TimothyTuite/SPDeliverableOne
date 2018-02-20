@@ -34,13 +34,45 @@ namespace SeniorProjectPreReq.Controllers
             return items;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            var schools = dataContext.Schools.ToList();
-            
-            return View(schools);
+            mainPageViewModel model = new mainPageViewModel();
+            model.schoolList = dataContext.Schools.ToList();
+            model.displaySchool = new School();
+            int intschoolId = Convert.ToInt32(id);
+            if (id != null)
+            {
+                model.displaySchool = dataContext.Schools.Find(intschoolId);
+            }
+            else
+            {
+                model.displaySchool.SchoolName = "Test";
+            }
+            return View(model);
         }
+        
+        [AllowAnonymous]
+        public ActionResult getSchoolDataByID(string id)
+        {
+            
+            int intschoolId = Convert.ToInt32(id);
+            var schoolData = dataContext.Schools.Find(intschoolId);
+            if(schoolData == null)
+            {
+                return HttpNotFound();
+            }
+            var schoolName = schoolData.SchoolName;
+            var schoolAddress = schoolData.SchoolAddress; 
+            Dictionary<string, string> schoolAttributes = new Dictionary<string, string>();
+            schoolAttributes.Add("schoolName", schoolName);
+            schoolAttributes.Add("Address", schoolAddress); 
+            if(schoolData == null)
+            {
+                return HttpNotFound("id could not be found"); 
+            }
+            return Json(schoolAttributes, JsonRequestBehavior.AllowGet); 
 
+        }
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Index(int?[] compare)

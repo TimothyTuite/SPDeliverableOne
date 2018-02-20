@@ -1,8 +1,28 @@
-﻿@model IEnumerable<SeniorProjectPreReq.Models.School>
+﻿@model SeniorProjectPreReq.Models.mainPageViewModel
+@using SeniorProjectPreReq.Models
 @{
     ViewBag.Title = "JPEF School Portal";
 }
+<script>
+    // john 
+    //you want to grab all the elements by id and update them 
+    //<h1 id="schoolName"></h1>
+    //would be $("#schoolName").innerHTML = schoolData.schoolName;
 
+    function getApiData(id) {
+        var schoolData
+        var bullshit = $.ajax({
+            url: "getschooldatabyid/" + id,
+            success: function (data) {
+                schoolData = data
+                console.log('success', data)
+                $("#schoolName").innerHTML = schoolData.schoolName;
+            }
+        })
+        
+
+    }
+</script>
 <div class="jumbotron">
     <div class="row">
         <div class="col-md-4">
@@ -23,7 +43,9 @@
             <div class="panel-body" style="height: 400px">
                 <h1>School Data</h1>
                 <p>
-                    This is where all the school data will show up
+                    <ul>
+                        <li id="schoolName"></li>
+                    </ul>
                 </p>
             </div>
         </div>
@@ -44,7 +66,8 @@
                         <ul class="list-group">
                           @foreach (var item in Model)
                           {
-                              <li class="list-group-item">@Html.DisplayFor(ModelItem => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+                            <li onclick="getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+                              //onclick(callDataApi(item.ID)
                           }
                         </ul>
                         <input type="submit" value="Compare" class = "btn btn-primary btn-large"/>
