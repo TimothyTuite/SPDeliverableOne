@@ -225,6 +225,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\middleProfile.cs" />
+    <Compile Include="Models\mainPageViewModel.cs" />
+    <Compile Include="Models\compareViewModel.cs" />
     <Compile Include="Models\highschoolProfile.cs" />
     <Compile Include="Models\k-12Profile.cs" />
     <Compile Include="Models\Pictures.cs" />
@@ -412,6 +414,10 @@
     <Content Include="Views\k_12Profile\Details.cshtml" />
     <Content Include="Views\k_12Profile\Edit.cshtml" />
     <Content Include="Views\k_12Profile\Index.cshtml" />
+
+
+
+    <Content Include="Views\Home\Compare.cshtml" />
 
   </ItemGroup>
   <ItemGroup>
