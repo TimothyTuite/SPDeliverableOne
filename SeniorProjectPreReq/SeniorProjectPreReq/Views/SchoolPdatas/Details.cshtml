@@ -1,0 +1,66 @@
+﻿@model SeniorProjectPreReq.Models.SchoolPdata
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SchoolPdata</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.type.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolWebsite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolWebsite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SchoolPrincipal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SchoolPrincipal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

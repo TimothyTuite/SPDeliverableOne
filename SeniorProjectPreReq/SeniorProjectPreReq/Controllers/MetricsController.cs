@@ -10,108 +10,110 @@ using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
-    public class ProgramsController : Controller
+    public class MetricsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Programs
+        // GET: Metrics
         public ActionResult Index()
         {
-            return View(db.Programs.ToList());
+            return View(db.Metrics.ToList());
         }
 
-        // GET: Programs/Details/5
+        // GET: Metrics/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            Metrics metrics = db.Metrics.Find(id);
+            if (metrics == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            return View(metrics);
         }
 
-        // GET: Programs/Create
+        // GET: Metrics/Create
         public ActionResult Create()
         {
-            ViewBag.TypeID = new SelectList(db.SchoolTypes, "ID", "Name");
+            ViewBag.schoolLevel = new SelectList(db.SchoolTypes, "ID", "Name");
             return View();
         }
 
-        // POST: Programs/Create
+        // POST: Metrics/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
+        public ActionResult Create([Bind(Include = "ID,MetricName,Description,schoolLevel,rangeTop,rangeBottom")] Metrics metrics)
         {
             if (ModelState.IsValid)
             {
-                db.Programs.Add(program);
+                db.Metrics.Add(metrics);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(program);
+            return View(metrics);
         }
 
-        // GET: Programs/Edit/5
+        // GET: Metrics/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            Metrics metrics = db.Metrics.Find(id);
+            if (metrics == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            var list = new SelectList(db.SchoolTypes, "ID", "Name",metrics.schoolLevel);
+            ViewBag.schoolLevel = list; 
+            return View(metrics);
         }
 
-        // POST: Programs/Edit/5
+        // POST: Metrics/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
+        public ActionResult Edit([Bind(Include = "ID,MetricName,Description,schoolLevel,rangeTop,rangeBottom")] Metrics metrics)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(program).State = EntityState.Modified;
+                db.Entry(metrics).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(program);
+            return View(metrics);
         }
 
-        // GET: Programs/Delete/5
+        // GET: Metrics/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            Metrics metrics = db.Metrics.Find(id);
+            if (metrics == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            return View(metrics);
         }
 
-        // POST: Programs/Delete/5
+        // POST: Metrics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Program program = db.Programs.Find(id);
-            db.Programs.Remove(program);
+            Metrics metrics = db.Metrics.Find(id);
+            db.Metrics.Remove(metrics);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

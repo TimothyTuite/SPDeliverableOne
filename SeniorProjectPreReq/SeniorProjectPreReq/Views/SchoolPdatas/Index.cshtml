@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SeniorProjectPreReq.Models.SchoolPdata>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.type.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolWebsite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SchoolPrincipal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.type.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolWebsite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolPrincipal)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace SeniorProjectPreReq.Models
 {
@@ -25,7 +26,7 @@ namespace SeniorProjectPreReq.Models
         [ForeignKey("school")]
         public int? schoolID { get; set; }
 
-        public virtual School school { get; set; }
+        public virtual SchoolPdata school { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -39,20 +40,24 @@ namespace SeniorProjectPreReq.Models
         {
             return new ApplicationDbContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // need this line or identity error 
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolPdata> SchoolPdatas { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Pictures> Pictures { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolType> SchoolTypes { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolsProgram> SchoolsPrograms { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolMetricValues> SchoolMetricValues { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.School> Schools { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Metrics> Metrics { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Programs> Programs { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.SchoolProgramsValues> SchoolProgramsValues { get; set; }
 
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.Program> Programs { get; set; }
 
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.middleProfile> middleProfiles { get; set; }
-
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.highschoolProfile> highschoolProfiles { get; set; }
-
-        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.k_12Profile> k_12Profile { get; set; }
+        public System.Data.Entity.DbSet<SeniorProjectPreReq.Models.youtubeURL> youtubeURLs { get; set; }
     }
 }

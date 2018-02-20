@@ -1,4 +1,4 @@
-﻿@model SeniorProjectPreReq.Models.Programs
+﻿@model SeniorProjectPreReq.Models.Program
 
 @{
     ViewBag.Title = "Details";
@@ -7,36 +7,36 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Programs</h4>
+    <h4>Program</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Program_Name)
+            @Html.DisplayNameFor(model => model.programName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Program_Name)
+            @Html.DisplayFor(model => model.programName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Program_Description)
+            @Html.DisplayNameFor(model => model.programDescription)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Program_Description)
+            @Html.DisplayFor(model => model.programDescription)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Program_Level)
+            @Html.DisplayNameFor(model => model.TypeID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Program_Level)
+            @Html.DisplayFor(model => model.TypeID)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProgramID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -26,16 +26,16 @@ namespace SeniorProjectPreReq.Controllers
 
         private IEnumerable<SelectListItem> populateSchoolsList(object schoolData = null)
         {
-            var s = dataContext.Schools;
+            //var s = dataContext.Schools;
             var items = new HashSet<SelectListItem>(); 
-            foreach ( var i in s)
-            {
-               var  item = new SelectListItem();
-                item.Value = i.ID.ToString();
-                item.Text = i.SchoolName;
+            //foreach ( var i in s)
+            //{
+            //   var  item = new SelectListItem();
+            //    item.Value = i.ID.ToString();
+            //    item.Text = i.SchoolName;
 
-                items.Add(item); 
-            }
+            //    items.Add(item); 
+            //}
 
             return items;  
         }

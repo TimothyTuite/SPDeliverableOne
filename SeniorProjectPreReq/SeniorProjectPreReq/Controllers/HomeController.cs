@@ -12,24 +12,33 @@ namespace SeniorProjectPreReq.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext dataContext = new ApplicationDbContext();
+       
+        
+        public highschoolViewModel getDummyData()
+        {
+            var dummyHS = new highschoolViewModel();
+            dummyHS.Name = "Lone Star High School"; 
+            return dummyHS; 
+        }
 
         public HomeController()
         {
-            
-        }
+
+                
+                }
 
         private IEnumerable<SelectListItem> populateSchoolsList(object schoolData = null)
         {
-            var s = dataContext.Schools;
+            //var s = dataContext.SchoolPdata;
             var items = new HashSet<SelectListItem>();
-            foreach (var i in s)
-            {
-                var item = new SelectListItem();
-                item.Value = i.ID.ToString();
-                item.Text = i.SchoolName;
+            //foreach (var i in s)
+           // {
+           //     var item = new SelectListItem();
+           //     item.Value = i.ID.ToString();
+           //     item.Text = i.SchoolName;
 
-                items.Add(item);
-            }
+           //     items.Add(item);
+           // }
 
             return items;
         }

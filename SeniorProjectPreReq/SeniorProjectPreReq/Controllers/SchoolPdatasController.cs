@@ -10,108 +10,112 @@ using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
-    public class ProgramsController : Controller
+    public class SchoolPdatasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Programs
+        // GET: SchoolPdatas
         public ActionResult Index()
         {
-            return View(db.Programs.ToList());
+            var schoolPdatas = db.SchoolPdatas.Include(s => s.type);
+            return View(schoolPdatas.ToList());
         }
 
-        // GET: Programs/Details/5
+        // GET: SchoolPdatas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            SchoolPdata schoolPdata = db.SchoolPdatas.Find(id);
+            if (schoolPdata == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            return View(schoolPdata);
         }
 
-        // GET: Programs/Create
+        // GET: SchoolPdatas/Create
         public ActionResult Create()
         {
-            ViewBag.TypeID = new SelectList(db.SchoolTypes, "ID", "Name");
+            ViewBag.schoolTypeID = new SelectList(db.SchoolTypes, "ID", "Name");
             return View();
         }
 
-        // POST: Programs/Create
+        // POST: SchoolPdatas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
+        public ActionResult Create([Bind(Include = "ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,schoolTypeID")] SchoolPdata schoolPdata)
         {
             if (ModelState.IsValid)
             {
-                db.Programs.Add(program);
+                db.SchoolPdatas.Add(schoolPdata);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(program);
+            ViewBag.schoolTypeID = new SelectList(db.SchoolTypes, "ID", "Name", schoolPdata.schoolTypeID);
+            return View(schoolPdata);
         }
 
-        // GET: Programs/Edit/5
+        // GET: SchoolPdatas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            SchoolPdata schoolPdata = db.SchoolPdatas.Find(id);
+            if (schoolPdata == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            ViewBag.schoolTypeID = new SelectList(db.SchoolTypes, "ID", "Name", schoolPdata.schoolTypeID);
+            return View(schoolPdata);
         }
 
-        // POST: Programs/Edit/5
+        // POST: SchoolPdatas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
+        public ActionResult Edit([Bind(Include = "ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,schoolTypeID")] SchoolPdata schoolPdata)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(program).State = EntityState.Modified;
+                db.Entry(schoolPdata).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(program);
+            ViewBag.schoolTypeID = new SelectList(db.SchoolTypes, "ID", "Name", schoolPdata.schoolTypeID);
+            return View(schoolPdata);
         }
 
-        // GET: Programs/Delete/5
+        // GET: SchoolPdatas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            SchoolPdata schoolPdata = db.SchoolPdatas.Find(id);
+            if (schoolPdata == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            return View(schoolPdata);
         }
 
-        // POST: Programs/Delete/5
+        // POST: SchoolPdatas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Program program = db.Programs.Find(id);
-            db.Programs.Remove(program);
+            SchoolPdata schoolPdata = db.SchoolPdatas.Find(id);
+            db.SchoolPdatas.Remove(schoolPdata);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

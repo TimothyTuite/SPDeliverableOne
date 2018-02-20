@@ -10,108 +10,112 @@ using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
-    public class ProgramsController : Controller
+    public class youtubeURLsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Programs
+        // GET: youtubeURLs
         public ActionResult Index()
         {
-            return View(db.Programs.ToList());
+            var youtubeURLs = db.youtubeURLs.Include(y => y.school);
+            return View(youtubeURLs.ToList());
         }
 
-        // GET: Programs/Details/5
+        // GET: youtubeURLs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            youtubeURL youtubeURL = db.youtubeURLs.Find(id);
+            if (youtubeURL == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            return View(youtubeURL);
         }
 
-        // GET: Programs/Create
+        // GET: youtubeURLs/Create
         public ActionResult Create()
         {
-            ViewBag.TypeID = new SelectList(db.SchoolTypes, "ID", "Name");
+            ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName");
             return View();
         }
 
-        // POST: Programs/Create
+        // POST: youtubeURLs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
+        public ActionResult Create([Bind(Include = "ID,schoolID,URL,year,dateCreated")] youtubeURL youtubeURL)
         {
             if (ModelState.IsValid)
             {
-                db.Programs.Add(program);
+                db.youtubeURLs.Add(youtubeURL);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(program);
+            ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName", youtubeURL.schoolID);
+            return View(youtubeURL);
         }
 
-        // GET: Programs/Edit/5
+        // GET: youtubeURLs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            youtubeURL youtubeURL = db.youtubeURLs.Find(id);
+            if (youtubeURL == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName", youtubeURL.schoolID);
+            return View(youtubeURL);
         }
 
-        // POST: Programs/Edit/5
+        // POST: youtubeURLs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
+        public ActionResult Edit([Bind(Include = "ID,schoolID,URL,year,dateCreated")] youtubeURL youtubeURL)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(program).State = EntityState.Modified;
+                db.Entry(youtubeURL).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(program);
+            ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName", youtubeURL.schoolID);
+            return View(youtubeURL);
         }
 
-        // GET: Programs/Delete/5
+        // GET: youtubeURLs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Program program = db.Programs.Find(id);
-            if (program == null)
+            youtubeURL youtubeURL = db.youtubeURLs.Find(id);
+            if (youtubeURL == null)
             {
                 return HttpNotFound();
             }
-            return View(program);
+            return View(youtubeURL);
         }
 
-        // POST: Programs/Delete/5
+        // POST: youtubeURLs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Program program = db.Programs.Find(id);
-            db.Programs.Remove(program);
+            youtubeURL youtubeURL = db.youtubeURLs.Find(id);
+            db.youtubeURLs.Remove(youtubeURL);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
