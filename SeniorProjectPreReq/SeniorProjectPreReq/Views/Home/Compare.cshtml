@@ -1,0 +1,380 @@
+﻿@model SeniorProjectPreReq.Models.compareViewModel
+@{
+    ViewBag.Title = "Compare";
+}
+
+<h2>Compare</h2>
+<div class="row">
+    @if (Model.schoolOne != null)
+    {
+        <div class="col-md-4">
+            <div>
+                <h4>School</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.SchoolName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.SchoolName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.SchoolPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.SchoolPhone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.SchoolAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.SchoolAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.SchoolWebsite)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.SchoolWebsite)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.SchoolPrincipal)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.SchoolPrincipal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.StudentsEnrolled)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.StudentsEnrolled)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.ReducedLunchPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.ReducedLunchPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.IsCharter)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.IsCharter)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.MHSReadingPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.MHSReadingPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.MHSMathPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.MHSMathPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.AlgebraIPassRatePercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.AlgebraIPassRatePercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.AccCourseParticipationPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.AccCourseParticipationPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.PSRReadyReadingPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.PSRReadyReadingPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.PSReadyMathPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.PSReadyMathPercentage)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+    }
+    @if (Model.schoolTwo != null)
+    {
+        <div class="col-md-4">
+            <div>
+                <h4>School</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.SchoolName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.SchoolName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.SchoolPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.SchoolPhone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.SchoolAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.SchoolAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.SchoolWebsite)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.SchoolWebsite)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.SchoolPrincipal)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.SchoolPrincipal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.StudentsEnrolled)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.StudentsEnrolled)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.ReducedLunchPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.ReducedLunchPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.IsCharter)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.IsCharter)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.MHSReadingPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.MHSReadingPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.MHSMathPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.MHSMathPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.AlgebraIPassRatePercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.AlgebraIPassRatePercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.AccCourseParticipationPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.AccCourseParticipationPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.PSRReadyReadingPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.PSRReadyReadingPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.PSReadyMathPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.PSReadyMathPercentage)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+    }
+
+    @if (Model.schoolThree != null)
+    {
+        <div class="col-md-4">
+            <div>
+                <h4>School</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.SchoolName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.SchoolName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.SchoolPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.SchoolPhone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.SchoolAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.SchoolAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.SchoolWebsite)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.SchoolWebsite)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.SchoolPrincipal)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.SchoolPrincipal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.StudentsEnrolled)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.StudentsEnrolled)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.ReducedLunchPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.ReducedLunchPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.IsCharter)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.IsCharter)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.MHSReadingPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.MHSReadingPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.MHSMathPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.MHSMathPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.AlgebraIPassRatePercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.AlgebraIPassRatePercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.AccCourseParticipationPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.AccCourseParticipationPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.PSRReadyReadingPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.PSRReadyReadingPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.PSReadyMathPercentage)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.PSReadyMathPercentage)
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+    }
+
+    @Html.ActionLink("Back to School List", "Index")
+</div>
