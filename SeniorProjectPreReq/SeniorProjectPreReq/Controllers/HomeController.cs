@@ -51,7 +51,7 @@ namespace SeniorProjectPreReq.Controllers
             int intschoolId = Convert.ToInt32(id);
             if (id != null)
             {
-                model.displaySchool = dataContext.Schools.Find(intschoolId);
+                model.displaySchool = dataContext.SchoolPdatas.Find(intschoolId);
             }
             else
             {
