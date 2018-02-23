@@ -410,6 +410,7 @@
     <Content Include="Views\Metrics\Details.cshtml" />
     <Content Include="Views\Metrics\Edit.cshtml" />
     <Content Include="Views\Metrics\Index.cshtml" />
+    <Content Include="Views\Home\AllDetailsSchoolView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

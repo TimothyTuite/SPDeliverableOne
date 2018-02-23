@@ -1,0 +1,50 @@
+﻿@model SeniorProjectPreReq.Models.AllDetailsViewModel
+@{
+    ViewBag.Title = "AllDetailsSchoolView";
+}
+
+<h2>AllDetailsSchoolView</h2>
+
+<div>
+    <h4>SchoolPdata</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.generalSchoolData.type)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolPrincipal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolWebsite)
+        </dt>
+
+        <h4>Metrics</h4>
+
+        @foreach(var i in Model.allMetrics)
+        {
+            <dd>
+                @Html.Display(i.MetricName)
+            </dd>
+            <dd>
+                @Html.Display(i.Description)
+            </dd>
+        }
+        
+
+    </dl>
+</div>

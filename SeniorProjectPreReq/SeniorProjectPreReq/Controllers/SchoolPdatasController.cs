@@ -21,6 +21,40 @@ namespace SeniorProjectPreReq.Controllers
             return View(schoolPdatas.ToList());
         }
 
+        // GET: SchoolPdatas/AllDetails/id
+        public ActionResult AllDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AllDetailsViewModel schoolInfo = new AllDetailsViewModel();
+            int parsedID = Convert.ToInt32(id);
+            schoolInfo.schoolID = parsedID;
+            schoolInfo.generalSchoolData = db.SchoolPdatas.Find(id);
+            IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
+            foreach (var i in collectMetrics)
+            {
+                if (id == i.schoolID)
+                {
+                    schoolInfo.allMetrics.Add(db.Metrics.Find(i.metricID));
+                }
+            }
+            IEnumerable<SchoolProgramsValues> collectPrograms = db.SchoolProgramsValues.ToList();
+            foreach (var i in collectPrograms)
+            {
+                if (id == i.schoolID)
+                {
+                    schoolInfo.allPrograms.Add(db.Programs.Find(i.programID));
+                }
+            }
+            if (schoolInfo.generalSchoolData == null)
+            {
+                return HttpNotFound();
+            }
+            return View(schoolInfo);
+        }
+
         // GET: SchoolPdatas/Details/5
         public ActionResult Details(int? id)
         {
