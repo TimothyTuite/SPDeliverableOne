@@ -219,7 +219,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AllDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\AllDetailsViewModel.cs" />
     <Compile Include="Models\Metrics.cs" />
     <Compile Include="Models\SchoolMetricValues.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
