@@ -46,8 +46,8 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult Index(string id)
         {
             mainPageViewModel model = new mainPageViewModel();
-            model.schoolList = dataContext.Schools.ToList();
-            model.displaySchool = new School();
+            model.schoolList = dataContext.SchoolPdatas.ToList();
+            model.displaySchool = new SchoolPdata();
             int intschoolId = Convert.ToInt32(id);
             if (id != null)
             {
@@ -65,7 +65,7 @@ namespace SeniorProjectPreReq.Controllers
         {
             
             int intschoolId = Convert.ToInt32(id);
-            var schoolData = dataContext.Schools.Find(intschoolId);
+            var schoolData = dataContext.SchoolPdatas.Find(intschoolId);
             if(schoolData == null)
             {
                 return HttpNotFound();
@@ -86,29 +86,29 @@ namespace SeniorProjectPreReq.Controllers
         [AllowAnonymous]
         public ActionResult Index(int?[] compare)
         {
-            var schools = dataContext.Schools.ToList();
+            var schools = dataContext.SchoolPdatas.ToList();
             var compareViewData = new compareViewModel();
 
             if (compare.Length == 1)
             {
                 if(compare[0] != null)
-                    compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
+                    compareViewData.schoolOne = dataContext.SchoolPdatas.Find(compare[0]);
             }
             if (compare.Length == 2)
             {
                 if (compare[0] != null && compare[1] != null)
                 {
-                    compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
-                    compareViewData.schoolTwo = dataContext.Schools.Find(compare[1]);
+                    compareViewData.schoolOne = dataContext.SchoolPdatas.Find(compare[0]);
+                    compareViewData.schoolTwo = dataContext.SchoolPdatas.Find(compare[1]);
                 }
             }
             if (compare.Length == 3)
             {
                 if (compare[0] != null && compare[1] != null && compare[2] != null)
                 {
-                    compareViewData.schoolOne = dataContext.Schools.Find(compare[0]);
-                    compareViewData.schoolTwo = dataContext.Schools.Find(compare[1]);
-                    compareViewData.schoolThree = dataContext.Schools.Find(compare[2]);
+                    compareViewData.schoolOne = dataContext.SchoolPdatas.Find(compare[0]);
+                    compareViewData.schoolTwo = dataContext.SchoolPdatas.Find(compare[1]);
+                    compareViewData.schoolThree = dataContext.SchoolPdatas.Find(compare[2]);
                 }
             }
 

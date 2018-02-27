@@ -32,10 +32,11 @@
         <dt>
             @Html.DisplayNameFor(model => model.generalSchoolData.SchoolWebsite)
         </dt>
+    </dl>
 
-        <h4>Metrics</h4>
-
-        @foreach(var i in Model.allMetrics)
+    <h4>Metrics</h4>
+    <dl class="dl-horizontal">
+        @foreach (var i in Model.allMetrics)
         {
             <dd>
                 @Html.Display(i.MetricName)
@@ -44,6 +45,6 @@
                 @Html.Display(i.Description)
             </dd>
         }
-        
     </dl>
+
 </div>
