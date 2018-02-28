@@ -47,4 +47,17 @@
         }
     </dl>
 
+    <h4>Programs</h4>
+    <dl class="dl-horizontal">
+        @foreach (var i in Model.allPrograms)
+        {
+            <dd>
+                @Html.Display(i.programName)
+            </dd>
+            <dd>
+                @Html.Display(i.programDescription)
+            </dd>
+        }
+    </dl>
+
 </div>
