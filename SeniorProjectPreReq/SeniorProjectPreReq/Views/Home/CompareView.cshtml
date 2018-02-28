@@ -3,14 +3,14 @@
     ViewBag.Title = "CompareView";
 }
 
-<h2>CompareView<</h2>
+<h2>Compare your schools!</h2>
 
 <div class="row">
     @if (Model.schoolOne != null)
     {
         <div class="col-md-4">
             <div>
-                <h4>SchoolPdata</h4>
+                <h4>@Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)</h4>
                 <hr />
                 <dl class="dl-horizontal">
                     <dt>
@@ -18,8 +18,20 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.schoolOne.generalSchoolData.type)
+                        @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)
                     </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.schoolTypeID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.generalSchoolData.type.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolAddress)
+                    </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolAddress)
@@ -30,42 +42,254 @@
                     </dt>
 
                     <dd>
+                        @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolPrincipal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolPhone)
+                    </dt>
+
+                    <dd>
                         @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolPhone)
                     </dd>
 
                     <dt>
                         @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolWebsite)
                     </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolWebsite)
+                    </dd>
                 </dl>
 
                 <h4>Metrics</h4>
                 <dl class="dl-horizontal">
-                    @foreach (var i in Model.schoolOne.allMetrics)
+                    @if (Model.schoolOne.allMetrics != null)
                     {
-                        <dd>
-                            @Html.Display(i.MetricName)
-                        </dd>
-                        <dd>
-                            @Html.Display(i.Description)
-                        </dd>
+                        foreach (var i in Model.schoolOne.allMetrics)
+                        {
+                            <dd>
+                                @Html.Display(i.MetricName)
+                            </dd>
+                            <dd>
+                                @Html.Display(i.Description)
+                            </dd>
+                        }
                     }
                 </dl>
 
                 <h4>Programs</h4>
                 <dl class="dl-horizontal">
-                    @foreach (var i in Model.schoolOne.allPrograms)
+                    @if (Model.schoolOne.allPrograms != null)
                     {
-                        <dd>
-                            @Html.Display(i.programName)
-                        </dd>
-                        <dd>
-                            @Html.Display(i.programDescription)
-                        </dd>
+                        foreach (var i in Model.schoolOne.allPrograms)
+                        {
+                            <dd>
+                                @Html.Display(i.programName)
+                            </dd>
+                            <dd>
+                                @Html.Display(i.programDescription)
+                            </dd>
+                        }
                     }
                 </dl>
 
             </div>
         </div>
+    }
+    else
+    {
+        <div class="col-md-4"></div>
+    }
+    @if (Model.schoolTwo != null)
+    {
+        <div class="col-md-4">
+            <div>
+                <h4>@Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolName)</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.schoolTypeID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.type.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolPrincipal)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolPrincipal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolPhone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolWebsite)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolWebsite)
+                    </dd>
+                </dl>
+
+                <h4>Metrics</h4>
+                <dl class="dl-horizontal">
+                    @if (Model.schoolTwo.allMetrics != null)
+                    {
+                        foreach (var i in Model.schoolTwo.allMetrics)
+                        {
+                            <dd>
+                                @Html.Display(i.MetricName)
+                            </dd>
+                            <dd>
+                                @Html.Display(i.Description)
+                            </dd>
+                        }
+                    }
+                </dl>
+
+                <h4>Programs</h4>
+                <dl class="dl-horizontal">
+                    @if (Model.schoolTwo.allPrograms != null)
+                    {
+                        foreach (var i in Model.schoolTwo.allPrograms)
+                        {
+                            <dd>
+                                @Html.Display(i.programName)
+                            </dd>
+                            <dd>
+                                @Html.Display(i.programDescription)
+                            </dd>
+                        }
+                    }
+                </dl>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-4"></div>
+    }
+    @if (Model.schoolThree != null)
+    {
+        <div class="col-md-4">
+            <div>
+                <h4>@Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolName)</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.schoolTypeID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.generalSchoolData.type.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolPrincipal)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolPrincipal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolPhone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolWebsite)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolWebsite)
+                    </dd>
+                </dl>
+
+                <h4>Metrics</h4>
+                <dl class="dl-horizontal">
+                    @if (Model.schoolThree.allMetrics != null)
+                    {
+                        foreach (var i in Model.schoolThree.allMetrics)
+                        {
+                            <dd>
+                                @Html.Display(i.MetricName)
+                            </dd>
+                            <dd>
+                                @Html.Display(i.Description)
+                            </dd>
+                        }
+                    }
+                </dl>
+
+                <h4>Programs</h4>
+                <dl class="dl-horizontal">
+                    @if (Model.schoolThree.allPrograms != null)
+                    {
+                        foreach (var i in Model.schoolThree.allPrograms)
+                        {
+                            <dd>
+                                @Html.Display(i.programName)
+                            </dd>
+                            <dd>
+                                @Html.Display(i.programDescription)
+                            </dd>
+                        }
+                    }
+                </dl>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-4"></div>
     }
 </div>
 
