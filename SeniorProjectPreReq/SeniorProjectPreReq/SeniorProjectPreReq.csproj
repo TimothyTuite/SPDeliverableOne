@@ -210,7 +210,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PrincipleController.cs" />
+    <Compile Include="Controllers\PrincipalController.cs" />
     <Compile Include="Migrations\201802271753009_newModels.cs" />
     <Compile Include="Migrations\201802271753009_newModels.Designer.cs">
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
@@ -426,6 +426,7 @@
     <Content Include="Views\Metrics\Index.cshtml" />
     <Content Include="Views\SchoolPdatas\AllDetailsSchoolView.cshtml" />
     <Content Include="Views\API\index.cshtml" />
+    <Content Include="Views\Principal\AddPrograms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -443,9 +444,7 @@
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Principle\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

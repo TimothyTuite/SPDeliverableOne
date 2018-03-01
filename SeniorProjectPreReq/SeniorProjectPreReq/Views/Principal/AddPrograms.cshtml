@@ -1,0 +1,12 @@
+﻿@model SeniorProjectPreReq.Models.FormModels.AddProgram
+@{
+    ViewBag.Title = "AddPrograms";
+    var programs = (IEnumerable<SelectListItem>)ViewData["newPrograms"];
+}
+
+<h2>Add Programs for the school year beginning in @Model.Year</h2>
+<h4>@ViewBag.message</h4>
+<div>
+   
+    @Html.ListBoxFor(x => x.SelectedPrograms, Model.ThePrograms)
+</div>

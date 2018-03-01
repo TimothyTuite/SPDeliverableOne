@@ -8,7 +8,9 @@ namespace SeniorProjectPreReq.Models.FormModels
 {
     public class AddProgram
     {
-        public MultiSelectList listOfSelectedPrograms { get; set; }
+        public IEnumerable<SelectListItem> ThePrograms { get; set; }
+
+        public IEnumerable<int> SelectedPrograms { get; set; }
 
         public int schoolID { get; set; }
 
