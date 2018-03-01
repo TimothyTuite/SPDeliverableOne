@@ -1,80 +1,78 @@
 ﻿
-    @using PagedList.Mvc;
-    @model PagedList.IPagedList<SeniorProjectPreReq.Models.UserRoles.ExpandedUserDTO>
-<div class="jumbotron">
-    <h1>Administration Page</h1>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<SeniorProjectPreReq.Models.UserRoles.ExpandedUserDTO>
+
+<br />
+
+<div class="container" style="background-color:white">
+
+    <img src="~/Content/img/Administration.jpg" style="width:100%">
+    <!-- <h1>Administration Page</h1> -->
 </div>
+
+<br />
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-6">
-            @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" }) 
-        </div>
-        <div class="col-lg-6">
-            @Html.ActionLink("Create New School", "Create", "SchoolPdatas", null, new { @class = "btn btn-default" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.ActionLink("Create School Program", "Create", "Programs", null, new { @class = "btn btn-default" })
-        </div>
-        <div class="col-lg-6">
-            @Html.ActionLink("Create School Metric", "Create", "Metrics", null, new { @class = "btn btn-default" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.ActionLink("Create School Type", "Create", "SchoolTypes", null, new { @class = "btn btn-default" })
-        </div>
-        <div class="col-lg-6">
-            @Html.ActionLink("Create New School", "Create", "SchoolPdatas", null, new { @class = "btn btn-default" })
-        </div>
+        @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Create School Program", "Create", "Progams", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Create New School", "Create", "SchoolPdatas", null, new { @class = "btn btn-default" })
     </div>
 </div>
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">All</button>
-        <button type="button" class="btn btn-secondary">Approved / Pending</button>
-        <button type="button" class="btn btn-secondary">Pending</button>
-        <button type="button" class="btn btn-secondary">Disapproved</button>
-        <button type="button" class="btn btn-secondary">Inactive</button>
+
+<br/>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary">All</button>
+    <button type="button" class="btn btn-secondary">Approved / Pending</button>
+    <button type="button" class="btn btn-secondary">Pending</button>
+    <button type="button" class="btn btn-secondary">Disapproved</button>
+    <button type="button" class="btn btn-secondary">Inactive</button>
+</div>
+
+<br />
+<br />
+
+@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+{
+    <div class="form-group">
+        Search: &nbsp; @Html.TextBox("searchStringUserNameOrEmail", ViewBag.CurrentFilter as string)
+        <input type="submit" value="search" />
     </div>
-    @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
-    {
-        <div class="form-group">
-            Search: &nbsp; @Html.TextBox("searchStringUserNameOrEmail", ViewBag.CurrentFilter as string)
-            <input type="submit" value="search" />
-        </div>
-    }
-    <table class="table">
-        <thead>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>School</th>
+            <th>Email</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int i = 1;}
+        @foreach (var item in Model)
+        {
+
             <tr>
-                <th>#</th>
-                <th>School</th>
-                <th>Email</th>
-                <th>Last Name</th>
-                <th>First Name</th>
+                <td>@Html.DisplayFor(modelItem => item.schoolID)</td>
+
+                <td>@Html.ActionLink("View " + item.school.SchoolName, "Details", "Schools", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.ActionLink("Edit Programs", "AddSchoolsPrograms", "SchoolsPrograms", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
+                <td></td>
+                <td></td>
+
+
             </tr>
-        </thead>
-        <tbody>
-            @{ int i = 1;}
-            @foreach (var item in Model)
-            {
-
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.schoolID)</td>
-
-                    <td>@Html.ActionLink("View " + item.school.SchoolName, "Details", "Schools", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
-                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                    <td>@Html.ActionLink("Edit Programs", "AddSchoolsPrograms", "SchoolsPrograms", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
-                    <td></td>
-                    <td></td>
-
-
-                </tr>
-                i++;
-            }
-        </tbody>
-    </table>
+            i++;
+        }
+    </tbody>
+</table>
 

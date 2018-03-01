@@ -33,6 +33,7 @@ namespace SeniorProjectPreReq.Controllers
             schoolInfo.schoolID = parsedID;
             schoolInfo.generalSchoolData = db.SchoolPdatas.Find(id);
             IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
+            schoolInfo.allMetrics = new List<Metrics>();
             foreach (var i in collectMetrics)
             {
                 if (id == i.schoolID)
@@ -41,6 +42,7 @@ namespace SeniorProjectPreReq.Controllers
                 }
             }
             IEnumerable<SchoolProgramsValues> collectPrograms = db.SchoolProgramsValues.ToList();
+            schoolInfo.allPrograms = new List<Program>();
             foreach (var i in collectPrograms)
             {
                 if (id == i.schoolID)
@@ -52,7 +54,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 return HttpNotFound();
             }
-            return View(schoolInfo);
+            return View("AllDetailsSchoolView", schoolInfo);
         }
 
         // GET: SchoolPdatas/Details/5

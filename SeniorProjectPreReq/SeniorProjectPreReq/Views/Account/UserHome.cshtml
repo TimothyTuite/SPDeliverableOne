@@ -3,15 +3,26 @@
     ViewBag.Title = "Synchro Principal Portal";
 }
 
+<br />
+
 <div class="jumbotron">
     <h1>Welcome Principal @Model.LastName!</h1>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="text-center">
         <h2>Getting started:</h2>
-        @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "Details", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large" })
         <br />
-        @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large" })
+        <br />
+        @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "AllDetails", "SchoolPdatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA" })
+        @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA"})
     </div>
 </div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
