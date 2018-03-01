@@ -216,6 +216,7 @@
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\FormModels\AddProgram.cs" />
     <Compile Include="Models\ViewModels\CompareViewModel.cs" />
     <Compile Include="Models\ViewModels\mainPageViewModel.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
