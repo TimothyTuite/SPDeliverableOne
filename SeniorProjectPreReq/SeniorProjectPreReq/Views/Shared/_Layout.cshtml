@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-light navbar-fixed-top">
+    <div class="navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -44,7 +44,14 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <!-- <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>  -->
+
+            <h1 style="background-color:#ADD8E6;">
+
+                <img src='@Url.Content("~/Content/img/JPEFLogo.png")' height="25" />
+
+            </h1>
+
         </footer>
     </div>
 

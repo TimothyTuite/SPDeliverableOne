@@ -87,32 +87,40 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult Index(int?[] compare)
         {
             var schools = dataContext.SchoolPdatas.ToList();
-            var compareViewData = new compareViewModel();
+            var CompareViewData = new CompareViewModel();
 
-            if (compare.Length == 1)
+            if (compare != null)
             {
-                if(compare[0] != null)
-                    compareViewData.schoolOne = dataContext.SchoolPdatas.Find(compare[0]);
-            }
-            if (compare.Length == 2)
-            {
-                if (compare[0] != null && compare[1] != null)
+                if (compare.Length == 1)
                 {
-                    compareViewData.schoolOne = dataContext.SchoolPdatas.Find(compare[0]);
-                    compareViewData.schoolTwo = dataContext.SchoolPdatas.Find(compare[1]);
+                    if (compare[0] != null)
+                        CompareViewData.schoolOne = new AllDetailsViewModel();
+                        CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                }
+                if (compare.Length == 2)
+                {
+                    if (compare[0] != null && compare[1] != null)
+                    {
+                        CompareViewData.schoolOne = new AllDetailsViewModel();
+                        CompareViewData.schoolTwo = new AllDetailsViewModel();
+                        CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
+                    }
+                }
+                if (compare.Length == 3)
+                {
+                    if (compare[0] != null && compare[1] != null && compare[2] != null)
+                    {
+                        CompareViewData.schoolOne = new AllDetailsViewModel();
+                        CompareViewData.schoolTwo = new AllDetailsViewModel();
+                        CompareViewData.schoolThree = new AllDetailsViewModel();
+                        CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
+                        CompareViewData.schoolThree.generalSchoolData = dataContext.SchoolPdatas.Find(compare[2]);
+                    }
                 }
             }
-            if (compare.Length == 3)
-            {
-                if (compare[0] != null && compare[1] != null && compare[2] != null)
-                {
-                    compareViewData.schoolOne = dataContext.SchoolPdatas.Find(compare[0]);
-                    compareViewData.schoolTwo = dataContext.SchoolPdatas.Find(compare[1]);
-                    compareViewData.schoolThree = dataContext.SchoolPdatas.Find(compare[2]);
-                }
-            }
-
-            return View("Compare", compareViewData);
+            return View("CompareView", CompareViewData);
         }
 
         public ActionResult About()

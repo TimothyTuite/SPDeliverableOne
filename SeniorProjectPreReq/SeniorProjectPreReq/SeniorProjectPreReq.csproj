@@ -323,7 +323,12 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\1_12.jpg" />
+    <Content Include="Content\img\Administration.jpg" />
+    <Content Include="Content\img\Elementry.jpg" />
+    <Content Include="Content\img\HighSchools.jpg" />
     <Content Include="Content\img\JPEFLogo.png" />
+    <Content Include="Content\img\MiddleSchool.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -419,7 +424,7 @@
     <Content Include="Views\Metrics\Details.cshtml" />
     <Content Include="Views\Metrics\Edit.cshtml" />
     <Content Include="Views\Metrics\Index.cshtml" />
-    <Content Include="Views\Home\AllDetailsSchoolView.cshtml" />
+    <Content Include="Views\SchoolPdatas\AllDetailsSchoolView.cshtml" />
     <Content Include="Views\API\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
