@@ -1,5 +1,10 @@
 ﻿using System;
+using DotNet.Highcharts;
+using DotNet.Highcharts.Enums;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Options;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -120,6 +125,7 @@ namespace SeniorProjectPreReq.Controllers
                     }
                 }
             }
+
             return View("CompareView", CompareViewData);
         }
 
@@ -137,8 +143,83 @@ namespace SeniorProjectPreReq.Controllers
             return View();
         }
 
-       
+        public ActionResult SchoolGraphsView()
+        {
+            Highcharts columnChart = new Highcharts("columnchart");
 
-        
+            columnChart.InitChart(new Chart()
+            {
+                Type = DotNet.Highcharts.Enums.ChartTypes.Column,
+                BackgroundColor = new BackColorOrGradient(System.Drawing.Color.AliceBlue),
+                Style = "fontWeight: 'bold', fontSize: '17px'",
+                BorderColor = System.Drawing.Color.LightBlue,
+                BorderRadius = 0,
+                BorderWidth = 2
+
+            });
+
+            columnChart.SetTitle(new Title()
+            {
+                Text = "Accelerated Coursework"
+            });
+
+            columnChart.SetSubtitle(new Subtitle()
+            {
+                Text = "Indicates the Percentage of Students Participating in Accelerated Coursework Options"
+            });
+
+            columnChart.SetXAxis(new XAxis()
+            {
+                Type = AxisTypes.Category,
+                Title = new XAxisTitle() { Text = "Participation", Style = "fontWeight: 'bold', fontSize: '17px'" },
+                Categories = new[] { "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012" }
+            });
+
+            columnChart.SetYAxis(new YAxis()
+            {
+                Title = new YAxisTitle()
+                {
+                    Text = "Runs",
+                    Style = "fontWeight: 'bold', fontSize: '17px'"
+                },
+                ShowFirstLabel = true,
+                ShowLastLabel = true,
+                Min = 0
+            });
+
+            columnChart.SetLegend(new Legend
+            {
+                Enabled = true,
+                BorderColor = System.Drawing.Color.CornflowerBlue,
+                BorderRadius = 6,
+                BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFADD8E6"))
+            });
+
+            columnChart.SetSeries(new Series[]
+            {
+                new Series{
+
+                    Name = "School 1",
+                    Data = new Data(new object[] { 81, 41, 72, 74, 60, 67, 75, 83, 95 })
+                },
+                new Series()
+                {
+                    Name = "School 2",
+                    Data = new Data(new object[] { 59, 65, 71, 73, 77, 88, 70, 84, 94, })
+                },
+                new Series()
+                {
+                    Name = "School 3",
+                    Data = new Data(new object[] { 69, 65, 71, 83, 77, 70, 67, 76, 83, })
+                }
+            }
+            );
+            return View(columnChart);
+
+        }
+
+
+
+
     }
 }
