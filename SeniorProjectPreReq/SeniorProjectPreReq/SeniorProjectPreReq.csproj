@@ -213,7 +213,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PrincipleController.cs" />
+    <Compile Include="Controllers\PrincipalController.cs" />
     <Compile Include="Migrations\201802271753009_newModels.cs" />
     <Compile Include="Migrations\201802271753009_newModels.Designer.cs">
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
