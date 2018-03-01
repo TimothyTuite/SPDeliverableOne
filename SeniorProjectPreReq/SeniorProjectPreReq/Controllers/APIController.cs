@@ -28,8 +28,10 @@ namespace SeniorProjectPreReq.Controllers
             var schoolData = dataContext.SchoolPdatas.Find(intschoolId);
             var schoolName = schoolData.SchoolName;
             var schoolAddress = schoolData.SchoolAddress;
-            
-            
+            var schoolPhone = schoolData.SchoolPhone;
+            var schoolWebsite = schoolData.SchoolWebsite;
+            var schoolPrincipal = schoolData.SchoolPrincipal;
+
             if (schoolData == null)
             {
                 // return HttpNotFound("id could not be found");
@@ -38,6 +40,9 @@ namespace SeniorProjectPreReq.Controllers
             }
             schoolAttributes.Add("schoolName", schoolName);
             schoolAttributes.Add("Address", schoolAddress);
+            schoolAttributes.Add("Phone", schoolPhone);
+            schoolAttributes.Add("Website", schoolWebsite);
+            schoolAttributes.Add("Principal", schoolPrincipal);
             return Json(schoolAttributes, JsonRequestBehavior.AllowGet);
 
         }
