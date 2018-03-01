@@ -425,6 +425,7 @@
     <Content Include="Views\Account\Schedule.cshtml" />
     <Content Include="Views\Account\UserHome.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
+    <Content Include="Views\Principal\AddPrograms.cshtl" />
     <Content Include="Views\SchoolPdatas\Create.cshtml" />
     <Content Include="Views\SchoolPdatas\Delete.cshtml" />
     <Content Include="Views\SchoolPdatas\Details.cshtml" />
