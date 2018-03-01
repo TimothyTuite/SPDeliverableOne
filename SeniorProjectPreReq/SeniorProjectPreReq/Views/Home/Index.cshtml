@@ -16,7 +16,8 @@
             success: function (data) {
                 schoolData = data
                 console.log('success', data)
-                $("#schoolName").innerHTML = schoolData.schoolName;
+                $("#schoolName").text(schoolData.schoolName);
+                $("#schoolAddress").text(schoolData.Address);
             }
         })
         
@@ -41,10 +42,13 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-body" style="height: 400px">
-                <h1>School Data</h1>
+                <h1 id="schoolName">School Data</h1>
                 <p>
                     <ul>
-                        <li id="schoolName"></li>
+                        <li id="schoolAddress"></li>
+                        <li id="schoolPhone"></li>
+                        <li id="schoolWebsite"></li>
+                        <li id="schoolPrincipal"></li>
                     </ul>
                 </p>
             </div>

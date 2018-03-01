@@ -88,21 +88,21 @@ namespace SeniorProjectPreReq.Controllers
         {
             var schools = dataContext.SchoolPdatas.ToList();
             var CompareViewData = new CompareViewModel();
-            CompareViewData.schoolOne = new AllDetailsViewModel();
-            CompareViewData.schoolTwo = new AllDetailsViewModel();
-            CompareViewData.schoolThree = new AllDetailsViewModel();
 
             if (compare != null)
             {
                 if (compare.Length == 1)
                 {
                     if (compare[0] != null)
+                        CompareViewData.schoolOne = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
                 }
                 if (compare.Length == 2)
                 {
                     if (compare[0] != null && compare[1] != null)
                     {
+                        CompareViewData.schoolOne = new AllDetailsViewModel();
+                        CompareViewData.schoolTwo = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
                         CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
                     }
@@ -111,6 +111,9 @@ namespace SeniorProjectPreReq.Controllers
                 {
                     if (compare[0] != null && compare[1] != null && compare[2] != null)
                     {
+                        CompareViewData.schoolOne = new AllDetailsViewModel();
+                        CompareViewData.schoolTwo = new AllDetailsViewModel();
+                        CompareViewData.schoolThree = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
                         CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
                         CompareViewData.schoolThree.generalSchoolData = dataContext.SchoolPdatas.Find(compare[2]);
