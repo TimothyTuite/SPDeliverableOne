@@ -103,10 +103,10 @@
 <br />
 
 <div class="row" style="height: 500px;">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-body" style="height: 400px">
-                <h1 id="schoolName">School Data</h1>
+                <h2 id="schoolName">School Data</h2>
                 <p>
                     <ul>
                         <li id="schoolAddress"></li>
@@ -118,16 +118,10 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
 
         <div class="container fluid">
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
-                </span>
-                <input type="text" class="form-control" placeholder="Search for...">
-
-            </div><!-- /input-group -->
+            <!-- /input-group -->
             <div style="height: 380px; overflow-y: scroll;">
                 @using (Html.BeginForm())
                 {
@@ -141,6 +135,15 @@
                     <input type="submit" value="Compare" class="btn btn-primary btn-large" />
                 }
             </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for...">
+
         </div>
     </div>
 
