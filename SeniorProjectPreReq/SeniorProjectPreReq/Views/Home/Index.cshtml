@@ -21,10 +21,10 @@
                 $("#schoolPhone").text(schoolData.Phone);
                 $("#schoolWebsite").text(schoolData.Website);
                 $("#schoolPrincipal").text(schoolData.Principal);
+                $("#profileButton").text("Visit " + schoolData.schoolName + "'s profile!");
             }
         })
-
-
+        $("#profileButton").attr("href", "../SchoolPdatas/AllDetails/" + id);
     }
 </script>
 <br />
@@ -43,7 +43,7 @@
         <div class="item active">
             <img src="~/Content/img/1_12.jpg" style="width:100%" class="img-responsive">
             <div class="carousel-caption">
-                <h1>1 - 12</h1>
+                <h1>K - 12 Schools</h1>
                 <p></p>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="item">
             <img src="~/Content/img/Elementry.jpg">
             <div class="carousel-caption">
-                <h1>1 - 5</h1>
+                <h1>Elementary Schools</h1>
                 <p></p>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="item">
             <img src="~/Content/img/MiddleSchool.jpg">
             <div class="carousel-caption">
-                <h1>6 - 8</h1>
+                <h1>Middle Schools</h1>
                 <p></p>
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="item">
             <img src="~/Content/img/HighSchools.jpg">
             <div class="carousel-caption">
-                <h1>9 - 12</h1>
+                <h1>High Schools</h1>
                 <p></p>
             </div>
         </div>
@@ -142,7 +142,7 @@
                     </dd>
                 </dl>
 
-               @* @Html.ActionLink("View their Profile!", "AllDetails", "SchoolPdatas", new { id = Model.schoolList. }, new { @class = "btn btn-primary btn-large" })*@
+                <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA" href="">Visit their Profile!</a>
 
             </div>
         </div>
