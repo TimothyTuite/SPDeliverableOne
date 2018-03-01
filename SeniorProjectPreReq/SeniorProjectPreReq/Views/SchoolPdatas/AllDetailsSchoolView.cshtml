@@ -3,10 +3,10 @@
     ViewBag.Title = "AllDetailsSchoolView";
 }
 
-<h2>AllDetailsSchoolView</h2>
+<h2>School Profile</h2>
 
 <div>
-    <h4>SchoolPdata</h4>
+    <h4>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -14,8 +14,20 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.type)
+            @Html.DisplayFor(model => model.generalSchoolData.SchoolName)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.generalSchoolData.schoolTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.generalSchoolData.type.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolAddress)
+        </dt>
 
         <dd>
             @Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)
@@ -26,12 +38,24 @@
         </dt>
 
         <dd>
+            @Html.DisplayFor(model => model.generalSchoolData.SchoolPrincipal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolPhone)
+        </dt>
+
+        <dd>
             @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.generalSchoolData.SchoolWebsite)
         </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.generalSchoolData.SchoolWebsite)
+        </dd>
     </dl>
 
     <h4>Metrics</h4>

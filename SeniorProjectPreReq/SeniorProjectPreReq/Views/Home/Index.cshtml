@@ -86,35 +86,61 @@
 <br />
 
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <a class="btn btn-info btn-block" style="background-color:#ADD8E6" href="">Collaborative Schools</a>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <a class="btn btn-info btn-block" style="background-color:#ADD8E6" href="">Elementry Schools</a>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <a class="btn btn-info btn-block" style="background-color:#ADD8E6" href="">Middle Schools</a>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <a class="btn btn-info btn-block" style="background-color:#ADD8E6" href="">High Schools</a>
+    </div>
+    <div class="col-sm-4">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search for...">
+
+        </div>
     </div>
 </div>
 
 <br />
 
-<div class="row" style="height: 500px;">
-    <div class="col-md-3">
+<div class="row" style="height: 390px;">
+    <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-body" style="height: 400px">
                 <h2 id="schoolName">School Data</h2>
-                <p>
-                    <ul>
-                        <li id="schoolAddress"></li>
-                        <li id="schoolPhone"></li>
-                        <li id="schoolWebsite"></li>
-                        <li id="schoolPrincipal"></li>
-                    </ul>
-                </p>
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
+                    </dt>
+                    <dd id="schoolAddress">
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
+                    </dt>
+                    <dd id="schoolPhone">
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
+                    </dt>
+                    <dd id="schoolWebsite">
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
+                    </dt>
+                    <dd id="schoolPrincipal">
+                    </dd>
+                </dl>
+
+               @* @Html.ActionLink("View their Profile!", "AllDetails", "SchoolPdatas", new { id = Model.schoolList. }, new { @class = "btn btn-primary btn-large" })*@
+
             </div>
         </div>
     </div>
@@ -135,15 +161,6 @@
                     <input type="submit" value="Compare" class="btn btn-primary btn-large" />
                 }
             </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-            </span>
-            <input type="text" class="form-control" placeholder="Search for...">
-
         </div>
     </div>
 
