@@ -10,7 +10,7 @@ namespace SeniorProjectPreReq.Models.FormModels
     {
         public IEnumerable<SelectListItem> ThePrograms { get; set; }
 
-        public IEnumerable<int> SelectedPrograms { get; set; }
+        public IEnumerable<string> SelectedPrograms { get; set; }
 
         public int schoolID { get; set; }
 

@@ -9,6 +9,7 @@ using SeniorProjectPreReq.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Mvc;
 using SeniorProjectPreReq.Models.FormModels;
+using System.Text;
 
 namespace SeniorProjectPreReq.Controllers
 {
@@ -59,22 +60,26 @@ namespace SeniorProjectPreReq.Controllers
             //get the current users data 
             var userID = User.Identity.GetUserId(); 
             var user = UserManager.FindById(userID);
-            IEnumerable<SelectListItem> possible; 
+            IEnumerable<string> listOfOld = null;
+            IEnumerable<string> listOfCurrent = null;
             AddProgram ViewModel = new AddProgram();
             //query for current avaliable programs 
-            List<Program> p = dataContext.Programs.Where(m => m.TypeID == user.school.schoolTypeID).ToList();
+            var p = dataContext.Programs.Where(m => m.TypeID == user.school.schoolTypeID);
+            IEnumerable<SelectListItem> possible = p.Select(x => new SelectListItem
+            {
+                Value = x.ID.ToString(),
+                Text = x.programName
+            }); 
             if (user.school.schoolsPrograms != null)
             {
                 //user it to query for their schools program data for the last year save the ids to list
-                IEnumerable<int> listOfOld = user.school.schoolsPrograms.Where(m => m.year == lastYear()).Select(m => m.programID).ToList();
-                IEnumerable<int> listOfCurrent = user.school.schoolsPrograms.Where(m => m.year == currentYear()).Select(m => m.programID).ToList();
-                if (!listOfCurrent.Any())
+              listOfOld = user.school.schoolsPrograms.Where(m => m.year == lastYear()).Select(m => m.programID.ToString()).ToList();
+              listOfCurrent = user.school.schoolsPrograms.Where(m => m.year == currentYear()).Select(m => m.programID.ToString()).ToList();
+            } 
+
+           if (listOfCurrent == null)
                 {
-                    possible = p.Select(x => new SelectListItem
-                    {
-                        Value = x.ID.ToString(),
-                        Text = x.programName,
-                    }).ToList();
+                    
                     ViewBag.Message = "Showing the programs from last year, no programs for the current year";
                     ViewModel.ThePrograms = possible;
                     ViewData["oldPrograms"] = possible;
@@ -83,18 +88,13 @@ namespace SeniorProjectPreReq.Controllers
                 }
                 else
                 {
-                    possible = p.Select(x => new SelectListItem
-                        {
-                            Value = x.ID.ToString(),
-                            Text = x.programName,
-                        }).ToList();
                     ViewBag.Message = "Showing selected Programs for the current ";
                     ViewModel.ThePrograms = possible;
                     ViewData["newPrograms"] = possible;
                     ViewModel.SelectedPrograms = listOfOld;
 
                 }
-            }
+            
            
             
             // create a multiple selection list that will be displayed and edited by the user, use the list of old ids to preselect values 
@@ -102,10 +102,26 @@ namespace SeniorProjectPreReq.Controllers
             {
                 ViewModel.schoolID = user.schoolID.Value; 
             }
-            
+            ViewModel.ThePrograms = possible;
             ViewModel.Year = currentYear();
             //TODO: https://stackoverflow.com/questions/18363158/super-simple-implementation-of-multiselect-list-box-in-edit-view
             return View(ViewModel);
         }
+
+        [HttpPost]
+        public string AddPrograms(AddProgram model)
+        {
+            if(model.SelectedPrograms == null)
+            {
+                return "No Values Selected";
+            }
+            else
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Selected - " + string.Join(",", model.SelectedPrograms));
+                return sb.ToString(); 
+            }
+        }
+  
     }
 }
