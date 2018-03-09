@@ -4,14 +4,15 @@
     var programs = (IEnumerable<SelectListItem>)ViewData["newPrograms"];
 }
 
-<h2>Add Programs for the school year beginning in @Model.Year</h2>
+<h2>Add Programs for @Model.schoolName for the school year beginning in @Model.Year</h2>
+<h3>@Model.schoolID.ToString()</h3>
 <h4>@ViewBag.message</h4>
-@using (Html.BeginForm("AddPrograms", "Principal", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("savePrograms", "Principal", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 <div>
 
-   @Html.ListBoxFor(x => x.SelectedPrograms, new MultiSelectList(Model.ThePrograms, "Value", "Text", Model.SelectedPrograms))
+   @Html.ListBoxFor(x => x.SelectedPrograms, new MultiSelectList(Model.ThePrograms, "Value", "Text", Model.SelectedPrograms), new { style = "width: 100%; height: 50%;" } )
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="AddPrograms" />

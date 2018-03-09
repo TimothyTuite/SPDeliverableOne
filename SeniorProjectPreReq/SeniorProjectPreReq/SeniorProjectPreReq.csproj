@@ -464,6 +464,8 @@
     <Content Include="Views\API\index.cshtml" />
     <Content Include="Views\Home\SchoolGraphsView.cshtml" />
     <Content Include="Views\Principal\AddPrograms.cshtml" />
+    <Content Include="Views\Principal\EditProgramYear.cshtml" />
+    <Content Include="Views\Principal\Saved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
