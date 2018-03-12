@@ -92,11 +92,13 @@ namespace SeniorProjectPreReq.Controllers
             }
             //get the current users data 
             var userID = User.Identity.GetUserId();
-            var ArePrograms = false; 
             var user = UserManager.FindById(userID);
+            AddProgram ViewModel = new AddProgram();
+            ViewModel.schoolID = user.schoolID ?? default(int);
+            ViewModel.Year = Int32.Parse(year);
             IEnumerable<string> listOfOld = null;
             IEnumerable<string> listOfCurrent = null;
-            AddProgram ViewModel = new AddProgram();
+            
             //query for current avaliable programs 
             var p = dataContext.Programs.Where(m => m.TypeID == user.school.schoolTypeID);
             IEnumerable<SelectListItem> possible = p.Select(x => new SelectListItem
@@ -104,24 +106,11 @@ namespace SeniorProjectPreReq.Controllers
                 Value = x.ID.ToString(),
                 Text = x.programName
             });
-            try
-            {
-                if (user.school.schoolsPrograms.Any())
-                {
-                    ArePrograms = true; 
-                }
-            }catch(ArgumentNullException e)
-            {
+            listOfCurrent = getProgramsIds(ViewModel.schoolID, ViewModel.Year);
+            listOfOld = getProgramsIds(ViewModel.schoolID, ViewModel.Year - 1); 
 
-            }
-            if (ArePrograms)
-            {
-                //user it to query for their schools program data for the last year save the ids to list
-              listOfOld = user.school.schoolsPrograms.Where(m => m.year == lastYear()).Select(m => m.programID.ToString()).ToList();
-              listOfCurrent = user.school.schoolsPrograms.Where(m => m.year == currentYear()).Select(m => m.programID.ToString()).ToList();
-            } 
 
-           if (listOfCurrent == null)
+           if ( !listOfCurrent.Any() )
                 {
                     
                     ViewBag.Message = "Showing the programs from last year, no programs for the current year";
@@ -146,21 +135,21 @@ namespace SeniorProjectPreReq.Controllers
             {
                 ViewModel.schoolID = user.schoolID.Value; 
             }
-            ViewModel.schoolID = user.schoolID ?? default(int);
+            
             ViewModel.schoolName = user.school.SchoolName; 
             ViewModel.ThePrograms = possible;
-            ViewModel.Year = Int32.Parse(year);
+            
             //TODO: https://stackoverflow.com/questions/18363158/super-simple-implementation-of-multiselect-list-box-in-edit-view
             return View(ViewModel);
         }
 
         [HttpPost]
-        public ActionResult savePrograms(AddProgram model)
+        [ValidateAntiForgeryToken]
+        public ActionResult addPrograms([Bind(Include = "schoolName,thePrograms,SelectedPrograms,previousPrograms,schoolID,Year")] AddProgram model)
         {
             string[] previous = new string[] {};
             string[] updated = new string[] { };
-          
-            if(model.SelectedPrograms == null)
+            if (model.SelectedPrograms == null)
             {
                 return RedirectToAction("addPrograms",model.Year);
             }
@@ -174,7 +163,7 @@ namespace SeniorProjectPreReq.Controllers
                     List<string> del = findRemoved(previous, updated);
                     for(var i =0; i < add.Count; i++)
                     {
-                        var schoolProgram = new SchoolProgramsValues();
+                        SchoolProgramsValues schoolProgram = new SchoolProgramsValues();
                         schoolProgram.programID = Int32.Parse(add[i]);
                         schoolProgram.schoolID = model.schoolID;
                         schoolProgram.year = model.Year;
@@ -199,14 +188,15 @@ namespace SeniorProjectPreReq.Controllers
                     List<string> add = model.SelectedPrograms.ToList();
                     for (var i = 0; i < add.Count; i++)
                     {
-                       
-                        var schoolProgram = new SchoolProgramsValues();
+
+                        SchoolProgramsValues schoolProgram = new SchoolProgramsValues();
                         schoolProgram.programID = Int32.Parse(add[i]);
                         schoolProgram.schoolID = model.schoolID;
                         schoolProgram.year = model.Year;
                         schoolProgram.hasProgram = true;
                         schoolProgram.Approved = false;
                         schoolProgram.dateCreated = DateTime.Now;
+                        Console.WriteLine(schoolProgram); 
                         dataContext.SchoolProgramsValues.Add(schoolProgram);
                     }
                     try
@@ -251,6 +241,23 @@ namespace SeniorProjectPreReq.Controllers
                 }
             }
             return result; 
+        }
+
+        public string[] getProgramsIds(int id,int year)
+        {
+            try
+            {
+                IEnumerable<SchoolProgramsValues> sp =  dataContext.SchoolProgramsValues.Where(x => (x.schoolID == id) && (x.year == year)).ToList();
+                return sp.Select(x => x.programID.ToString()).ToArray();
+            }
+            catch(ArgumentNullException e)
+            {
+                string[] result = new string[]{ };
+                return result; 
+            }
+            
+
+
         }
     }
 }
