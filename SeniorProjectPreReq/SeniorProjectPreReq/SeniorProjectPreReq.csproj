@@ -210,6 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminApprovalsController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -334,7 +335,7 @@
     <Content Include="Content\img\MiddleSchool.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Migrations\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -466,14 +467,16 @@
     <Content Include="Views\Principal\AddPrograms.cshtml" />
     <Content Include="Views\Principal\EditProgramYear.cshtml" />
     <Content Include="Views\Principal\Saved.cshtml" />
+    <Content Include="Views\Principal\ViewUnApproved.cshtml" />
+    <Content Include="Views\Principal\AddYouTubeVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Migrations\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Migrations\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Migrations\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -483,7 +486,9 @@
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\AdminApprovals\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -59,6 +59,25 @@ namespace SeniorProjectPreReq.Controllers
         {
             return DateTime.Now.Year + 1; 
         }
+        public ActionResult AddYouTubeVideo()
+        {
+            var yCurrent = currentYear().ToString();
+            var yLast = lastYear().ToString(); 
+            List<SelectListItem> years = new List<SelectListItem>();
+            years.Add(new SelectListItem
+            {
+                Text = yCurrent,
+                Value = yCurrent
+
+            });
+            years.Add(new SelectListItem
+            {
+                Text = yLast,
+                Value = yLast
+            });
+            ViewBag.year = years; 
+            return View(); 
+        }
         public ActionResult EditProgramYear()
         {
             List<SelectListItem> year = new List<SelectListItem>();
@@ -212,7 +231,12 @@ namespace SeniorProjectPreReq.Controllers
             }
             return RedirectToAction("Account", "UserHome"); 
         }
-
+        public ActionResult ViewUnApproved()
+        {
+            var schoolID = getUserSchoolID();
+            List<SchoolProgramsValues> UnApprovedPrograms = dataContext.SchoolProgramsValues.Include("theProgram").Where(x => (x.schoolID == schoolID) && (x.Approved == false)).ToList(); 
+            return View(UnApprovedPrograms); 
+        }
         public ActionResult Saved()
         {
             return View(); 
@@ -258,6 +282,13 @@ namespace SeniorProjectPreReq.Controllers
             
 
 
+        }
+
+        public int getUserSchoolID()
+        {
+            var userID = User.Identity.GetUserId();
+            var user = UserManager.FindById(userID);
+            return user.school.ID; 
         }
     }
 }

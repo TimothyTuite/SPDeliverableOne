@@ -1,0 +1,29 @@
+﻿@model List<SeniorProjectPreReq.Models.SchoolProgramsValues>
+@{
+    ViewBag.Title = "ViewUnApproved";
+}
+
+<h2>Added Programs Awaiting Review </h2>
+
+<table class="table">
+<thead>
+    <tr>
+        <th>Program Name</th>
+        <th>Year</th>
+        <th>Date Submitted</th>
+    </tr>
+</thead>
+<tbody>
+    @{ int i = 1;}
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.theProgram.programName)</td>
+            <td>@Html.DisplayFor(modelItem => item.year)</td>
+            <td>@item.dateCreated.ToString("MM/dd/yyyy")</td>
+        </tr>
+        i++;
+    }
+</tbody>
+</table>
