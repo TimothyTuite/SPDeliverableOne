@@ -48,6 +48,25 @@ namespace SeniorProjectPreReq.Controllers
             return items;
         }
 
+        /*
+         * Takes a YouTube URL and cuts the end off to make the source of an embed link.
+         **/
+        public string EmbedLink(string url)
+        {
+            int index = url.IndexOf("=") + 1;
+            string end = url.Substring(index);
+            string embed = "https://www.youtube.com/embed/" + end;
+            return embed;
+        }
+        public youtubeURL YoutubeQuery(int? id)
+        {
+            var index = id;
+            var query = from a in dataContext.youtubeURLs
+                        where a.schoolID == index
+                        select a;
+            var item = query.FirstOrDefault();
+            return item;   
+        }
         public ActionResult Index(string id)
         {
             mainPageViewModel model = new mainPageViewModel();
@@ -77,8 +96,12 @@ namespace SeniorProjectPreReq.Controllers
                 if (compare.Length == 1)
                 {
                     if (compare[0] != null)
+                    {
                         CompareViewData.schoolOne = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        var item = YoutubeQuery(compare[0]);
+                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                    }
                 }
                 if (compare.Length == 2)
                 {
@@ -87,7 +110,11 @@ namespace SeniorProjectPreReq.Controllers
                         CompareViewData.schoolOne = new AllDetailsViewModel();
                         CompareViewData.schoolTwo = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        var item = YoutubeQuery(compare[0]);
+                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
                         CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
+                        item = YoutubeQuery(compare[1]);
+                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
                     }
                 }
                 if (compare.Length == 3)
@@ -98,8 +125,14 @@ namespace SeniorProjectPreReq.Controllers
                         CompareViewData.schoolTwo = new AllDetailsViewModel();
                         CompareViewData.schoolThree = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        var item = YoutubeQuery(compare[0]);
+                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
                         CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
+                        item = YoutubeQuery(compare[1]);
+                        CompareViewData.schoolTwo.schoolVideo = EmbedLink(item.URL);
                         CompareViewData.schoolThree.generalSchoolData = dataContext.SchoolPdatas.Find(compare[2]);
+                        item = YoutubeQuery(compare[2]);
+                        CompareViewData.schoolThree.schoolVideo = EmbedLink(item.URL);
                     }
                 }
             }

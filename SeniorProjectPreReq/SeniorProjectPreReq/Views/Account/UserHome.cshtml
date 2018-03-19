@@ -12,13 +12,14 @@
 <div class="row">
     <div class="col-lg-3" style="text-align: center;">
     </div>
-        <div class="col-lg-3" style="text-align: center;">
-            <h2 style="margin: 1%;">Getting started:</h2>
-            @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "AllDetails", "SchoolPdatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Programs", "EditProgramYear", "Principal", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Metrics", "EditMetricYear", "Principal", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("View Programs Awaiting Approval", "ViewUnApproved", "Principal", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
+    <div class="col-lg-3" style="text-align: center;">
+        <h2 style="margin: 1%;">Getting started:</h2>
+        @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "AllDetails", "SchoolPdatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
+        @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Programs", "EditProgramYear", "Principal", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
+        @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Metrics", "EditMetricYear", "Principal", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
+        @Html.ActionLink("View Programs Awaiting Approval", "ViewUnApproved", "Principal", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
+        @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "Schools", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
+        @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Video", "Create", "youtubeURLs", null, new { @class = "btn btn-primary btn-large", @style = "background-color: #33C2DA; margin: 1%;" })
     </div>
     <div class="col-lg-3" style="text-align: center;">
     </div>
