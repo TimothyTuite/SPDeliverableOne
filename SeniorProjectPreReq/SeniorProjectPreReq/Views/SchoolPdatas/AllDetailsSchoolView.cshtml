@@ -86,4 +86,18 @@
         }
     </dl>
 
+
 </div>
+
+@if (User.IsInRole("Administrator"))
+{
+    <div>
+        @Html.ActionLink("Back to List", "Index", "SchoolPDatas")
+    </div>
+}
+else
+{
+    <div>
+        @Html.ActionLink("Back to Principal Portal", "UserHome", "Account")
+    </div>
+}
