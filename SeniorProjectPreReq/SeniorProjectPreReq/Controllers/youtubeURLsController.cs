@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -82,7 +83,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,schoolID,URL,year,dateCreated")] youtubeURL youtubeURL)
+        public ActionResult Edit([Bind(Include = "ID,schoolID,URL,year,dateCreated,Approved")] youtubeURL youtubeURL)
         {
             if (ModelState.IsValid)
             {
@@ -127,6 +128,40 @@ namespace SeniorProjectPreReq.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: youtubeURLs
+        public ActionResult YoutubeApprovals()
+        {
+            var schools = db.SchoolPdatas.ToList();
+            List<int> ids = new List<int>();
+            foreach(var item in schools)
+            {
+                ids.Add(item.ID);
+            }
+            var youtubeURLs = CollectRecentYoutubeURLs(ids);
+            return View(youtubeURLs);
+        }
+        public List<youtubeURL> CollectRecentYoutubeURLs(List<int> ids)
+        {
+            List<youtubeURL> urls = new List<youtubeURL>();
+            //IEnumerable<youtubeURL> urls;
+            foreach(var item in ids)
+            {
+                urls.Add(YoutubeQuery(item));
+            }
+            return urls;
+        }
+        public youtubeURL YoutubeQuery(int? id)
+        {
+            var index = id;
+            var query = from a in db.youtubeURLs
+                        where a.schoolID == index
+                        orderby a.dateCreated descending
+                        select a;
+            var item = query.FirstOrDefault();
+            Debug.WriteLine(item.school.SchoolName);
+            return item;
         }
     }
 }

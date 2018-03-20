@@ -469,7 +469,7 @@
     <Content Include="Views\Principal\Saved.cshtml" />
     <Content Include="Views\Principal\ViewUnApproved.cshtml" />
     <Content Include="Views\Principal\AddYouTubeVideo.cshtml" />
-    <Content Include="Views\Admin\YoutubeApprovals.cshtml" />
+    <Content Include="Views\youtubeURLs\YoutubeApprovals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

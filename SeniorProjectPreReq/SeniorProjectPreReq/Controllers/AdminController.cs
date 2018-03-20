@@ -14,6 +14,7 @@ namespace SeniorProjectPreReq.Controllers
     {
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
         // Controllers
         // GET: /Admin/
         [Authorize(Roles = "Administrator")]
@@ -118,5 +119,7 @@ namespace SeniorProjectPreReq.Controllers
             }
         }
         #endregion
+
+        
     }
 }

@@ -63,6 +63,7 @@ namespace SeniorProjectPreReq.Controllers
             var index = id;
             var query = from a in dataContext.youtubeURLs
                         where a.schoolID == index && a.Approved == true
+                        orderby a.dateCreated descending
                         select a;
             var item = query.FirstOrDefault();
             return item;   

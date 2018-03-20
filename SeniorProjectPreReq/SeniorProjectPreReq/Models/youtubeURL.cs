@@ -24,13 +24,10 @@ namespace SeniorProjectPreReq.Models
         
         public virtual SchoolPdata school { get; set; }
 
-
-
         public string URL { get; set; }
 
 
-
-        [Display(Name = "Year at the start of the school year")]
+        [Display(Name = "School Year")]
         public int year { get; set; }
 
         public Boolean Approved { get; set; }
