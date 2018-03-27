@@ -221,6 +221,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FormModels\AddProgram.cs" />
+    <Compile Include="Models\FormModels\CheckBoxes.cs" />
+    <Compile Include="Models\FormModels\MetricListItem.cs" />
+    <Compile Include="Models\FormModels\MetricsList.cs" />
+    <Compile Include="Models\FormModels\ProgramsCheckBoxList.cs" />
     <Compile Include="Models\ViewModels\CompareViewModel.cs" />
     <Compile Include="Models\ViewModels\mainPageViewModel.cs" />
     <Compile Include="Controllers\MetricsController.cs" />
@@ -470,6 +474,10 @@
     <Content Include="Views\Principal\ViewUnApproved.cshtml" />
     <Content Include="Views\Principal\AddYouTubeVideo.cshtml" />
     <Content Include="Views\youtubeURLs\YoutubeApprovals.cshtml" />
+    <Content Include="Views\Principal\SelectPrograms.cshtml" />
+    <Content Include="Views\Principal\SelectMetrics.cshtml" />
+    <Content Include="Views\Principal\EditMetricYear.cshtml" />
+    <Content Include="Views\Principal\EditMetricForYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,35 @@
+﻿@model SeniorProjectPreReq.Models.FormModels.ProgramsCheckBoxList
+@{
+    ViewBag.Title = "SelectPrograms";
+}
+<div class="container">
+    <h1>List Of Available Programs</h1>
+
+        @using (Html.BeginForm("SelectPrograms", "Principal"))
+        {
+            @Html.AntiForgeryToken()
+            foreach (var item in Model.AvailablePrograms)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="@item.Value" name="CategoryIds" value="@item.Value"
+                                       @foreach (var c in Model.preSelectids) { if (c == item.Value) { <text> checked="checked" </text>         } } />
+
+                                @item.Text
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                    }
+
+
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </div>
+                    }
+</div>
+
+
+

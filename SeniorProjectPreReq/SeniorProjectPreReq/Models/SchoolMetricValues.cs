@@ -9,6 +9,7 @@ namespace SeniorProjectPreReq.Models
 {
     public class SchoolMetricValues
     {
+        //TODO: There is no Actual Value Variable in the Model, It will have to Migrated 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID { get; set; }

@@ -95,142 +95,13 @@ namespace SeniorProjectPreReq.Controllers
             ViewBag.year = year; 
             return View(); 
         }
-
+        //User selectes year to edit 
         [HttpPost]
         public ActionResult EditProgramYear(string year)
         {
-            return RedirectToAction("AddPrograms/" + year);
+            return RedirectToAction("SelectPrograms/" + year);
         }
-        [HttpGet]
-        public ActionResult AddPrograms(string year)
-        {
-            //if no year is submitted and the year is any other than the current or the next redirect 
-            if (year == null || (year != currentYear().ToString() && year != nextYear().ToString()))
-            {
-                return RedirectToAction("EditProgramYear");
-            }
-            //get the current users data 
-            var userID = User.Identity.GetUserId();
-            var user = UserManager.FindById(userID);
-            AddProgram ViewModel = new AddProgram();
-            ViewModel.schoolID = user.schoolID ?? default(int);
-            ViewModel.Year = Int32.Parse(year);
-            IEnumerable<string> listOfOld = null;
-            IEnumerable<string> listOfCurrent = null;
-            
-            //query for current avaliable programs 
-            var p = dataContext.Programs.Where(m => m.TypeID == user.school.schoolTypeID);
-            IEnumerable<SelectListItem> possible = p.Select(x => new SelectListItem
-            {
-                Value = x.ID.ToString(),
-                Text = x.programName
-            });
-            listOfCurrent = getProgramsIds(ViewModel.schoolID, ViewModel.Year);
-            listOfOld = getProgramsIds(ViewModel.schoolID, ViewModel.Year - 1); 
-
-
-           if ( !listOfCurrent.Any() )
-                {
-                    
-                    ViewBag.Message = "Showing the programs from last year, no programs for the current year";
-                    ViewModel.ThePrograms = possible;
-                    ViewModel.SelectedPrograms = listOfOld;
-                    ViewModel.previousPrograms = listOfOld;
-
-                }
-                else
-                {
-                    ViewBag.Message = "Showing selected Programs for the current ";
-                    ViewModel.ThePrograms = possible;
-                    ViewModel.SelectedPrograms = listOfCurrent;
-                    ViewModel.previousPrograms = listOfCurrent;  
-
-                }
-            
-           
-            
-            // create a multiple selection list that will be displayed and edited by the user, use the list of old ids to preselect values 
-            if(user.schoolID.HasValue)
-            {
-                ViewModel.schoolID = user.schoolID.Value; 
-            }
-            
-            ViewModel.schoolName = user.school.SchoolName; 
-            ViewModel.ThePrograms = possible;
-            
-            //TODO: https://stackoverflow.com/questions/18363158/super-simple-implementation-of-multiselect-list-box-in-edit-view
-            return View(ViewModel);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult addPrograms([Bind(Include = "schoolName,thePrograms,SelectedPrograms,previousPrograms,schoolID,Year")] AddProgram model)
-        {
-            string[] previous = new string[] {};
-            string[] updated = new string[] { };
-            if (model.SelectedPrograms == null)
-            {
-                return RedirectToAction("addPrograms",model.Year);
-            }
-            else
-            {
-                try
-                {
-                    previous = model.previousPrograms.Select(x => x).ToArray();
-                    updated = model.SelectedPrograms.Select(x => x).ToArray();
-                    List<string> add = findNew(previous, updated);
-                    List<string> del = findRemoved(previous, updated);
-                    for(var i =0; i < add.Count; i++)
-                    {
-                        SchoolProgramsValues schoolProgram = new SchoolProgramsValues();
-                        schoolProgram.programID = Int32.Parse(add[i]);
-                        schoolProgram.schoolID = model.schoolID;
-                        schoolProgram.year = model.Year;
-                        schoolProgram.hasProgram = true;
-                        schoolProgram.Approved = false;
-                        schoolProgram.dateCreated = DateTime.Now;
-                        dataContext.SchoolProgramsValues.Add(schoolProgram); 
-                    }
-                    for (var i = 0; i < del.Count; i++)
-                    {
-                        var delSchoolProgram = dataContext.SchoolProgramsValues.SingleOrDefault(x => x.schoolID == model.schoolID && x.year == model.Year && x.programID == Int32.Parse(del[i]));
-                        dataContext.SchoolProgramsValues.Remove(delSchoolProgram); 
-                    }
-                    dataContext.SaveChanges(); 
-                }
-                catch(ArgumentNullException x)
-                {
-                    //if there are no previous add all the updated to database
-                    
-
-                    
-                    List<string> add = model.SelectedPrograms.ToList();
-                    for (var i = 0; i < add.Count; i++)
-                    {
-
-                        SchoolProgramsValues schoolProgram = new SchoolProgramsValues();
-                        schoolProgram.programID = Int32.Parse(add[i]);
-                        schoolProgram.schoolID = model.schoolID;
-                        schoolProgram.year = model.Year;
-                        schoolProgram.hasProgram = true;
-                        schoolProgram.Approved = false;
-                        schoolProgram.dateCreated = DateTime.Now;
-                        Console.WriteLine(schoolProgram); 
-                        dataContext.SchoolProgramsValues.Add(schoolProgram);
-                    }
-                    try
-                    {
-                        dataContext.SaveChanges();
-                    }catch(SqlException e)
-                    {
-                        return Content(e.ToString(),model.schoolID.ToString()); 
-                    }
-                }
-               
-                return RedirectToAction("Saved");
-            }
-            return RedirectToAction("Account", "UserHome"); 
-        }
+        //Shows the user the Unapproved programs 
         public ActionResult ViewUnApproved()
         {
             var schoolID = getUserSchoolID();
@@ -241,32 +112,7 @@ namespace SeniorProjectPreReq.Controllers
         {
             return View(); 
         }
-        public List<string> findNew(string[] previous, string[] updated)
-        {
-            List<string> result = new List<string>(updated); 
-            for(var i = 0; i < previous.Length; i++)
-            {
-                result.Remove(previous[i]); 
-            }
-
-            return result; 
-        }
-
-        public List<string> findRemoved(string[] previous, string[] updated)
-        {
-            List<string> upd = new List<string>(updated); 
-            List<string> result = new List<string>();
-            for(var i = 0; i < previous.Length; i++)
-            {
-                var found = upd.Remove(previous[i]);
-                if (!found)
-                {
-                    result.Add(previous[i]); 
-                }
-            }
-            return result; 
-        }
-
+    
         public string[] getProgramsIds(int id,int year)
         {
             try
@@ -289,6 +135,161 @@ namespace SeniorProjectPreReq.Controllers
             var userID = User.Identity.GetUserId();
             var user = UserManager.FindById(userID);
             return user.school.ID; 
+        }
+
+        private IList<CheckBoxes> GetAvailablePrograms(int schoolsTypeID)
+        {
+            var p = dataContext.Programs.Where(m => m.TypeID == schoolsTypeID);
+            List<CheckBoxes> possible = p.Select(x => new CheckBoxes
+            {
+                Value = x.ID.ToString(),
+                Text = x.programName
+            }).ToList();
+            // https://stackoverflow.com/questions/17037446/get-multiple-selected-checkboxes-in-mvc
+            return possible;
+        }
+
+        public ActionResult SelectPrograms(string year)
+        {
+            //if no year is submitted and the year is any other than the current or the next redirect 
+            if (year == null || (year != currentYear().ToString() && year != nextYear().ToString()))
+            {
+                return RedirectToAction("EditProgramYear");
+            }
+
+            List<string> listOfCurrent = getProgramsIds(getUserSchoolID(), currentYear()).ToList();
+            List<string> listOfOld = getProgramsIds(getUserSchoolID(), lastYear()).ToList();
+            IList<CheckBoxes> possible = GetAvailablePrograms(getUserSchoolType());
+            var model = new ProgramsCheckBoxList { AvailablePrograms = possible, year = 2018,preSelectids = listOfCurrent };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SelectPrograms(FormCollection collection,ProgramsCheckBoxList model)
+        {
+            string selected = Request.Form["CategoryIds"];
+            List<string> newPrograms = new List<string>();
+            List<string> AfterRemoval = new List<string>();
+            List<string> AfterAddNew = new List<string>(); 
+            List<string> listOfCurrent = getProgramsIds(getUserSchoolID(), model.year).ToList();
+            var schoolId = getUserSchoolID(); 
+            if (string.IsNullOrEmpty(selected))
+            {
+                dataContext.SchoolProgramsValues.RemoveRange(dataContext.SchoolProgramsValues.Where(s => (s.schoolID == schoolId) && (s.year == model.year)));
+                return RedirectToAction("Saved");
+            }
+            else
+            {
+                //querys and removes all the old programs for the school for the selected year
+               dataContext.SchoolProgramsValues.RemoveRange(dataContext.SchoolProgramsValues.Where(s => (s.schoolID == schoolId) && (s.year == model.year))); 
+               newPrograms = selected.Split(',').ToList();
+               AfterRemoval = getProgramsIds(getUserSchoolID(), model.year).ToList();
+                foreach (var Program in newPrograms)
+                {
+                    SchoolProgramsValues schoolProgram = new SchoolProgramsValues();
+                    schoolProgram.programID = Int32.Parse(Program);
+                    schoolProgram.schoolID = schoolId;
+                    schoolProgram.year = model.year;
+                    schoolProgram.hasProgram = true;
+                    schoolProgram.Approved = false;
+                    schoolProgram.dateCreated = DateTime.Now;
+                    dataContext.SchoolProgramsValues.Add(schoolProgram);
+                }
+                dataContext.SaveChanges();
+                AfterAddNew = getProgramsIds(getUserSchoolID(), model.year).ToList();
+            }
+            // save this code for error checking 
+            //var data = new { NewProgramsIDs = newPrograms,currentProgramsIds = listOfCurrent, shouldBeNone= AfterRemoval, year = model.year, New = AfterAddNew };
+            //return Json(data, JsonRequestBehavior.AllowGet);
+
+            return RedirectToAction("Saved");
+        }
+        private int getUserSchoolType()
+        {
+            var userID = User.Identity.GetUserId();
+            var user = UserManager.FindById(userID);
+            return user.school.schoolTypeID; 
+        }
+
+        public ActionResult EditMetricYear()
+        {
+            List<SelectListItem> year = new List<SelectListItem>();
+            year.Add(new SelectListItem
+            {
+                Text = currentYear().ToString(),
+                Value = currentYear().ToString()
+            });
+            year.Add(new SelectListItem
+            {
+                Text = nextYear().ToString(),
+                Value = currentYear().ToString()
+            });
+
+            ViewBag.year = year;
+            return View();
+        }
+        //User selectes year to edit 
+        [HttpPost]
+        public ActionResult EditMetricYear(string year)
+        {
+            return RedirectToAction("SelectMetrics/" + year);
+        }
+
+        public ActionResult SelectMetrics(string year)
+        {
+            if (year == null || (year != currentYear().ToString() && year != nextYear().ToString()))
+            {
+                return RedirectToAction("EditMetricYear");
+            }
+
+            List<MetricListItem> PossibleMetrics = GetAvailableMetrics(getUserSchoolType()).ToList();
+            var model = new MetricsList { listOfMetrics = PossibleMetrics };
+            model.year = year; 
+            return View(model); 
+        }
+        private IList<MetricListItem> GetAvailableMetrics(int schoolsTypeID)
+        {
+            var p = dataContext.Metrics.Where(m => m.schoolLevel == schoolsTypeID);
+            List<MetricListItem> possible = p.Select(x => new MetricListItem
+            {
+                id = x.ID.ToString(),
+                MetricName = x.MetricName,
+                MetricValue = null
+            }).ToList();
+
+            return possible;
+        }
+        public ActionResult EditMetricForYear(string year,string MetricID)
+        {
+            int schoolID = getUserSchoolID(); 
+            int mID = Convert.ToInt32(MetricID);
+            int mYear = Convert.ToInt32(year); 
+            var Metric = dataContext.Metrics.FirstOrDefault(m => m.ID == mID);
+            //check to see if there isn't already a value for the school metric year 
+            var currentMetricData = dataContext.SchoolMetricValues.FirstOrDefault(m => (m.ID == mID) && (m.year == mYear) && (m.schoolID == schoolID));
+            var type = dataContext.SchoolTypes.FirstOrDefault(t => t.ID == Metric.schoolLevel);
+            string LevelName = type.Name; 
+            if(Metric == null)
+            {
+                //Error Redirect 
+            }
+            var model = new EditMetric();
+            model.metricID = mID;
+            model.schoolID = schoolID;
+            model.metricName = Metric.MetricName;
+            model.description = Metric.Description; 
+            model.rangeTop = Metric.rangeTop;
+            model.rangeBottom = Metric.rangeBottom;
+            model.year = year;
+            model.level = LevelName; 
+            var data = new { year = year, MetricID = MetricID, Metric = Metric, FromModel = model};
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMetricForYear(EditMetric model)
+        {
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

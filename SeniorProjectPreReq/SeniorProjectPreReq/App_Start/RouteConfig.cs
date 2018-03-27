@@ -18,6 +18,11 @@ namespace SeniorProjectPreReq
                  defaults: new { controller = "API", action = "Index", id = UrlParameter.Optional , year = UrlParameter.Optional }
              );
             routes.MapRoute(
+                  name: "EditMetricForYear",
+                  url: "principal/{action}/{year}/{MetricID}",
+                  defaults: new { controller = "Principal", action = "EditMetricForYear", year = "", MetricID="" }
+             );
+            routes.MapRoute(
                  name: "EditYear",
                  url: "principal/{action}/{year}",
                  defaults: new { controller = "Principal", action = "AddPrograms", year = "" }

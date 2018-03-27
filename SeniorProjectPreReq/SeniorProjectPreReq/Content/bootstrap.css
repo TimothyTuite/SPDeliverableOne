@@ -277,10 +277,10 @@ table {
   .navbar {
     display: none;
   }
-  .table td,
-  .table th {
-    background-color: #fff !important;
-  }
+    .table td,
+    .table th {
+        background-color: #fff !important;
+    }
   .btn > .caret,
   .dropup > .btn > .caret {
     border-top-color: #000 !important;
@@ -311,11 +311,13 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #333333;
+    /*light blue background #ccffff,#e6ffff*/
+    /* original  background-color: #fff !important;*/
+    background-color: #e6ffff;
 }
 
 input,
@@ -4384,8 +4386,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
+    /*original  background-color: #f8f8f8;*/
+    /*New slight grey #e0ebeb,#f0f5f5*/
+    background-color: #e0ebeb;
+    border-color: #f0f5f5;
 }
 
 .navbar-default .navbar-brand {

@@ -1,0 +1,44 @@
+﻿@model SeniorProjectPreReq.Models.FormModels.MetricsList
+@{
+    ViewBag.Title = "SelectMetrics";
+}
+
+
+<div class="container">
+    <h2>Select Metric to Edit</h2>
+        @foreach (var item in Model.listOfMetrics)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label style=" margin: 1%;">
+                                @item.MetricName
+                            </label>
+                            @if (string.IsNullOrEmpty(@item.MetricValue.ToString()))
+                            {
+                                <label style=" color: red;margin: 1%;">No Value for Metric</label>
+                            }
+                            else
+                            {
+                                <label style=" color: green; margin: 1%;"> Value: @item.MetricValue.ToString()</label>
+                            }
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ActionLink("Edit " + @item.MetricName,"EditMetricForYear","Principal", new { year = Model.year, MetricID=item.id }, new { @class = "btn btn-primary btn-large", @style = "float: right; background-color: #33C2DA; margin: 1%;" })
+                        </div>
+                    </div>
+                        
+                      
+
+                    </div>
+            </div>
+    }
+
+</div>
+
+
+
