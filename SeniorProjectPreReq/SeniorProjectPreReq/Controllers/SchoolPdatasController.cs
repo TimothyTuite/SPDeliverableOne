@@ -15,6 +15,7 @@ namespace SeniorProjectPreReq.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SchoolPdatas
+        [Authorize]
         public ActionResult Index()
         {
             var schoolPdatas = db.SchoolPdatas.Include(s => s.type);
@@ -58,6 +59,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: SchoolPdatas/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -73,6 +75,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: SchoolPdatas/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.schoolTypeID = new SelectList(db.SchoolTypes, "ID", "Name");
@@ -84,6 +87,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,schoolTypeID")] SchoolPdata schoolPdata)
         {
             if (ModelState.IsValid)
@@ -98,6 +102,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: SchoolPdatas/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -118,6 +123,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,SchoolName,SchoolPhone,SchoolAddress,SchoolWebsite,SchoolPrincipal,schoolTypeID")] SchoolPdata schoolPdata)
         {
             if (ModelState.IsValid)
@@ -131,6 +137,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: SchoolPdatas/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -148,6 +155,7 @@ namespace SeniorProjectPreReq.Controllers
         // POST: SchoolPdatas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             SchoolPdata schoolPdata = db.SchoolPdatas.Find(id);

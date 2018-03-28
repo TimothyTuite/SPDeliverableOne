@@ -10,6 +10,7 @@ using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class SchoolTypesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

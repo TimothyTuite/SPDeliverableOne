@@ -11,11 +11,13 @@ using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
+    [Authorize]
     public class youtubeURLsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: youtubeURLs
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             var youtubeURLs = db.youtubeURLs.Include(y => y.school);
@@ -55,7 +57,11 @@ namespace SeniorProjectPreReq.Controllers
             {
                 db.youtubeURLs.Add(youtubeURL);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if (User.IsInRole("Administrator"))
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("UserHome", "Account");
             }
 
             ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName", youtubeURL.schoolID);
@@ -63,6 +69,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: youtubeURLs/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +90,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "ID,schoolID,URL,year,dateCreated,Approved")] youtubeURL youtubeURL)
         {
             if (ModelState.IsValid)
@@ -129,7 +137,7 @@ namespace SeniorProjectPreReq.Controllers
             }
             base.Dispose(disposing);
         }
-
+        [Authorize(Roles = "Administrator")]
         // GET: youtubeURLs
         public ActionResult YoutubeApprovals()
         {

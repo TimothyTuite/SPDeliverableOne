@@ -10,11 +10,13 @@ using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
+    [Authorize]
     public class ProgramsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Programs
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             return View(db.Programs.ToList());
@@ -36,6 +38,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: Programs/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             ViewBag.TypeID = new SelectList(db.SchoolTypes, "ID", "Name");
@@ -47,6 +50,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
         {
             if (ModelState.IsValid)
@@ -60,6 +64,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: Programs/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +84,7 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "ID,programName,programDescription,TypeID")] Program program)
         {
             if (ModelState.IsValid)
@@ -91,6 +97,7 @@ namespace SeniorProjectPreReq.Controllers
         }
 
         // GET: Programs/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +115,7 @@ namespace SeniorProjectPreReq.Controllers
         // POST: Programs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Program program = db.Programs.Find(id);

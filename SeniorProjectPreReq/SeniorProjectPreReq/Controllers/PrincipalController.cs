@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 
 namespace SeniorProjectPreReq.Controllers
 {
+    [Authorize]
     public class PrincipalController : Controller
     {
         private ApplicationDbContext dataContext = new ApplicationDbContext();
@@ -244,8 +245,8 @@ namespace SeniorProjectPreReq.Controllers
 
             List<MetricListItem> PossibleMetrics = GetAvailableMetrics(getUserSchoolType()).ToList();
             var model = new MetricsList { listOfMetrics = PossibleMetrics };
-            model.year = year; 
-            return View(model); 
+            model.year = year;
+            return View(model);
         }
         private IList<MetricListItem> GetAvailableMetrics(int schoolsTypeID)
         {
@@ -259,17 +260,17 @@ namespace SeniorProjectPreReq.Controllers
 
             return possible;
         }
-        public ActionResult EditMetricForYear(string year,string MetricID)
+        public ActionResult EditMetricForYear(string year, string MetricID)
         {
-            int schoolID = getUserSchoolID(); 
+            int schoolID = getUserSchoolID();
             int mID = Convert.ToInt32(MetricID);
-            int mYear = Convert.ToInt32(year); 
+            int mYear = Convert.ToInt32(year);
             var Metric = dataContext.Metrics.FirstOrDefault(m => m.ID == mID);
             //check to see if there isn't already a value for the school metric year 
             var currentMetricData = dataContext.SchoolMetricValues.FirstOrDefault(m => (m.ID == mID) && (m.year == mYear) && (m.schoolID == schoolID));
             var type = dataContext.SchoolTypes.FirstOrDefault(t => t.ID == Metric.schoolLevel);
-            string LevelName = type.Name; 
-            if(Metric == null)
+            string LevelName = type.Name;
+            if (Metric == null)
             {
                 //Error Redirect 
             }
@@ -277,12 +278,12 @@ namespace SeniorProjectPreReq.Controllers
             model.metricID = mID;
             model.schoolID = schoolID;
             model.metricName = Metric.MetricName;
-            model.description = Metric.Description; 
+            model.description = Metric.Description;
             model.rangeTop = Metric.rangeTop;
             model.rangeBottom = Metric.rangeBottom;
             model.year = year;
-            model.level = LevelName; 
-            var data = new { year = year, MetricID = MetricID, Metric = Metric, FromModel = model};
+            model.level = LevelName;
+            var data = new { year = year, MetricID = MetricID, Metric = Metric, FromModel = model };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
