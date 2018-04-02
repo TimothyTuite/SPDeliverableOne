@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Configuration; 
 using System.Web.Mvc;
 using SeniorProjectPreReq.Models;
 
@@ -13,6 +14,9 @@ namespace SeniorProjectPreReq.Controllers
     public class SchoolPdatasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        //googleMapsAPIKey configure the api key in the web.config folder 
+        //******CHANGE TIM's KEY BEFORER GOING TO PRODUCTION**********
+        private string googleAPIkey = ConfigurationManager.AppSettings["googleMapsAPIKey"];
 
         // GET: SchoolPdatas
         [Authorize]
@@ -35,7 +39,14 @@ namespace SeniorProjectPreReq.Controllers
             schoolInfo.generalSchoolData = db.SchoolPdatas.Find(id);
             //TODO: null pointer catch on empty youtube vids 
             var item = YoutubeQuery(id);
-            schoolInfo.schoolVideo = EmbedLink(item.URL);
+            try
+            {
+                schoolInfo.schoolVideo = EmbedLink(item.URL);
+            }
+            catch(NullReferenceException e)
+            {
+                schoolInfo.schoolVideo = null; 
+            }
             IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
             schoolInfo.allMetrics = new List<Metrics>();
             foreach (var i in collectMetrics)
@@ -63,10 +74,18 @@ namespace SeniorProjectPreReq.Controllers
 
         public string EmbedLink(string url)
         {
-            int index = url.IndexOf("=") + 1;
-            string end = url.Substring(index);
-            string embed = "https://www.youtube.com/embed/" + end;
-            return embed;
+            if(!string.IsNullOrEmpty(url))
+            {
+                int index = url.IndexOf("=") + 1;
+                string end = url.Substring(index);
+                string embed = "https://www.youtube.com/embed/" + end;
+                return embed;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
         public youtubeURL YoutubeQuery(int? id)
         {
