@@ -219,6 +219,14 @@
     <Compile Include="Migrations\201802271753009_newModels.Designer.cs">
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804022229338_youtube.cs" />
+    <Compile Include="Migrations\201804022229338_youtube.Designer.cs">
+      <DependentUpon>201804022229338_youtube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804022238478_metric.cs" />
+    <Compile Include="Migrations\201804022238478_metric.Designer.cs">
+      <DependentUpon>201804022238478_metric.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FormModels\AddProgram.cs" />
     <Compile Include="Models\FormModels\CheckBoxes.cs" />
@@ -498,6 +506,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802271753009_newModels.resx">
       <DependentUpon>201802271753009_newModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804022229338_youtube.resx">
+      <DependentUpon>201804022229338_youtube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804022238478_metric.resx">
+      <DependentUpon>201804022238478_metric.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

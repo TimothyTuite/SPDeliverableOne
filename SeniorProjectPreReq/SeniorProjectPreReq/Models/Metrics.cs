@@ -21,6 +21,8 @@ namespace SeniorProjectPreReq.Models
 
         public int schoolLevel { get; set; }
 
+        public float value { get; set; }
+
         public float rangeTop { get; set; }
 
         public float rangeBottom { get; set; }

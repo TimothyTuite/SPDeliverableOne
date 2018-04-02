@@ -33,6 +33,9 @@ namespace SeniorProjectPreReq.Controllers
             int parsedID = Convert.ToInt32(id);
             schoolInfo.schoolID = parsedID;
             schoolInfo.generalSchoolData = db.SchoolPdatas.Find(id);
+            //TODO: null pointer catch on empty youtube vids 
+            var item = YoutubeQuery(id);
+            schoolInfo.schoolVideo = EmbedLink(item.URL);
             IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
             schoolInfo.allMetrics = new List<Metrics>();
             foreach (var i in collectMetrics)
@@ -56,6 +59,36 @@ namespace SeniorProjectPreReq.Controllers
                 return HttpNotFound();
             }
             return View("AllDetailsSchoolView", schoolInfo);
+        }
+
+        public string EmbedLink(string url)
+        {
+            int index = url.IndexOf("=") + 1;
+            string end = url.Substring(index);
+            string embed = "https://www.youtube.com/embed/" + end;
+            return embed;
+        }
+        public youtubeURL YoutubeQuery(int? id)
+        {
+            var index = id;
+            var query = from a in db.youtubeURLs
+                        where a.schoolID == index && a.Approved == true
+                        orderby a.dateCreated descending
+                        select a;
+            var item = query.FirstOrDefault();
+            return item;
+        }
+
+        public ActionResult ProgramQuery(int? id)
+        {
+            var index = id;
+            var query = from a in db.SchoolProgramsValues
+                        where a.schoolID == index && a.Approved == true && a.hasProgram == true && a.year == DateTime.Now.Year
+                        orderby a.dateCreated descending
+                        select a;
+            //get rid of first or default 
+            var item = query;
+            return Json(item, JsonRequestBehavior.AllowGet);
         }
 
         // GET: SchoolPdatas/Details/5
