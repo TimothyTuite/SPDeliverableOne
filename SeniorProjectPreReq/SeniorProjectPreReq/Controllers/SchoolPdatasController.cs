@@ -36,6 +36,7 @@ namespace SeniorProjectPreReq.Controllers
             //TODO: null pointer catch on empty youtube vids 
             var item = YoutubeQuery(id);
             schoolInfo.schoolVideo = EmbedLink(item.URL);
+            schoolInfo.allPrograms = new List<Program>();
             IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
             schoolInfo.allMetrics = new List<Metrics>();
             foreach (var i in collectMetrics)
@@ -45,15 +46,7 @@ namespace SeniorProjectPreReq.Controllers
                     schoolInfo.allMetrics.Add(db.Metrics.Find(i.metricID));
                 }
             }
-            IEnumerable<SchoolProgramsValues> collectPrograms = db.SchoolProgramsValues.ToList();
-            schoolInfo.allPrograms = new List<Program>();
-            foreach (var i in collectPrograms)
-            {
-                if (id == i.schoolID)
-                {
-                    schoolInfo.allPrograms.Add(db.Programs.Find(i.programID));
-                }
-            }
+            schoolInfo.allPrograms = ProgramQuery(id);
             if (schoolInfo.generalSchoolData == null)
             {
                 return HttpNotFound();
@@ -79,16 +72,11 @@ namespace SeniorProjectPreReq.Controllers
             return item;
         }
 
-        public ActionResult ProgramQuery(int? id)
+        public List<Program> ProgramQuery(int? id)
         {
-            var index = id;
-            var query = from a in db.SchoolProgramsValues
-                        where a.schoolID == index && a.Approved == true && a.hasProgram == true && a.year == DateTime.Now.Year
-                        orderby a.dateCreated descending
-                        select a;
-            //get rid of first or default 
-            var item = query;
-            return Json(item, JsonRequestBehavior.AllowGet);
+            int year = DateTime.Now.Year;
+            List<Program> pValues = db.SchoolProgramsValues.Where(p => (p.schoolID == id) && (p.year == year)).Select(p => p.theProgram).ToList(); 
+            return pValues;
         }
 
         // GET: SchoolPdatas/Details/5
