@@ -64,14 +64,16 @@
       
 
     <h4>Programs</h4>
-    <ul class="list-group col-md-6">
-        @foreach (var i in Model.allPrograms)
-        {
-            <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
-                @Html.DisplayFor(model => i.programName)
-            </li>
-        }
-    </ul>
+    <div class="container">
+        <ul class="list-group col-md-6">
+            @foreach (var i in Model.allPrograms)
+            {
+                <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
+                    @Html.DisplayFor(model => i.programName)
+                </li>
+            }
+        </ul>
+    </div>
 
 
 </div>

@@ -83,20 +83,17 @@
             </dl>
 
             <h4>Programs</h4>
-            <dl class="dl-horizontal">
+            <ul class="list-group">
                 @if (Model.schoolOne.allPrograms != null)
                 {
-                foreach (var i in Model.schoolOne.allPrograms)
-                {
-                <dd>
-                    @Html.Display(i.programName)
-                </dd>
-                <dd>
-                    @Html.Display(i.programDescription)
-                </dd>
+                    foreach (var i in Model.schoolOne.allPrograms)
+                    {
+                    <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
+                        @Html.DisplayFor(model => i.programName)
+                    </li>
+                    }
                 }
-                }
-            </dl>
+            </ul>
 
         </div>
     </div>
@@ -180,20 +177,17 @@
             </dl>
 
             <h4>Programs</h4>
-            <dl class="dl-horizontal">
-                @if (Model.schoolTwo.allPrograms != null)
+            <ul class="list-group">
+                @if (Model.schoolOne.allPrograms != null)
                 {
-                foreach (var i in Model.schoolTwo.allPrograms)
-                {
-                <dd>
-                    @Html.Display(i.programName)
-                </dd>
-                <dd>
-                    @Html.Display(i.programDescription)
-                </dd>
+                    foreach (var i in Model.schoolTwo.allPrograms)
+                    {
+                        <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
+                            @Html.DisplayFor(model => i.programName)
+                        </li>
+                    }
                 }
-                }
-            </dl>
+            </ul>
 
         </div>
     </div>
@@ -277,20 +271,17 @@
             </dl>
 
             <h4>Programs</h4>
-            <dl class="dl-horizontal">
-                @if (Model.schoolThree.allPrograms != null)
+            <ul class="list-group">
+                @if (Model.schoolOne.allPrograms != null)
                 {
-                foreach (var i in Model.schoolThree.allPrograms)
-                {
-                <dd>
-                    @Html.Display(i.programName)
-                </dd>
-                <dd>
-                    @Html.Display(i.programDescription)
-                </dd>
+                    foreach (var i in Model.schoolThree.allPrograms)
+                    {
+                    <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
+                        @Html.DisplayFor(model => i.programName)
+                    </li>
+                    }
                 }
-                }
-            </dl>
+            </ul>
 
         </div>
     </div>
