@@ -31,30 +31,33 @@
 
     @foreach (var item in Model)
     {
-        if (item.Approved != true)
+        if (item != null)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.school.SchoolName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.URL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Approved)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", "youtubeURLs", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", "youtubeURLs", new { id = item.ID })
-        </td>
-    </tr>
+            if (item.Approved != true)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.school.SchoolName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.URL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateCreated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Approved)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", "youtubeURLs", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", "youtubeURLs", new { id = item.ID })
+                </td>
+            </tr>
+            }
         }
     }
 

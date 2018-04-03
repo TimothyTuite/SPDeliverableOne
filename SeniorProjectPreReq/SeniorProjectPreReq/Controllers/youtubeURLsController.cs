@@ -168,7 +168,10 @@ namespace SeniorProjectPreReq.Controllers
                         orderby a.dateCreated descending
                         select a;
             var item = query.FirstOrDefault();
-            Debug.WriteLine(item.school.SchoolName);
+            if (item != null)
+            {
+                Debug.WriteLine(item.school.SchoolName);
+            }
             return item;
         }
     }

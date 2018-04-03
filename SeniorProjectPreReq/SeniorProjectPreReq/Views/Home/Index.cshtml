@@ -24,6 +24,7 @@
             }
         })
         $("#profileButton").attr("href", "../SchoolPdatas/AllDetails/" + id);
+        
     }
 </script>
 <br />
@@ -31,7 +32,20 @@
 <script>
     // <li onclick="getApiData(id)" class="list-group-item">schoolName<input style="float: right;" type="checkbox" name="compare" value="id"></li>
 
-
+    function checkForCheckbox()
+    {
+        $('input[type="checkbox"]').click(function (event) {
+            event.stopImmediatePropagation();
+            if (this.checked && $('input:checked').length > 3) {
+                event.preventDefault();
+                alert('You cannot choose more than 3 schools for comparison!');
+            }
+            //if ($('input:checked').length < 1) {
+            //    event.preventDefault();
+            //    alert('Please choose a school for comparison!');
+            //}
+        });
+    }
     function clearAndReplace(data) {
         $("#ViewSchoolList").empty();
         for (var i = 0; i < data.length; i++) {
@@ -114,7 +128,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <button  onclick='getApiSchoolsByTypeAndUpdate("MiddleSchools")'class="btn btn-info btn-block"  style="background-color:#33C2DA">Collaborative Schools</button>
+        <button onclick='getApiSchoolsByTypeAndUpdate("CollaborativeSchools")'class="btn btn-info btn-block"  style="background-color:#33C2DA">Collaborative Schools</button>
     </div>
     <div class="col-sm-2">
         <button onclick='getApiSchoolsByTypeAndUpdate("ElementarySchools")' class="btn btn-info btn-block" style="background-color:#33C2DA">Elementary Schools</button>
@@ -142,9 +156,9 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-body" style="height: 400px">
-                <h2 id="schoolName">School Data</h2>
+                <h2 id="schoolName" style="text-align:center;height:70px">School Data</h2>
                
-                <dl>
+                <dl style="height:190px">
                     <dt>
                         @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
                     </dt>
@@ -182,7 +196,7 @@
                         <ul id="ViewSchoolList" class="list-group">
                             @foreach (var item in Model)
                             {
-                                <li onclick="getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+                                <li onclick="getApiData(@item.ID);checkForCheckbox()" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
                                 //onclick(callDataApi(item.ID)
                             }
                         </ul>
