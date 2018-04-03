@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201804022238478_metric.Designer.cs">
       <DependentUpon>201804022238478_metric.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804030022474_metric2.cs" />
+    <Compile Include="Migrations\201804030022474_metric2.Designer.cs">
+      <DependentUpon>201804030022474_metric2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FormModels\AddProgram.cs" />
     <Compile Include="Models\FormModels\CheckBoxes.cs" />
@@ -512,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804022238478_metric.resx">
       <DependentUpon>201804022238478_metric.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804030022474_metric2.resx">
+      <DependentUpon>201804030022474_metric2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
