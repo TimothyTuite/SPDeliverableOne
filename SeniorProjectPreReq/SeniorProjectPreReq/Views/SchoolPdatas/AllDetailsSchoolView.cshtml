@@ -3,80 +3,75 @@
     ViewBag.Title = "AllDetailsSchoolView";
 }
 <script>
+    var geocoder; 
+    var map; 
+    var markers = []; 
+    function codeAddress() {
+        //test address syndney opera hall 
+        var testAddress = "Bennelong Point, Sydney NSW 2000, Australia";
+        var address = document.getElementById("address").innerText;
+        console.log("address: ", address); 
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == 'OK') {
+                clearMarkers();
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+                markers.push(marker); 
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
     function initMap() {
-        var uluru = { lat: -25.363, lng: 131.044 };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
+        geocoder = new google.maps.Geocoder();
+        //test start center 30.3270763,-81.656778,20z
+        var uluru = { lat: 30.3270763, lng: -81.656778 };
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 9,
             center: uluru
         });
         var marker = new google.maps.Marker({
             position: uluru,
             map: map
         });
+        markers.push(marker)
+        codeAddress(); 
+    }
+    function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+        }
+        markers = new Array();
     }
 </script>
-<h2>School Profile</h2>
-
+<h4></h4>
 <div>
     
-    <div class="jumbotron jumbotron-fluid">
-        <div id="map" style="height: 400px; width: 400px;"></div>
-    </div>
-</div>
-    <h4>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolName)
-        </dt>
+            <div class="row" >
+                <div class="col-lg-4" style="background-color: white; height: 500px">
+                    <div id="map" style="height: 200px; width: calc(100% + 30px); margin-left: -15px;  margin-right: -15px;"></div>
+                    <h2>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h2>
+                    <hr />
+                    <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="address">@Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)</span></h4>
+                    <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPrincipal)</h4>
+                    <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)</h4>
+                    <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolWebsite)</h4>
+                    
+                </div>
+                <div class="col-lg-8">
+                    <iframe align="middle" width="100%" height="500" src=@Model.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen ></iframe>
 
-        <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.SchoolName)
-        </dd>
+                    
+                </div>
+            </div>
+        </div>
+        
+   
 
-        <dt>
-            @Html.DisplayNameFor(model => model.generalSchoolData.schoolTypeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.type.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolPrincipal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.SchoolPrincipal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolPhone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.generalSchoolData.SchoolWebsite)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.generalSchoolData.SchoolWebsite)
-        </dd>
-    </dl>
-
-    <iframe align="middle" width="560" height="315" src=@Model.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
-
+   
     <h4>Metrics</h4>
       
 
@@ -107,6 +102,7 @@ else
         @Html.ActionLink("Back to Home", "Index", "Home")
     </div>
 }
+<!-- TIMS GOOGLE API DO NOT ALLOW INTO PRODUCTION TIM DOES NOT WANT A BILL-->
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVI-Yro6HisXG_c5pWCrISeKCcGhlSzpY&callback=initMap">
 </script>
