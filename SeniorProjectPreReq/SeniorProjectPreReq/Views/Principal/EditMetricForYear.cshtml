@@ -1,7 +1,54 @@
-﻿
+﻿@model  SeniorProjectPreReq.Models.FormModels.EditMetric
+
 @{
     ViewBag.Title = "EditMetricForYear";
-}
 
+}
+<!--
+            model.metricID = mID;
+            model.schoolID = schoolID;
+            model.metricName = Metric.MetricName;
+            model.description = Metric.Description;
+            model.rangeTop = Metric.rangeTop;
+            model.rangeBottom = Metric.rangeBottom;
+            model.year = year;
+            model.level = LevelName;    
+-->
 <h2>EditMetricForYear</h2>
+@using (Html.BeginForm("EditMetricForYear", "Principal", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <div class="form-group">
+            <row>
+                <div class="col-md col-md-10">
+                    @Html.DisplayFor(Model => Model.metricName)
+                </div>
+            </row>
+            <row>
+                <div class="col-md col-md-10">
+                    @Html.DisplayFor(Model => Model.description)
+                </div>
+            </row>
+            <row>
+                <div class="col-md col-md-10">
+                    Please Enter a Value Between 
+                    @Html.DisplayFor(Model => Model.rangeTop)
+                    @Html.DisplayFor(Model => Model.rangeBottom)
+                </div>
+            </row>
+            <row>
+                <div class="col-md col-md-10">
+                    @Html.EditorFor(Model => Model.Value, new { htmlAttributes = new { @type = "number", @min = Model.rangeBottom.ToString(), @max = Model.rangeTop.ToString(), @value = "0" } })
+                </div>
+            </row>
+            <row>
+                <div class="col-md col-md-10">
+                    <input type="submit" class="btn btn-default" value="Submit" />
+                </div>
+            </row>
+        </div>
+
+    </div>
+}
 

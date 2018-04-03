@@ -1,5 +1,4 @@
 ﻿@model SeniorProjectPreReq.Models.mainPageViewModel
-@using SeniorProjectPreReq.Models
 @{
     ViewBag.Title = "JPEF School Portal";
 }
@@ -119,6 +118,7 @@
         <div class="panel panel-default">
             <div class="panel-body" style="height: 400px">
                 <h2 id="schoolName">School Data</h2>
+               
                 <dl>
                     <dt>
                         @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
