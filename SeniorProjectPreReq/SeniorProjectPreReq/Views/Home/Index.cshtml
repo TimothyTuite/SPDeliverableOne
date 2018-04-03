@@ -28,6 +28,31 @@
 </script>
 <br />
 
+<script>
+    // <li onclick="getApiData(id)" class="list-group-item">schoolName<input style="float: right;" type="checkbox" name="compare" value="id"></li>
+
+
+    function clearAndReplace(data) {
+        $("#ViewSchoolList").empty();
+        for (var i = 0; i < data.length; i++) {
+            $("#ViewSchoolList").append('<li onclick="getApiData(' + data[i].ID + ')" class="list-group-item">' + data[i].SchoolName + '<input style="float: right;" type="checkbox" name="compare" value="' + data[i].ID +'"></li> ');
+        };
+    }
+    function getApiSchoolsByTypeAndUpdate(SchoolTypeName) {
+        $.ajax({
+            type: 'GET',
+            url: '/API/' + SchoolTypeName,
+            success: function (data) {
+                console.log('success', data)
+                clearAndReplace(data);
+            }
+
+        })
+
+    }
+
+</script>
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -89,16 +114,16 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <a class="btn btn-info btn-block" style="background-color:#33C2DA" href="">Collaborative Schools</a>
+        <button  onclick='getApiSchoolsByTypeAndUpdate("MiddleSchools")'class="btn btn-info btn-block"  style="background-color:#33C2DA">Collaborative Schools</button>
     </div>
     <div class="col-sm-2">
-        <a class="btn btn-info btn-block" style="background-color:#33C2DA" href="">Elementry Schools</a>
+        <button onclick='getApiSchoolsByTypeAndUpdate("ElementarySchools")' class="btn btn-info btn-block" style="background-color:#33C2DA">Elementary Schools</button>
     </div>
     <div class="col-sm-2">
-        <a class="btn btn-info btn-block" style="background-color:#33C2DA" href="">Middle Schools</a>
+        <button onclick='getApiSchoolsByTypeAndUpdate("MiddleSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA" >Middle Schools</button>
     </div>
     <div class="col-sm-2">
-        <a class="btn btn-info btn-block" style="background-color:#33C2DA" href="">High Schools</a>
+        <button onclick='getApiSchoolsByTypeAndUpdate("HighSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;">High Schools</button>
     </div>
     <div class="col-sm-4">
         <div class="input-group">
@@ -154,7 +179,7 @@
                 <!-- /input-group -->
                 <div style="height: 380px; overflow-y: scroll;">
                 
-                        <ul class="list-group">
+                        <ul id="ViewSchoolList" class="list-group">
                             @foreach (var item in Model)
                             {
                                 <li onclick="getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
