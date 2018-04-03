@@ -24,6 +24,7 @@
             }
         })
         $("#profileButton").attr("href", "../SchoolPdatas/AllDetails/" + id);
+        
     }
 </script>
 <br />
@@ -31,7 +32,20 @@
 <script>
     // <li onclick="getApiData(id)" class="list-group-item">schoolName<input style="float: right;" type="checkbox" name="compare" value="id"></li>
 
-
+    function checkForCheckbox()
+    {
+        $('input[type="checkbox"]').click(function (event) {
+            event.stopImmediatePropagation();
+            if (this.checked && $('input:checked').length > 3) {
+                event.preventDefault();
+                alert('You cannot choose more than 3 schools for comparison!');
+            }
+            //if ($('input:checked').length < 1) {
+            //    event.preventDefault();
+            //    alert('Please choose a school for comparison!');
+            //}
+        });
+    }
     function clearAndReplace(data) {
         $("#ViewSchoolList").empty();
         for (var i = 0; i < data.length; i++) {
@@ -182,7 +196,7 @@
                         <ul id="ViewSchoolList" class="list-group">
                             @foreach (var item in Model)
                             {
-                                <li onclick="getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+                                <li onclick="getApiData(@item.ID);checkForCheckbox()" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
                                 //onclick(callDataApi(item.ID)
                             }
                         </ul>
