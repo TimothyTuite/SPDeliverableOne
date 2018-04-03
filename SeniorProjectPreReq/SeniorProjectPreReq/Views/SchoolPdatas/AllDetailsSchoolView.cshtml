@@ -73,7 +73,17 @@
 
    
     <h4>Metrics</h4>
-      
+    <div class="container">
+        <ul class="list-group col-md-6">
+            @foreach (var i in Model.allMetrics)
+            {
+                <li class="list-group-item" title="@Html.DisplayFor(model => i.metric.Description)">
+                    <span class="badge">@Html.DisplayFor(model => i.value)</span>
+                    @Html.DisplayFor(model => i.metric.MetricName)
+                </li>
+            }
+        </ul>
+    </div>
 
     <h4>Programs</h4>
     <div class="container">

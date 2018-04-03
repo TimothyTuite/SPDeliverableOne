@@ -10,7 +10,7 @@ namespace SeniorProjectPreReq.Models
         public int schoolID { get; set; }
         public SchoolPdata generalSchoolData { get; set; }
         public string schoolVideo { get; set; }
-        public List<Metrics> allMetrics { get; set; }
+        public List<SchoolMetricValues> allMetrics { get; set; }
         public List<Program> allPrograms { get; set; }
 
     }

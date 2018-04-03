@@ -37,7 +37,6 @@ namespace SeniorProjectPreReq.Controllers
             int parsedID = Convert.ToInt32(id);
             schoolInfo.schoolID = parsedID;
             schoolInfo.generalSchoolData = db.SchoolPdatas.Find(id);
-            //TODO: null pointer catch on empty youtube vids 
             var item = YoutubeQuery(id);
             try
             {
@@ -47,15 +46,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 schoolInfo.schoolVideo = null; 
             }
-            IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
-            schoolInfo.allMetrics = new List<Metrics>();
-            foreach (var i in collectMetrics)
-            {
-                if (id == i.schoolID)
-                {
-                    schoolInfo.allMetrics.Add(db.Metrics.Find(i.metricID));
-                }
-            }
+            schoolInfo.allMetrics = MetricQuery(id);
             schoolInfo.allPrograms = ProgramQuery(id);
             if (schoolInfo.generalSchoolData == null)
             {
@@ -95,6 +86,13 @@ namespace SeniorProjectPreReq.Controllers
             int year = DateTime.Now.Year;
             List<Program> pValues = db.SchoolProgramsValues.Where(p => (p.schoolID == id) && (p.year == year)).Select(p => p.theProgram).ToList(); 
             return pValues;
+        }
+
+        public List<SchoolMetricValues> MetricQuery(int? id)
+        {
+            int year = DateTime.Now.Year;
+            List<SchoolMetricValues> mValues = db.SchoolMetricValues.Where(p => (p.schoolID == id) && (p.year == year)).ToList();
+            return mValues;
         }
 
         // GET: SchoolPdatas/Details/5
