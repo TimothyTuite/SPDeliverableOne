@@ -2,10 +2,27 @@
 @{
     ViewBag.Title = "AllDetailsSchoolView";
 }
-
+<script>
+    function initMap() {
+        var uluru = { lat: -25.363, lng: 131.044 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
 <h2>School Profile</h2>
 
 <div>
+    
+    <div class="jumbotron jumbotron-fluid">
+        <div id="map" style="height: 400px; width: 400px;"></div>
+    </div>
+</div>
     <h4>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -90,3 +107,6 @@ else
         @Html.ActionLink("Back to Home", "Index", "Home")
     </div>
 }
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVI-Yro6HisXG_c5pWCrISeKCcGhlSzpY&callback=initMap">
+</script>

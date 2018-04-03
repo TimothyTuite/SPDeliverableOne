@@ -311,7 +311,7 @@ namespace SeniorProjectPreReq.Controllers
                 return RedirectToAction("Saved");
 
             }
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("SelectMetrics/");
         }
     }
 }
