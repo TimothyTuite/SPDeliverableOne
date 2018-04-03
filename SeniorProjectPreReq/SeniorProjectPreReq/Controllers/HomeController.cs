@@ -53,10 +53,23 @@ namespace SeniorProjectPreReq.Controllers
          **/
         public string EmbedLink(string url)
         {
-            int index = url.IndexOf("=") + 1;
-            string end = url.Substring(index);
-            string embed = "https://www.youtube.com/embed/" + end;
-            return embed;
+            if (!string.IsNullOrEmpty(url))
+            {
+                int index = url.IndexOf("=") + 1;
+                string end = url.Substring(index);
+                string embed = "https://www.youtube.com/embed/" + end;
+                return embed;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public List<Program> ProgramQuery(int? id)
+        {
+            int year = DateTime.Now.Year;
+            List<Program> pValues = dataContext.SchoolProgramsValues.Where(p => (p.schoolID == id) && (p.year == year)).Select(p => p.theProgram).ToList();
+            return pValues;
         }
         public youtubeURL YoutubeQuery(int? id)
         {
@@ -100,8 +113,17 @@ namespace SeniorProjectPreReq.Controllers
                     {
                         CompareViewData.schoolOne = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        CompareViewData.schoolOne.allPrograms = ProgramQuery(compare[0]);
                         var item = YoutubeQuery(compare[0]);
-                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        try
+                        {
+                            CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            CompareViewData.schoolOne.schoolVideo = null;
+                        }
+
                     }
                 }
                 if (compare.Length == 2)
@@ -111,11 +133,27 @@ namespace SeniorProjectPreReq.Controllers
                         CompareViewData.schoolOne = new AllDetailsViewModel();
                         CompareViewData.schoolTwo = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        CompareViewData.schoolOne.allPrograms = ProgramQuery(compare[0]);
                         var item = YoutubeQuery(compare[0]);
-                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        try
+                        {
+                            CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            CompareViewData.schoolOne.schoolVideo = null;
+                        }
                         CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
+                        CompareViewData.schoolTwo.allPrograms = ProgramQuery(compare[1]);
                         item = YoutubeQuery(compare[1]);
-                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        try
+                        {
+                            CompareViewData.schoolTwo.schoolVideo = EmbedLink(item.URL);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            CompareViewData.schoolTwo.schoolVideo = null;
+                        }
                     }
                 }
                 if (compare.Length == 3)
@@ -126,14 +164,38 @@ namespace SeniorProjectPreReq.Controllers
                         CompareViewData.schoolTwo = new AllDetailsViewModel();
                         CompareViewData.schoolThree = new AllDetailsViewModel();
                         CompareViewData.schoolOne.generalSchoolData = dataContext.SchoolPdatas.Find(compare[0]);
+                        CompareViewData.schoolOne.allPrograms = ProgramQuery(compare[0]);
                         var item = YoutubeQuery(compare[0]);
-                        CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        try
+                        {
+                            CompareViewData.schoolOne.schoolVideo = EmbedLink(item.URL);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            CompareViewData.schoolOne.schoolVideo = null;
+                        }
                         CompareViewData.schoolTwo.generalSchoolData = dataContext.SchoolPdatas.Find(compare[1]);
+                        CompareViewData.schoolTwo.allPrograms = ProgramQuery(compare[1]);
                         item = YoutubeQuery(compare[1]);
-                        CompareViewData.schoolTwo.schoolVideo = EmbedLink(item.URL);
+                        try
+                        {
+                            CompareViewData.schoolTwo.schoolVideo = EmbedLink(item.URL);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            CompareViewData.schoolTwo.schoolVideo = null;
+                        }
                         CompareViewData.schoolThree.generalSchoolData = dataContext.SchoolPdatas.Find(compare[2]);
+                        CompareViewData.schoolThree.allPrograms = ProgramQuery(compare[2]);
                         item = YoutubeQuery(compare[2]);
-                        CompareViewData.schoolThree.schoolVideo = EmbedLink(item.URL);
+                        try
+                        {
+                            CompareViewData.schoolThree.schoolVideo = EmbedLink(item.URL);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            CompareViewData.schoolThree.schoolVideo = null;
+                        }
                     }
                 }
             }

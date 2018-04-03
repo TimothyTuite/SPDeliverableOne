@@ -23,6 +23,8 @@ namespace SeniorProjectPreReq.Models
        
         public virtual Metrics metric {get; set;}
 
+        public float value { get; set; }
+
         public Boolean Approved { get; set; }
 
         [Display(Name = "Year at the start of the school year")]

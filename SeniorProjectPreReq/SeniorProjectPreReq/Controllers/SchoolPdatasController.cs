@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Configuration; 
 using System.Web.Mvc;
 using SeniorProjectPreReq.Models;
 
@@ -13,6 +14,9 @@ namespace SeniorProjectPreReq.Controllers
     public class SchoolPdatasController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        //googleMapsAPIKey configure the api key in the web.config folder 
+        //******CHANGE TIM's KEY BEFORER GOING TO PRODUCTION**********
+        private string googleAPIkey = ConfigurationManager.AppSettings["googleMapsAPIKey"];
 
         // GET: SchoolPdatas
         [Authorize]
@@ -33,6 +37,16 @@ namespace SeniorProjectPreReq.Controllers
             int parsedID = Convert.ToInt32(id);
             schoolInfo.schoolID = parsedID;
             schoolInfo.generalSchoolData = db.SchoolPdatas.Find(id);
+            //TODO: null pointer catch on empty youtube vids 
+            var item = YoutubeQuery(id);
+            try
+            {
+                schoolInfo.schoolVideo = EmbedLink(item.URL);
+            }
+            catch(NullReferenceException e)
+            {
+                schoolInfo.schoolVideo = null; 
+            }
             IEnumerable<SchoolMetricValues> collectMetrics = db.SchoolMetricValues.ToList();
             schoolInfo.allMetrics = new List<Metrics>();
             foreach (var i in collectMetrics)
@@ -42,20 +56,45 @@ namespace SeniorProjectPreReq.Controllers
                     schoolInfo.allMetrics.Add(db.Metrics.Find(i.metricID));
                 }
             }
-            IEnumerable<SchoolProgramsValues> collectPrograms = db.SchoolProgramsValues.ToList();
-            schoolInfo.allPrograms = new List<Program>();
-            foreach (var i in collectPrograms)
-            {
-                if (id == i.schoolID)
-                {
-                    schoolInfo.allPrograms.Add(db.Programs.Find(i.programID));
-                }
-            }
+            schoolInfo.allPrograms = ProgramQuery(id);
             if (schoolInfo.generalSchoolData == null)
             {
                 return HttpNotFound();
             }
             return View("AllDetailsSchoolView", schoolInfo);
+        }
+
+        public string EmbedLink(string url)
+        {
+            if(!string.IsNullOrEmpty(url))
+            {
+                int index = url.IndexOf("=") + 1;
+                string end = url.Substring(index);
+                string embed = "https://www.youtube.com/embed/" + end;
+                return embed;
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+        public youtubeURL YoutubeQuery(int? id)
+        {
+            var index = id;
+            var query = from a in db.youtubeURLs
+                        where a.schoolID == index && a.Approved == true
+                        orderby a.dateCreated descending
+                        select a;
+            var item = query.FirstOrDefault();
+            return item;
+        }
+
+        public List<Program> ProgramQuery(int? id)
+        {
+            int year = DateTime.Now.Year;
+            List<Program> pValues = db.SchoolProgramsValues.Where(p => (p.schoolID == id) && (p.year == year)).Select(p => p.theProgram).ToList(); 
+            return pValues;
         }
 
         // GET: SchoolPdatas/Details/5

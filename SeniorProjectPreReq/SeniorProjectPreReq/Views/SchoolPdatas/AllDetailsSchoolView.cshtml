@@ -58,33 +58,22 @@
         </dd>
     </dl>
 
-    <iframe align="middle" width="560" height="315" src="https://www.youtube.com/embed/PQJjx19sRbs" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+    <iframe align="middle" width="560" height="315" src=@Model.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
     <h4>Metrics</h4>
-    <dl class="dl-horizontal">
-        @foreach (var i in Model.allMetrics)
-        {
-            <dd>
-                @Html.Display(i.MetricName)
-            </dd>
-            <dd>
-                @Html.Display(i.Description)
-            </dd>
-        }
-    </dl>
+      
 
     <h4>Programs</h4>
-    <dl class="dl-horizontal">
-        @foreach (var i in Model.allPrograms)
-        {
-            <dd>
-                @Html.Display(i.programName)
-            </dd>
-            <dd>
-                @Html.Display(i.programDescription)
-            </dd>
-        }
-    </dl>
+    <div class="container">
+        <ul class="list-group col-md-6">
+            @foreach (var i in Model.allPrograms)
+            {
+                <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
+                    @Html.DisplayFor(model => i.programName)
+                </li>
+            }
+        </ul>
+    </div>
 
 
 </div>
