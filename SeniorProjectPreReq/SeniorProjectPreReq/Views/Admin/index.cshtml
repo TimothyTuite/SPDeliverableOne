@@ -14,24 +14,36 @@
 
 <div class="container">
     <div class="row">
+        <h2>Creation Links</h2>
+    </div>
+    <div class="row text-center">
         @Html.ActionLink("Approve School YouTube Videos", "YoutubeApprovals", "youtubeURLs", null, new { @class = "btn btn-default" })
-        @Html.ActionLink("View School YouTube Videos", "Index", "youtubeURLs", null, new { @class = "btn btn-default" })
         @Html.ActionLink("Create New School", "Create", "SchoolPdatas", null, new { @class = "btn btn-default" })
         @Html.ActionLink("Create School Metric", "Create", "Metrics", null, new { @class = "btn btn-default" })
-        @Html.ActionLink("Create School Administrator", "Register", "Account", null, new { @class = "btn btn-default" })
         @Html.ActionLink("Create School Program", "Create", "Programs", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Create School Principal", "Register", "Account", null, new { @class = "btn btn-default" })
+    </div>
+    <div class="row">
+        <h2>Review Links</h2>
+    </div>
+    <div class="row text-center">
+        @Html.ActionLink("View School YouTube Videos", "Index", "youtubeURLs", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("View School List", "Index", "SchoolPdatas", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("View Metric List", "Create", "Metrics", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("View Program List", "Create", "Programs", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("View Principal List", "Register", "Account", null, new { @class = "btn btn-default" })
     </div>
 </div>
 
 <br/>
 
-<div class="btn-group" role="group" aria-label="Basic example">
+@*<div class="btn-group" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-secondary">All</button>
     <button type="button" class="btn btn-secondary">Approved / Pending</button>
     <button type="button" class="btn btn-secondary">Pending</button>
     <button type="button" class="btn btn-secondary">Disapproved</button>
     <button type="button" class="btn btn-secondary">Inactive</button>
-</div>
+</div>*@
 
 <br />
 <br />
@@ -66,7 +78,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                 <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                <td>@Html.ActionLink("Edit Programs", "AddSchoolsPrograms", "SchoolsPrograms", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
+                <td>@Html.ActionLink("Edit Programs", "EditProgramYear", "Principal", new { id = item.schoolID }, new { @class = "btn btn-primary btn-large" })</td>
                 <td></td>
                 <td></td>
 
