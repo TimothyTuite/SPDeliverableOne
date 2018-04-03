@@ -3,10 +3,16 @@ namespace SeniorProjectPreReq.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class newModels : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
+            DropForeignKey("dbo.SchoolsPrograms", "ProgramID", "dbo.Programs");
+            DropForeignKey("dbo.SchoolsPrograms", "SchoolID", "dbo.Schools");
+            DropForeignKey("dbo.Pictures", "School_id", "dbo.Schools");
+            DropIndex("dbo.Pictures", new[] { "School_id" });
+            DropIndex("dbo.SchoolsPrograms", new[] { "SchoolID" });
+            DropIndex("dbo.SchoolsPrograms", new[] { "ProgramID" });
             CreateTable(
                 "dbo.Metrics",
                 c => new
@@ -30,29 +36,6 @@ namespace SeniorProjectPreReq.Migrations
                         TypeID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.SchoolMetricValues",
@@ -116,56 +99,6 @@ namespace SeniorProjectPreReq.Migrations
                 .Index(t => t.programID);
             
             CreateTable(
-                "dbo.AspNetUsers",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        schoolID = c.Int(),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SchoolPdatas", t => t.schoolID)
-                .Index(t => t.schoolID)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserClaims",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetUserLogins",
-                c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
-            
-            CreateTable(
                 "dbo.youtubeURLs",
                 c => new
                     {
@@ -180,46 +113,92 @@ namespace SeniorProjectPreReq.Migrations
                 .ForeignKey("dbo.SchoolPdatas", t => t.schoolID, cascadeDelete: true)
                 .Index(t => t.schoolID);
             
+            DropTable("dbo.Pictures");
+            DropTable("dbo.Schools");
+            DropTable("dbo.SchoolsPrograms");
+            DropTable("dbo.Programs");
         }
         
         public override void Down()
         {
+            CreateTable(
+                "dbo.Programs",
+                c => new
+                    {
+                        ProgramID = c.Int(nullable: false, identity: true),
+                        Program_Name = c.String(),
+                        Program_Description = c.String(),
+                        Program_Level = c.String(),
+                    })
+                .PrimaryKey(t => t.ProgramID);
+            
+            CreateTable(
+                "dbo.SchoolsPrograms",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        SchoolID = c.Int(nullable: false),
+                        ProgramID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.Schools",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        SchoolName = c.String(),
+                        SchoolPhone = c.String(),
+                        SchoolAddress = c.String(),
+                        SchoolWebsite = c.String(),
+                        SchoolPrincipal = c.String(),
+                        StudentsEnrolled = c.Int(nullable: false),
+                        ReducedLunchPercentage = c.Int(nullable: false),
+                        IsCharter = c.Boolean(nullable: false),
+                        MHSReadingPercentage = c.Int(nullable: false),
+                        MHSMathPercentage = c.Int(nullable: false),
+                        AlgebraIPassRatePercentage = c.Int(nullable: false),
+                        AccCourseParticipationPercentage = c.Int(nullable: false),
+                        PSRReadyReadingPercentage = c.Int(nullable: false),
+                        PSReadyMathPercentage = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.Pictures",
+                c => new
+                    {
+                        id = c.Int(nullable: false, identity: true),
+                        School_id = c.Int(nullable: false),
+                        picture = c.Binary(),
+                    })
+                .PrimaryKey(t => t.id);
+            
             DropForeignKey("dbo.youtubeURLs", "schoolID", "dbo.SchoolPdatas");
-            DropForeignKey("dbo.AspNetUsers", "schoolID", "dbo.SchoolPdatas");
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SchoolProgramsValues", "programID", "dbo.Programs");
             DropForeignKey("dbo.SchoolProgramsValues", "schoolID", "dbo.SchoolPdatas");
             DropForeignKey("dbo.SchoolMetricValues", "schoolID", "dbo.SchoolPdatas");
             DropForeignKey("dbo.SchoolPdatas", "schoolTypeID", "dbo.SchoolTypes");
             DropForeignKey("dbo.SchoolMetricValues", "metricID", "dbo.Metrics");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.youtubeURLs", new[] { "schoolID" });
-            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUsers", new[] { "schoolID" });
             DropIndex("dbo.SchoolProgramsValues", new[] { "programID" });
             DropIndex("dbo.SchoolProgramsValues", new[] { "schoolID" });
             DropIndex("dbo.SchoolPdatas", new[] { "schoolTypeID" });
             DropIndex("dbo.SchoolMetricValues", new[] { "metricID" });
             DropIndex("dbo.SchoolMetricValues", new[] { "schoolID" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.youtubeURLs");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
             DropTable("dbo.SchoolProgramsValues");
             DropTable("dbo.SchoolTypes");
             DropTable("dbo.SchoolPdatas");
             DropTable("dbo.SchoolMetricValues");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.AspNetRoles");
             DropTable("dbo.Programs");
             DropTable("dbo.Metrics");
+            CreateIndex("dbo.SchoolsPrograms", "ProgramID");
+            CreateIndex("dbo.SchoolsPrograms", "SchoolID");
+            CreateIndex("dbo.Pictures", "School_id");
+            AddForeignKey("dbo.Pictures", "School_id", "dbo.Schools", "ID", cascadeDelete: true);
+            AddForeignKey("dbo.SchoolsPrograms", "SchoolID", "dbo.Schools", "ID", cascadeDelete: true);
+            AddForeignKey("dbo.SchoolsPrograms", "ProgramID", "dbo.Programs", "ProgramID", cascadeDelete: true);
         }
     }
 }

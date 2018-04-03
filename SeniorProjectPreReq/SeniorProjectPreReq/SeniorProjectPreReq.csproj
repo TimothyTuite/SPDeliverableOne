@@ -215,9 +215,9 @@
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrincipalController.cs" />
-    <Compile Include="Migrations\201802271753009_newModels.cs" />
-    <Compile Include="Migrations\201802271753009_newModels.Designer.cs">
-      <DependentUpon>201802271753009_newModels.cs</DependentUpon>
+    <Compile Include="Migrations\201803290349470_init.cs" />
+    <Compile Include="Migrations\201803290349470_init.Designer.cs">
+      <DependentUpon>201803290349470_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201804022229338_youtube.cs" />
     <Compile Include="Migrations\201804022229338_youtube.Designer.cs">
@@ -352,7 +352,6 @@
     <Content Include="Content\img\MiddleSchool.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Migrations\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -495,22 +494,17 @@
     <Content Include="Views\Principal\EditMetricForYear.cshtml" />
     <Content Include="Views\Home\CompareView.cshtml" />
     <Content Include="Views\Home\Compare.cshtml" />
+    <Content Include="Views\Shared\googleMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Migrations\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Migrations\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Migrations\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802271753009_newModels.resx">
-      <DependentUpon>201802271753009_newModels.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804022229338_youtube.resx">
       <DependentUpon>201804022229338_youtube.cs</DependentUpon>
     </EmbeddedResource>
@@ -519,6 +513,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804030022474_metric2.resx">
       <DependentUpon>201804030022474_metric2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803290349470_init.resx">
+      <DependentUpon>201803290349470_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

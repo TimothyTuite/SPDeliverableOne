@@ -284,12 +284,33 @@ namespace SeniorProjectPreReq.Controllers
             model.year = year;
             model.level = LevelName;
             var data = new { year = year, MetricID = MetricID, Metric = Metric, FromModel = model };
-            return Json(data, JsonRequestBehavior.AllowGet);
+            return View(model); 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditMetricForYear(EditMetric model)
         {
+            if (float.IsNaN(model.Value))
+            {
+                return RedirectToAction("SelectMetrics/");
+            }
+            var mValue = model.Value; 
+            var mID = Convert.ToInt32(model.metricID);
+            var Metric = dataContext.Metrics.FirstOrDefault(m => m.ID == mID);
+            if(mValue >= Metric.rangeBottom && mValue <= Metric.rangeTop)
+            {
+                SchoolMetricValues SPV = new SchoolMetricValues();
+                SPV.value = mValue;
+                SPV.schoolID = getUserSchoolID();
+                SPV.dateCreated = DateTime.Now;
+                SPV.metricID = mID;
+                SPV.year = Convert.ToInt32(model.year);
+                SPV.Approved = false; 
+                dataContext.SchoolMetricValues.Add(SPV);
+                dataContext.SaveChanges();
+                return RedirectToAction("Saved");
+
+            }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

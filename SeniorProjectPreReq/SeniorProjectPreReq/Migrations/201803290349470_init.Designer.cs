@@ -7,13 +7,13 @@ namespace SeniorProjectPreReq.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class newModels : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newModels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802271753009_newModels"; }
+            get { return "201803290349470_init"; }
         }
         
         string IMigrationMetadata.Source
