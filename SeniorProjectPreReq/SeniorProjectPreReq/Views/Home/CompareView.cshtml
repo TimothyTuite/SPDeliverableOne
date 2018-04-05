@@ -67,20 +67,17 @@
 
 
             <h4>Metrics</h4>
-            <dl class="dl-horizontal">
-                @if (Model.schoolOne.allMetrics != null)
-                {
-                foreach (var i in Model.schoolOne.allMetrics)
-                {
-                <dd>
-                    @Html.Display(i.MetricName)
-                </dd>
-                <dd>
-                    @Html.Display(i.Description)
-                </dd>
-                }
-                }
-            </dl>
+            <div class="container">
+                <ul class="list-group col-md-6">
+                    @foreach (var i in Model.schoolOne.allMetrics)
+                    {
+                        <li class="list-group-item" title="@Html.DisplayFor(model => i.metric.Description)">
+                            <span class="badge">@Html.DisplayFor(model => i.value)</span>
+                            @Html.DisplayFor(model => i.metric.MetricName)
+                        </li>
+                    }
+                </ul>
+            </div>
 
             <h4>Programs</h4>
             <ul class="list-group">
@@ -161,20 +158,17 @@
             <iframe align="middle" width="360" height="315" src=@Model.schoolTwo.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
             <h4>Metrics</h4>
-            <dl class="dl-horizontal">
-                @if (Model.schoolTwo.allMetrics != null)
-                {
-                foreach (var i in Model.schoolTwo.allMetrics)
-                {
-                <dd>
-                    @Html.Display(i.MetricName)
-                </dd>
-                <dd>
-                    @Html.Display(i.Description)
-                </dd>
-                }
-                }
-            </dl>
+            <div class="container">
+                <ul class="list-group col-md-6">
+                    @foreach (var i in Model.schoolTwo.allMetrics)
+                    {
+                        <li class="list-group-item" title="@Html.DisplayFor(model => i.metric.Description)">
+                            <span class="badge">@Html.DisplayFor(model => i.value)</span>
+                            @Html.DisplayFor(model => i.metric.MetricName)
+                        </li>
+                    }
+                </ul>
+            </div>
 
             <h4>Programs</h4>
             <ul class="list-group">
@@ -255,20 +249,17 @@
             <iframe align="middle" width="360" height="315" src=@Model.schoolThree.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
             <h4>Metrics</h4>
-            <dl class="dl-horizontal">
-                @if (Model.schoolThree.allMetrics != null)
-                {
-                foreach (var i in Model.schoolThree.allMetrics)
-                {
-                <dd>
-                    @Html.Display(i.MetricName)
-                </dd>
-                <dd>
-                    @Html.Display(i.Description)
-                </dd>
-                }
-                }
-            </dl>
+            <div class="container">
+                <ul class="list-group col-md-6">
+                    @foreach (var i in Model.schoolThree.allMetrics)
+                    {
+                        <li class="list-group-item" title="@Html.DisplayFor(model => i.metric.Description)">
+                            <span class="badge">@Html.DisplayFor(model => i.value)</span>
+                            @Html.DisplayFor(model => i.metric.MetricName)
+                        </li>
+                    }
+                </ul>
+            </div>
 
             <h4>Programs</h4>
             <ul class="list-group">
