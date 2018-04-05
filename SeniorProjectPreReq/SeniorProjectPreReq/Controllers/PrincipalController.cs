@@ -223,7 +223,7 @@ namespace SeniorProjectPreReq.Controllers
             year.Add(new SelectListItem
             {
                 Text = nextYear().ToString(),
-                Value = currentYear().ToString()
+                Value = nextYear().ToString()
             });
 
             ViewBag.year = year;
