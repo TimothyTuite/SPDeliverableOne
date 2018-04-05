@@ -199,7 +199,7 @@
                         <ul id="ViewSchoolList" class="list-group">
                             @foreach (var item in Model)
                             {
-                                <li onclick="getApiData(@item.ID);checkForCheckbox()" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
+                                <li onclick="checkForCheckbox(),getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
                                 //onclick(callDataApi(item.ID)
                             }
                         </ul>
