@@ -47,6 +47,32 @@
         markers = new Array();
     }
 </script>
+<style>
+    .databox {
+        background-color: #07A64E;
+        width: 150px;
+        height: 200px;
+        border: 2px blue;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .header {
+        font-size: 2px;
+        color: white;
+        margin: 10px;
+        padding: 10px 0;
+        text-align: left;
+    }
+
+    .content {
+        font-size: 30px;
+        color: white;
+        padding: 50px 0px;
+        margin: auto;
+        line-height: 130px;
+    }
+</style>
 <h4></h4>
 <div>
     
@@ -94,6 +120,13 @@
             }
         </ul>
     </div>
+    @foreach (var i in Model.allMetrics)
+    {
+        <div class="databox" title="@Html.DisplayFor(model => i.metric.Description)">
+            <div>@Html.DisplayFor(model => i.metric.MetricName, new { @class = "header" })</div>
+            <div>@Html.DisplayFor(model => i.value, new { @class = "content" })</div>
+        </div>
+    }
 
     <h4>Programs</h4>
     <div class="container">

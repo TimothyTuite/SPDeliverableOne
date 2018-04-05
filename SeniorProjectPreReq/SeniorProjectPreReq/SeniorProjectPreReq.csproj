@@ -215,21 +215,13 @@
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrincipalController.cs" />
-    <Compile Include="Migrations\201803290349470_init.cs" />
-    <Compile Include="Migrations\201803290349470_init.Designer.cs">
-      <DependentUpon>201803290349470_init.cs</DependentUpon>
+    <Compile Include="Migrations\201804052100165_modelsrequired.cs" />
+    <Compile Include="Migrations\201804052100165_modelsrequired.Designer.cs">
+      <DependentUpon>201804052100165_modelsrequired.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804022229338_youtube.cs" />
-    <Compile Include="Migrations\201804022229338_youtube.Designer.cs">
-      <DependentUpon>201804022229338_youtube.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804022238478_metric.cs" />
-    <Compile Include="Migrations\201804022238478_metric.Designer.cs">
-      <DependentUpon>201804022238478_metric.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804030022474_metric2.cs" />
-    <Compile Include="Migrations\201804030022474_metric2.Designer.cs">
-      <DependentUpon>201804030022474_metric2.cs</DependentUpon>
+    <Compile Include="Migrations\201804052105490_modelsrequired2.cs" />
+    <Compile Include="Migrations\201804052105490_modelsrequired2.Designer.cs">
+      <DependentUpon>201804052105490_modelsrequired2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FormModels\AddProgram.cs" />
@@ -511,23 +503,15 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804022229338_youtube.resx">
-      <DependentUpon>201804022229338_youtube.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804022238478_metric.resx">
-      <DependentUpon>201804022238478_metric.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804030022474_metric2.resx">
-      <DependentUpon>201804030022474_metric2.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803290349470_init.resx">
-      <DependentUpon>201803290349470_init.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Views\AdminApprovals\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804052100165_modelsrequired.resx">
+      <DependentUpon>201804052100165_modelsrequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804052105490_modelsrequired2.resx">
+      <DependentUpon>201804052105490_modelsrequired2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

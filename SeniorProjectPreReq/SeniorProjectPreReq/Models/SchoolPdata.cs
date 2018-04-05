@@ -12,16 +12,22 @@ namespace SeniorProjectPreReq.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID { get; set; }
+        [Required]
         [Display( Name ="Name")]
         public string SchoolName { get; set; }
+        [Required]
         [Display(Name = "Phone")]
         public string SchoolPhone { get; set; }
+        [Required]
         [Display(Name = "Address")]
         public string SchoolAddress { get; set; }
+        [Required]
         [Display(Name = "Website")]
         public string SchoolWebsite { get; set; }
+        [Required]
         [Display(Name = "Principal")]
         public string SchoolPrincipal { get; set; }
+        [Required]
         [ForeignKey("type")]
         [Display(Name = "School Level")]
         public int schoolTypeID { get; set; }
