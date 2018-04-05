@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity; 
 using SeniorProjectPreReq.Models;
+
 namespace SeniorProjectPreReq.Controllers
 {
     public class APIController : Controller
@@ -65,11 +67,14 @@ namespace SeniorProjectPreReq.Controllers
         [AllowAnonymous]
         public ActionResult SchoolsMetrics(string id)
         {
+            //TODO: Shannon, Here is the api, it gets all the data for each school metric, you probably only need the name, year and Value
+            // you can cut out the rest of it or leave it as is and just get what you need from the json. 
             int intschoolId = Convert.ToInt32(id);
-            var schoolData = dataContext.SchoolPdatas.Find(intschoolId);
-            if (schoolData.schoolsPrograms != null)
+            var schoolData = dataContext.SchoolMetricValues.Where(v => v.schoolID == intschoolId).Include("metric")
+                .Select(v => new { v.metric.MetricName, v.value, v.year }); 
+            if (schoolData != null)
             {
-                List<SchoolMetricValues> hasPrograms = schoolData.schoolsMetrics.ToList();
+                var hasPrograms = schoolData.ToList();
                 return Json(hasPrograms, JsonRequestBehavior.AllowGet);
             }
             else

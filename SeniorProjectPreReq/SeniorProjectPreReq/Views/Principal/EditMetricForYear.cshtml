@@ -39,7 +39,7 @@
             </row>
             <row>
                 <div class="col-md col-md-10">
-                    @Html.EditorFor(Model => Model.Value, new { htmlAttributes = new { @type = "number", @min = Model.rangeBottom.ToString(), @max = Model.rangeTop.ToString(), @value = "0" } })
+                    @Html.EditorFor(Model => Model.Value, new { htmlAttributes = new { @type = "number", @min = Model.rangeBottom.ToString(), @max = Model.rangeTop.ToString(), @value = "0", @step = "0.01" } })
                 </div>
             </row>
             <row>
