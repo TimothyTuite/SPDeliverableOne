@@ -55,6 +55,82 @@
         markers = new Array();
     }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+<script>
+    function loadCanvas(divID,canvasID) {
+        var canvas = document.createElement('canvas');
+        div = document.getElementById(divID);
+        canvas.id = canvasID;
+        canvas.width = 50;
+        canvas.height = 50;
+        canvas.style.zIndex = 8;
+        canvas.style.position = "inline-block";
+        canvas.style.border = "1px solid";
+        div.appendChild(canvas)
+    }
+    $(document).ready(function () {
+       var xhr =  $.ajax({
+            url: '/API/SchoolsMetrics/' + @Model.schoolID,
+            success: function (data) {
+                console.log(data);
+                var metrics = []
+                for(d in data){
+                    if (metrics.indexOf(data[d].MetricName) == -1) {
+                        metrics.push(data[d].MetricName)
+                    }
+                }
+                for (m in metrics) {
+                    var array = []
+                    for (p in data) {
+                        if (data[p].MetricName == metrics[m]) {
+                            array.push(data[p])
+                        }
+                    }
+                    array.sort(function (a, b) {
+                        return a.year - b.year; 
+                    })
+                    var years = []
+                    var values = []
+                    for (y in array) {
+                        years.push(array[y].year);
+                        values.push(array[y].value);
+                    }
+                    console.log("years", years);
+                    console.log("values", values)
+                    loadCanvas("metricsC", metrics[m] + "C")
+                    console.log(document.getElementById("metricsC"));
+                    new Chart(document.getElementById(metrics[m]+"C"), {
+                        type: 'bar',
+                        data: {
+                            labels: years,
+                            datasets: [
+                                {
+                                    label: metrics[m],
+                                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                                    data: values,
+                                    ticks: {
+                                        min: 0
+                                    }
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: { display: false },
+                            maintainAspectRatio: false,
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: metrics[m]
+                            }
+                        }
+                    });
+                }
+                
+            }
+        });
+       console.log(xhr); 
+    })
+</script>
 <style>
     .databoxmetric {
         background-color: #13395E;
@@ -139,13 +215,14 @@
             }
         </ul>
     </div>*@
+    <div class="row col-lg-3" id="metricsC" style="height: 400px; width: 400px">
+
+    </div>
     <div class="row col-sm-12">
+        
         @foreach (var i in Model.allMetrics)
         {
             <div id="@i.metric.MetricName" class="databoxmetric col-lg-2" title="@Html.DisplayFor(model => i.metric.Description)">
-                <script>
-            randomColor(@i.metric.MetricName);
-                </script>
                 <div class="header">@Html.DisplayFor(model => i.metric.MetricName, new { @class = ".header" })</div>
                 <div class="content">@Html.DisplayFor(model => i.value, new { @class = "content" })</div>
             </div>

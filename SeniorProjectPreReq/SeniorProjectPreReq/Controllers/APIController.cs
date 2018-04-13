@@ -91,7 +91,7 @@ namespace SeniorProjectPreReq.Controllers
             // you can cut out the rest of it or leave it as is and just get what you need from the json. 
             int intschoolId = Convert.ToInt32(id);
             var schoolData = dataContext.SchoolMetricValues.Where(v => v.schoolID == intschoolId).Include("metric")
-                .Select(v => new { v.metric.MetricName, v.value, v.year }); 
+                .Select(v => new { v.metric.MetricName, v.value, v.year });
             if (schoolData != null)
             {
                 var hasPrograms = schoolData.ToList();
