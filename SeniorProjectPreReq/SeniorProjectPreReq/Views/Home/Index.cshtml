@@ -37,15 +37,19 @@
     {
         $('input[type="checkbox"]').click(function (event) {
             event.stopImmediatePropagation();
-            if (this.checked && $('input:checked').length > 3) {
+            if ($('input:checked').length > 3) {
                 event.preventDefault();
-                alert('You cannot choose more than 3 schools for comparison!');
+                alert('You cannot choose more than 3 schools for comparison.');
             }
-            //if ($('input:checked').length < 1) {
-            //    event.preventDefault();
-            //    alert('Please choose a school for comparison!');
-            //}
         });
+    }
+    function buttonCheckForCheckbox() {
+        var numberOfCheckboxesSelected = $('input[type=checkbox]:checked').length; 
+        if (numberOfCheckboxesSelected < 2)
+        {
+            alert("Please choose an additional school for comparison.");
+            event.preventDefault();
+        }
     }
     function clearAndReplace(data) {
         $("#ViewSchoolList").empty();
@@ -247,7 +251,7 @@
                     
                 </div>
             </div>
-            <input type="submit" value="Compare" class="btn btn-primary btn-large" style="background-color:#33C2DA;border-radius: 0px;margin:10px 0px;" />
+            <input type="submit" id="compareButton" onclick="buttonCheckForCheckbox()" value="Compare" class="btn btn-primary btn-large" style="background-color:#33C2DA;border-radius: 0px;margin:10px 0px;" />
         }
     </div>
 
