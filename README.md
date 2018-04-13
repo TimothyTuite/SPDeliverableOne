@@ -1,3 +1,6 @@
+# Microsoft Azure Link to Latest Published Build
+http://jpefschools.azurewebsites.net/
+
 # SeniorProject first Deliverable 
 Senior Project first deliverable 
 
