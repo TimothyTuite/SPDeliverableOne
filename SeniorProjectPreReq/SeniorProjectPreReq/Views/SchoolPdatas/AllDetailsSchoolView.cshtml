@@ -5,7 +5,15 @@
 <script>
     var geocoder; 
     var map; 
-    var markers = []; 
+    var markers = [];
+    function randomColor(id) {
+        var colors = ["#07A64E", "#13395E", "#F9B71C", "#33C2DA", "#E62440"];
+
+        min = Math.ceil(0);
+        max = Math.floor(5);
+        var randomcolor = Math.floor(Math.random() * (max - min)) + min;
+        document.getElementById(id).style.backgroundcolor = colors[randomColor];
+    }
     function codeAddress() {
         //test address syndney opera hall 
         var testAddress = "Bennelong Point, Sydney NSW 2000, Australia";
@@ -48,8 +56,8 @@
     }
 </script>
 <style>
-    .databox {
-        background-color: #07A64E;
+    .databoxmetric {
+        background-color: #13395E;
         width: 150px;
         height: 200px;
         border: 2px blue;
@@ -58,13 +66,23 @@
         text-align: center;
         font-size: 20px;
     }
-
+    .databoxprogram {
+        background-color: #E62440;
+        width: 180px;
+        height: 200px;
+        border: 2px blue;
+        margin: 10px;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 20px;
+    }
     .header {
-        font-size: 2px;
+        font-size: 14px;
         color: white;
         margin: 10px;
         padding: 10px 0;
         text-align: left;
+        height:28px;
     }
 
     .content {
@@ -72,7 +90,6 @@
         color: white;
         padding: 50px 0px;
         margin: auto;
-        line-height: 130px;
     }
 </style>
 <h4></h4>
@@ -111,7 +128,7 @@
 
 <div>
     <h4>Metrics</h4>
-    <div class="container">
+    @*<div class="container">
         <ul class="list-group col-md-6">
             @foreach (var i in Model.allMetrics)
             {
@@ -121,17 +138,22 @@
                 </li>
             }
         </ul>
+    </div>*@
+    <div class="row col-sm-12">
+        @foreach (var i in Model.allMetrics)
+        {
+            <div id="@i.metric.MetricName" class="databoxmetric col-lg-2" title="@Html.DisplayFor(model => i.metric.Description)">
+                <script>
+            randomColor(@i.metric.MetricName);
+                </script>
+                <div class="header">@Html.DisplayFor(model => i.metric.MetricName, new { @class = ".header" })</div>
+                <div class="content">@Html.DisplayFor(model => i.value, new { @class = "content" })</div>
+            </div>
+        }
     </div>
-    @foreach (var i in Model.allMetrics)
-    {
-        <div class="databox" title="@Html.DisplayFor(model => i.metric.Description)">
-            <div>@Html.DisplayFor(model => i.metric.MetricName, new { @class = ".header"})</div>
-            <div>@Html.DisplayFor(model => i.value, new { @class = "content" })</div>
-        </div>
-    }
 
     <h4>Programs</h4>
-    <div class="container">
+    @*<div class="container">
         <ul class="list-group col-md-6">
             @foreach (var i in Model.allPrograms)
             {
@@ -140,19 +162,29 @@
                 </li>
             }
         </ul>
-    </div>
+    </div>*@
 
+    <div class="row col-sm-12">
+        @foreach (var i in Model.allPrograms)
+        {
+            <div class="databoxprogram col-lg-2" title="@Html.DisplayFor(model => i.programDescription)">
+                <div class="content">@Html.DisplayFor(model => i.programName)</div>
+            </div>
+        }
+    </div>
 
 </div>
 
 @if (User.IsInRole("Administrator"))
 {
+    <br />
     <div>
         @Html.ActionLink("Back to List", "Index", "SchoolPDatas")
     </div>
 }
 else
 {
+    <br />
     <div>
         @Html.ActionLink("Back to Home", "Index", "Home")
     </div>

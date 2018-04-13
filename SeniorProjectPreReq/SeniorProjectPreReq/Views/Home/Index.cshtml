@@ -16,11 +16,11 @@
                 schoolData = data
                 console.log('success', data)
                 $("#schoolName").text(schoolData.schoolName);
-                $("#schoolAddress").text(schoolData.Address);
-                $("#schoolPhone").text(schoolData.Phone);
+                $("#schoolAddress").html('<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  ' + schoolData.Address);
+                $("#schoolPhone").html('<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  ' + schoolData.Phone);
                 $("#schoolWebsite").attr("href", schoolData.Website);
                 $("#schoolWebsite").text(schoolData.Website);
-                $("#schoolPrincipal").text(schoolData.Principal);
+                $("#schoolPrincipal").html('<span class="glyphicon glyphicon-user" aria-hidden="true"></span>  ' + schoolData.Principal);
                 $("#profileButton").text("Visit " + schoolData.schoolName + "'s profile!");
             }
         })
@@ -158,32 +158,34 @@
         <div class="panel panel-default">
             <div class="panel-body" style="height: 400px">
                 <h2 id="schoolName" style="text-align:center;height:70px">School Data</h2>
-               
+                <hr />
                 <dl style="height:190px">
-                    <dt>
-                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
-                    </dt>
+                    @*<dt>
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
+                    </dt>*@
                     <dd id="schoolAddress">
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
                     </dd>
-                    <dt>
-                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
-                    </dt>
+                    @*<dt>
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
+                    </dt>*@
                     <dd id="schoolPhone">
+                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
                     </dd>
-                    <dt>
-                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
-                    </dt>
+                    @*<dt>
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
+                    </dt>*@
                     <dd>
-                        <a id="schoolWebsite" href="">Visit their website!
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="">Visit their website!
                         </a>
                     </dd>
-                    <dt>
-                        @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
-                    </dt>
+                    @*<dt>
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
+                    </dt>*@
                     <dd id="schoolPrincipal">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
                     </dd>
                 </dl>
-
                 <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA" href="">Visit their Profile!</a>
 
             </div>
