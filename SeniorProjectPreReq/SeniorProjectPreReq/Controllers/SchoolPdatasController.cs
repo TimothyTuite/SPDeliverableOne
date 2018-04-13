@@ -168,9 +168,12 @@ namespace SeniorProjectPreReq.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(schoolPdata).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (schoolPdata.SchoolWebsite != null && (schoolPdata.SchoolWebsite.Substring(0, 7) == "http://" || schoolPdata.SchoolWebsite.Substring(0, 8) == "https://"))
+                {
+                    db.Entry(schoolPdata).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.schoolTypeID = new SelectList(db.SchoolTypes, "ID", "Name", schoolPdata.schoolTypeID);
             return View(schoolPdata);
