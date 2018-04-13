@@ -10,7 +10,7 @@
 
     function getApiData(id) {
         var schoolData
-        var bullshit = $.ajax({
+        var stuff = $.ajax({
             url: "../API/School/" + id,
             success: function (data) {
                 schoolData = data
@@ -64,6 +64,19 @@
 
         })
 
+    }
+    function resetSchoolList() {
+        $("#ViewSchoolList").empty();
+        var schoolData
+        var stuff = $.ajax({
+            url: "../API/School/-1",
+            success: function (data) {
+                console.log('success', data)
+                for (var i = 0; i < data.length; i++) {
+                    $("#ViewSchoolList").append('<li onclick="getApiData(' + data[i].ID + ')" class="list-group-item">' + data[i].SchoolName + '<input style="float: right;" type="checkbox" name="compare" value="' + data[i].ID + '"></li> ');
+                };
+            }
+        })
     }
 
 </script>
@@ -162,7 +175,7 @@
         <button onclick='getApiSchoolsByTypeAndUpdate("HighSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">High Schools</button>
     </div>
     <div class="col-sm-2 text-center">
-        <button onclick='' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Reset List</button>
+        <button onclick='resetSchoolList()' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Reset List</button>
     </div>
     @*<div class="col-sm-4">
             <div class="input-group">
