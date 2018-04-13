@@ -5,21 +5,21 @@
 
 <br />
 
-<div class="jumbotron">
+<div class="jumbotron" style="border-radius: 0px">
     <h1>Welcome Principal @Model.LastName!</h1>
 </div>
 
 <div class="container">
-    <div class="col-lg-3 text-center" style="text-align: center; float: none; margin:0 auto;">
+    <div class="col-lg-3 text-center" style="text-align: center; float: none; margin:0 auto">
         <h2 style="margin: 1%;">Getting started:</h2>
     
-        <ul class="list-group" style="text-align: center;">   
-            @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "AllDetails", "SchoolPdatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Programs", "EditProgramYear", "Principal", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Metrics", "EditMetricYear", "Principal", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;" })
-           @* @Html.ActionLink("View Programs Awaiting Approval", "ViewUnApproved", "Principal", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;" })*@
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "SchoolPDatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;" })
-            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Video", "Create", "youtubeURLs", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;" })
+        <ul class="list-group" style="text-align: center">
+            @Html.ActionLink("View " + Model.school.SchoolName + "'s Profile", "AllDetails", "SchoolPdatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;border-radius: 0px" })
+            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Programs", "EditProgramYear", "Principal", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;border-radius: 0px" })
+            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Metrics", "EditMetricYear", "Principal", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;border-radius: 0px" })
+            @* @Html.ActionLink("View Programs Awaiting Approval", "ViewUnApproved", "Principal", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;border-radius: 0px" })*@
+            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Profile", "Edit", "SchoolPDatas", new { id = Model.schoolID }, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;border-radius: 0px" })
+            @Html.ActionLink("Edit " + Model.school.SchoolName + "'s Video", "Create", "youtubeURLs", null, new { @class = "btn btn-primary btn-large btn-block", @style = "background-color: #33C2DA; margin: 1%;border-radius: 0px" })
         </ul>
     
     </div>

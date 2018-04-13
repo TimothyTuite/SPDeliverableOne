@@ -68,6 +68,24 @@
 
 </script>
 
+<style>
+    .dont-break-out {
+        /* These are technically the same, but use both */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        /* This is the dangerous one in WebKit, as it breaks things wherever */
+        word-break: break-all;
+        /* Instead use this non-standard one: */
+        word-break: break-word;
+        /* Adds a hyphen where the word breaks, if supported (No Blink) */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+</style>
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -127,78 +145,85 @@
 
 <br />
 
-<div class="row">
-    <div class="col-sm-2">
-        <button onclick='getApiSchoolsByTypeAndUpdate("CollaborationSchools")'class="btn btn-info btn-block"  style="background-color:#33C2DA">Combination Schools</button>
+<div class="row text-center">
+    <div class="col-sm-2 text-center">
+        <button onclick='getApiSchoolsByTypeAndUpdate("CollaborationSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Combination Schools</button>
     </div>
-    <div class="col-sm-2">
-        <button onclick='getApiSchoolsByTypeAndUpdate("ElementarySchools")' class="btn btn-info btn-block" style="background-color:#33C2DA">Elementary Schools</button>
+    <div class="col-sm-2 text-center">
+        <button onclick='' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Pre-Learning Centers</button>
     </div>
-    <div class="col-sm-2">
-        <button onclick='getApiSchoolsByTypeAndUpdate("MiddleSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA" >Middle Schools</button>
+    <div class="col-sm-2 text-center">
+        <button onclick='getApiSchoolsByTypeAndUpdate("ElementarySchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Elementary Schools</button>
     </div>
-    <div class="col-sm-2">
-        <button onclick='getApiSchoolsByTypeAndUpdate("HighSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;">High Schools</button>
+    <div class="col-sm-2 text-center">
+        <button onclick='getApiSchoolsByTypeAndUpdate("MiddleSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Middle Schools</button>
     </div>
-    <div class="col-sm-4">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-            </span>
-            <input type="text" class="form-control" placeholder="Search for...">
+    <div class="col-sm-2 text-center">
+        <button onclick='getApiSchoolsByTypeAndUpdate("HighSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">High Schools</button>
+    </div>
+    <div class="col-sm-2 text-center">
+        <button onclick='' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Reset List</button>
+    </div>
+    @*<div class="col-sm-4">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Go!</button>
+                </span>
+                <input type="text" class="form-control" placeholder="Search for...">
 
-        </div>
-    </div>
+            </div>
+        </div>*@
 </div>
 
 <br />
 
-<div class="row" style="height: 390px;">
+<div class="row" style="height: 390px">
     <div class="col-md-4">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="border-radius: 0px">
             <div class="panel-body" style="height: 400px">
-                <h2 id="schoolName" style="text-align:center;height:70px">School Data</h2>
+                <h2 id="schoolName" style="text-align:center;height:50px">School Data</h2>
                 <hr />
-                <dl style="height:190px">
+                <dl style="height:150px">
                     @*<dt>
                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
                     </dt>*@
-                    <dd id="schoolAddress">
+                    <dd id="schoolAddress" style="font-size:20px">
                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
                     </dd>
                     @*<dt>
                         <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
                     </dt>*@
-                    <dd id="schoolPhone">
+                    <dd id="schoolPhone" style="font-size:20px">
                         <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
                     </dd>
                     @*<dt>
                         <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
                     </dt>*@
-                    <dd>
-                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="">Visit their website!
+                    <dd style="font-size:20px;width:auto;">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="" class="dont-break-out">Visit their website!
                         </a>
                     </dd>
                     @*<dt>
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
                     </dt>*@
-                    <dd id="schoolPrincipal">
+                    <dd id="schoolPrincipal" style="font-size:20px">
                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
                     </dd>
                 </dl>
-                <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA" href="">Visit their Profile!</a>
+                <br />
+                <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA;border-radius: 0px" href="">Visit their Profile!</a>
 
             </div>
         </div>
     </div>
-    <div class="col-md-8 text-center">
+    <div class="col-md-8 text-center" style="border-radius: 0px">
         @using (Html.BeginForm())
         {
-            <div class="container fluid">
+            <div class="container fluid" style="border-radius: 0px">
                 <!-- /input-group -->
-                <div style="height: 380px; overflow-y: scroll;">
+                <div style="height: 380px; overflow-y: scroll;border-radius: 0px">
                 
-                        <ul id="ViewSchoolList" class="list-group">
+                        <ul id="ViewSchoolList" class="list-group" style="border-radius: 0px">
                             @foreach (var item in Model)
                             {
                                 <li onclick="checkForCheckbox(),getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>
@@ -209,7 +234,7 @@
                     
                 </div>
             </div>
-            <input type="submit" value="Compare" class="btn btn-primary btn-large" style="background-color:#33C2DA" />
+            <input type="submit" value="Compare" class="btn btn-primary btn-large" style="background-color:#33C2DA;border-radius: 0px;margin:10px 0px;" />
         }
     </div>
 
