@@ -86,7 +86,7 @@
                     var canvas = document.createElement('canvas');
                     canvas.id = metrics[i] + "C";
                     canvas.width = 300;
-                    canvas.height = 400;
+                    canvas.height = 300;
 
                     canvas.style.position = "relative";
                     canvas.style.border = "1px solid";
@@ -175,7 +175,7 @@
     }
     .databoxprogram {
         background-color: #E62440;
-        width: 180px;
+        width: 200px;
         height: 200px;
         border: 2px blue;
         margin: 10px;
@@ -201,40 +201,46 @@
 </style>
 <h4></h4>
 <div>
-    
-            <div class="row" >
-                <div class="col-lg-4" style="background-color: white; height: 500px">
-                    <div id="map" style="height: 200px; width: calc(100% + 30px); margin-left: -15px;  margin-right: -15px;"></div>
-                    <h2>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h2>
-                    <hr/>
-                    <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="address">@Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)</span></h4>
-                    <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPrincipal)</h4>
-                    <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)</h4>
-                    <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolWebsite)</h4>
-                    
-                </div>
-                <div class="col-lg-8">
-                        @if (Model.schoolVideo != null) {
-                            
-                            <iframe align="middle" width="100%" height="500" src="@Model.schoolVideo" frameborder="0" allow="encrypted - media" allowfullscreen></iframe>
-                        }
-                        else
-                        {
- 
-                            <img style="width: 100%; height: 500px;"src="@Url.Content("~/Content/img/classroom.jpg")">
-                        }
+    <div>
+
+        <div class="row">
+            <div class="col-lg-4" style="background-color: white; height: 500px">
+                <div id="map" style="height: 200px; width: calc(100% + 30px); margin-left: -15px;  margin-right: -15px;"></div>
+                <h2>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h2>
+                <hr />
+                <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="address">@Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)</span></h4>
+                <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPrincipal)</h4>
+                <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)</h4>
+                <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolWebsite)</h4>
+
+            </div>
+            <div class="col-lg-8">
+                @if (Model.schoolVideo != null)
+                {
+
+                    <iframe align="middle" width="100%" height="500" src="@Model.schoolVideo" frameborder="0" allow="encrypted - media" allowfullscreen></iframe>
+                }
+                else
+                {
+
+                    <img style="width: 100%; height: 500px;" src="@Url.Content("~/Content/img/classroom.jpg")">
+                }
 
 
 
 
-                </div>
             </div>
         </div>
+    </div>
+</div>
+
+
+
         
    
 
 
-    <h4>Metrics</h4>
+    <h1>Metrics</h1>
     @*<div class="container">
         <ul class="list-group col-md-6">
             @foreach (var i in Model.allMetrics)
@@ -250,30 +256,9 @@
 
     </div>
 <div>
+    <h1>Programs</h1>
+
     <div class="row">
-
-        @foreach (var i in Model.allMetrics)
-        {
-            <div id="@i.metric.MetricName" class="databoxmetric col-lg-2" title="@Html.DisplayFor(model => i.metric.Description)">
-                <div class="header">@Html.DisplayFor(model => i.metric.MetricName, new { @class = ".header" })</div>
-                <div class="content">@Html.DisplayFor(model => i.value, new { @class = "content" })</div>
-            </div>
-        }
-    </div>
-
-    <h4>Programs</h4>
-    @*<div class="container">
-            <ul class="list-group col-md-6">
-                @foreach (var i in Model.allPrograms)
-                {
-                    <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
-                        @Html.DisplayFor(model => i.programName)
-                    </li>
-                }
-            </ul>
-        </div>*@
-
-    <div class="row col-sm-12">
         @foreach (var i in Model.allPrograms)
         {
             <div class="databoxprogram col-lg-2" title="@Html.DisplayFor(model => i.programDescription)">
