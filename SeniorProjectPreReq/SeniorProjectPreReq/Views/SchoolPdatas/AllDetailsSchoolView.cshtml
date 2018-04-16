@@ -68,17 +68,48 @@
         canvas.style.border = "1px solid";
         div.appendChild(canvas)
     }
+    function drawGridAndCanvases(divID, metrics) {
+        for (var x = 0; x < metrics.length; x += 3) {
+            var div = document.getElementById(divID);
+            
+            var row = document.createElement('div')
+            row.classList.add("row"); 
+
+            for (var i = x; i < x + 3; i++) {
+                console.log(metrics[i], typeof metrics[i])
+                if (!(typeof metrics[i] === 'undefined')) {
+                    console.log("building canvas")
+                    var col = document.createElement('div')
+                    col.classList.add('col-lg-4')
+                    col.height = 400;
+                    col.width = 400
+                    var canvas = document.createElement('canvas');
+                    canvas.id = metrics[i] + "C";
+                    canvas.width = 300;
+                    canvas.height = 400;
+
+                    canvas.style.position = "relative";
+                    canvas.style.border = "1px solid";
+                    col.appendChild(canvas)
+                    row.appendChild(col)
+                } else { console.log("undefined") }
+            }
+            div.appendChild(row)
+        }
+    }
     $(document).ready(function () {
        var xhr =  $.ajax({
             url: '/API/SchoolsMetrics/' + @Model.schoolID,
             success: function (data) {
                 console.log(data);
                 var metrics = []
+
                 for(d in data){
                     if (metrics.indexOf(data[d].MetricName) == -1) {
                         metrics.push(data[d].MetricName)
                     }
                 }
+                drawGridAndCanvases("metricsC", metrics)
                 for (m in metrics) {
                     var array = []
                     for (p in data) {
@@ -97,7 +128,7 @@
                     }
                     console.log("years", years);
                     console.log("values", values)
-                    loadCanvas("metricsC", metrics[m] + "C")
+                 
                     console.log(document.getElementById("metricsC"));
                     new Chart(document.getElementById(metrics[m]+"C"), {
                         type: 'bar',
@@ -106,7 +137,7 @@
                             datasets: [
                                 {
                                     label: metrics[m],
-                                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                                    backgroundColor: ["#d32941" , "#1d3f5f", "#f5a81e", "#25bad1", "#09a54e"],
                                     data: values,
                                     ticks: {
                                         min: 0
@@ -116,8 +147,8 @@
                         },
                         options: {
                             legend: { display: false },
-                            maintainAspectRatio: false,
                             responsive: true,
+                            maintainAspectRatio: false,
                             title: {
                                 display: true,
                                 text: metrics[m]
@@ -175,7 +206,7 @@
                 <div class="col-lg-4" style="background-color: white; height: 500px">
                     <div id="map" style="height: 200px; width: calc(100% + 30px); margin-left: -15px;  margin-right: -15px;"></div>
                     <h2>@Html.DisplayFor(model => model.generalSchoolData.SchoolName)</h2>
-                    <hr />
+                    <hr/>
                     <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="address">@Html.DisplayFor(model => model.generalSchoolData.SchoolAddress)</span></h4>
                     <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPrincipal)</h4>
                     <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.generalSchoolData.SchoolPhone)</h4>
@@ -202,7 +233,7 @@
         
    
 
-<div>
+
     <h4>Metrics</h4>
     @*<div class="container">
         <ul class="list-group col-md-6">
@@ -215,11 +246,12 @@
             }
         </ul>
     </div>*@
-    <div class="row col-lg-3" id="metricsC" style="height: 400px; width: 400px">
+    <div id="metricsC">
 
     </div>
-    <div class="row col-sm-12">
-        
+<div>
+    <div class="row">
+
         @foreach (var i in Model.allMetrics)
         {
             <div id="@i.metric.MetricName" class="databoxmetric col-lg-2" title="@Html.DisplayFor(model => i.metric.Description)">
@@ -231,15 +263,15 @@
 
     <h4>Programs</h4>
     @*<div class="container">
-        <ul class="list-group col-md-6">
-            @foreach (var i in Model.allPrograms)
-            {
-                <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
-                    @Html.DisplayFor(model => i.programName)
-                </li>
-            }
-        </ul>
-    </div>*@
+            <ul class="list-group col-md-6">
+                @foreach (var i in Model.allPrograms)
+                {
+                    <li class="list-group-item" title="@Html.DisplayFor(model => i.programDescription)">
+                        @Html.DisplayFor(model => i.programName)
+                    </li>
+                }
+            </ul>
+        </div>*@
 
     <div class="row col-sm-12">
         @foreach (var i in Model.allPrograms)

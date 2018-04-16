@@ -103,6 +103,12 @@ namespace SeniorProjectPreReq.Controllers
             }
         }
         [AllowAnonymous]
+        public ActionResult allSchools()
+        {
+            List<SchoolPdata> all = dataContext.SchoolPdatas.ToList();
+            return Json(all, JsonRequestBehavior.AllowGet);
+        }
+        [AllowAnonymous]
         public ActionResult MiddleSchools()
         {
             List<SchoolPdata> MiddleSchools = dataContext.SchoolPdatas.Where(m => m.type.Name == "Middle School").ToList(); 
@@ -124,6 +130,15 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult CollaborationSchools()
         {
             var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Collaboration School").ToList();
+            var school = mSchool.First();
+            var TID = school.ID;
+            List<SchoolPdata> CollaborationSchools = dataContext.SchoolPdatas.Where(m => m.schoolTypeID == TID).ToList();
+            return Json(CollaborationSchools, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult prekSchools()
+        {
+            var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Pre-K Learning Center").ToList();
             var school = mSchool.First();
             var TID = school.ID;
             List<SchoolPdata> CollaborationSchools = dataContext.SchoolPdatas.Where(m => m.schoolTypeID == TID).ToList();
