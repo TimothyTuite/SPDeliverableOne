@@ -19,7 +19,7 @@
         <h2>Creation Links</h2>
     </div>
     <div class="row text-center">
-        @Html.ActionLink("Approve School YouTube Videos", "YoutubeApprovals", "youtubeURLs", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
+        @Html.ActionLink("Create New School YouTube Video", "CreateByAdmin", "youtubeURLs", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
         @Html.ActionLink("Create New School", "Create", "SchoolPdatas", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
         @Html.ActionLink("Create School Metric", "Create", "Metrics", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
         @Html.ActionLink("Create School Program", "Create", "Programs", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
@@ -29,6 +29,7 @@
         <h2>Review Links</h2>
     </div>
     <div class="row text-center">
+        @Html.ActionLink("Approve School YouTube Videos", "YoutubeApprovals", "youtubeURLs", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
         @Html.ActionLink("View School YouTube Videos", "Index", "youtubeURLs", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
         @Html.ActionLink("View School List", "Index", "SchoolPdatas", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })
         @Html.ActionLink("View Metric List", "Create", "Metrics", null, new { @class = "btn btn-default", @style = "border-radius: 0px" })

@@ -7,15 +7,39 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using SeniorProjectPreReq.Models;
 
 namespace SeniorProjectPreReq.Controllers
 {
+
+   
+
     [Authorize]
     public class youtubeURLsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
+        public youtubeURLsController()
+        {
 
+        }
+        public youtubeURLsController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: youtubeURLs
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
@@ -43,6 +67,7 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult Create()
         {
             ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName");
+            ViewBag.date = DateTime.Now.ToString();
             return View();
         }
 
@@ -51,10 +76,44 @@ namespace SeniorProjectPreReq.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,schoolID,URL,year,dateCreated")] youtubeURL youtubeURL)
+        public ActionResult Create([Bind(Include = "schoolID,URL,year,dateCreated")] youtubeURL youtubeURL)
+        {
+            var userID = User.Identity.GetUserId();
+            var user = UserManager.FindById(userID);
+            youtubeURL.schoolID = Convert.ToInt32(user.schoolID);
+            if (ModelState.IsValid)
+            {
+                db.youtubeURLs.Add(youtubeURL);
+                db.SaveChanges();
+                if (User.IsInRole("Administrator"))
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Saved", "Principal");
+            }
+            else
+            {
+                return RedirectToAction("Create", "YoutubeURLs");
+            }
+        }
+
+        // GET: youtubeURLs/Create
+        [Authorize(Roles = "Administrator")]
+        public ActionResult CreateByAdmin()
+        {
+            ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName");
+            ViewBag.date = DateTime.Now.ToString();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult CreateByAdmin([Bind(Include = "schoolID,URL,year,dateCreated")] youtubeURL youtubeURL)
         {
             if (ModelState.IsValid)
             {
+                youtubeURL.Approved = true; 
                 db.youtubeURLs.Add(youtubeURL);
                 db.SaveChanges();
                 if (User.IsInRole("Administrator"))
@@ -97,7 +156,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 db.Entry(youtubeURL).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("YoutubeApprovals");
             }
             ViewBag.schoolID = new SelectList(db.SchoolPdatas, "ID", "SchoolName", youtubeURL.schoolID);
             return View(youtubeURL);
