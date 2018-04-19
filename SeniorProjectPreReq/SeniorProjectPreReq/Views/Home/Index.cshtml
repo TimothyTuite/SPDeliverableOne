@@ -15,6 +15,8 @@
             success: function (data) {
                 schoolData = data
                 console.log('success', data)
+                $("#dataPanel").show()
+                $("#messagePanel").hide()
                 $("#schoolName").text(schoolData.schoolName);
                 $("#schoolAddress").html('<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  ' + schoolData.Address);
                 $("#schoolPhone").html('<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  ' + schoolData.Phone);
@@ -29,7 +31,11 @@
     }
 </script>
 <br />
-
+<script>
+    $(document).ready(function () {
+        $("#dataPanel").hide(); 
+    });
+</script>
 <script>
     // <li onclick="getApiData(id)" class="list-group-item">schoolName<input style="float: right;" type="checkbox" name="compare" value="id"></li>
 
@@ -183,39 +189,46 @@
 <div class="row" style="height: 390px">
     <div class="col-md-4">
         <div class="panel panel-default" style="border-radius: 0px">
-            <div class="panel-body" style="height: 400px">
-                <h2 id="schoolName" style="text-align:center;height:50px">School Data</h2>
-                <hr />
-                <dl style="height:150px">
-                    @*<dt>
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
-                    </dt>*@
-                    <dd id="schoolAddress" style="font-size:20px">
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
-                    </dd>
-                    @*<dt>
-                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
-                    </dt>*@
-                    <dd id="schoolPhone" style="font-size:20px">
-                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
-                    </dd>
-                    @*<dt>
-                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
-                    </dt>*@
-                    <dd style="font-size:20px;width:auto;">
-                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="" class="dont-break-out">Visit their website!
-                        </a>
-                    </dd>
-                    @*<dt>
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
-                    </dt>*@
-                    <dd id="schoolPrincipal" style="font-size:20px">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
-                    </dd>
-                </dl>
-                <br />
-                <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA;border-radius: 0px" href="">Visit their Profile!</a>
-
+            <div  class="panel-body" style="height: 400px">
+                <div id="dataPanel">
+                    <h2 id="schoolName" style="text-align:center;height:50px">School Data</h2>
+                    <hr />
+                    <dl style="height:150px">
+                        @*<dt>
+                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
+                </dt>*@
+                        <dd id="schoolAddress" style="font-size:20px">
+                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
+                        </dd>
+                        @*<dt>
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
+                </dt>*@
+                        <dd id="schoolPhone" style="font-size:20px">
+                            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
+                        </dd>
+                        @*<dt>
+                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
+                </dt>*@
+                        <dd style="font-size:20px;width:auto;">
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="" class="dont-break-out">
+                                Visit their website!
+                            </a>
+                        </dd>
+                        @*<dt>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
+                </dt>*@
+                        <dd id="schoolPrincipal" style="font-size:20px">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
+                        </dd>
+                    </dl>
+                    <br />
+                    <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA;border-radius: 0px" href="">Visit their Profile!</a>
+                </div>
+                <div id="messagePanel">
+                    <h2 id="welcome" style="text-align:center;height:50px">Welcome to the JPEF School Viewer</h2>
+                    <hr />
+                    <p>We hope that this tool helps you to find the Jacksonville area school that best meets the educational needs of your child. To get started simply select a type of school using the buttons above and then browse through the list to your right</p>
+                </div>
             </div>
         </div>
     </div>
