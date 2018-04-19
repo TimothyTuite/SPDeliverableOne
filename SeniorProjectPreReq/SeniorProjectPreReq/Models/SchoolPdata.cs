@@ -11,6 +11,7 @@ namespace SeniorProjectPreReq.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        [Display(Name = "School")]
         public int ID { get; set; }
         [Required]
         [Display( Name ="Name")]
