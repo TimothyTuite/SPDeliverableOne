@@ -26,20 +26,40 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult School(string id)
         {
             Dictionary<string, string> schoolAttributes = new Dictionary<string, string>();
+            if (id == null)
+            {
+                // return HttpNotFound("id could not be found");
+                schoolAttributes.Add("Error", "School Not Found");
+                return Json(schoolAttributes, JsonRequestBehavior.AllowGet);
+            }
+
+            if (Convert.ToInt32(id) == -1)
+            {
+                List<SchoolPdata> schools = dataContext.SchoolPdatas.ToList();
+                return Json(schools, JsonRequestBehavior.AllowGet);
+            }
+
+            
             int intschoolId = Convert.ToInt32(id);
             var schoolData = dataContext.SchoolPdatas.Find(intschoolId);
+
+
+            if (schoolData == null)
+            {
+                // return HttpNotFound("id could not be found");
+                schoolAttributes.Add("Error", "School Not Found");
+                return Json(schoolAttributes, JsonRequestBehavior.AllowGet);
+            }
+            
+            
+            
             var schoolName = schoolData.SchoolName;
             var schoolAddress = schoolData.SchoolAddress;
             var schoolPhone = schoolData.SchoolPhone;
             var schoolWebsite = schoolData.SchoolWebsite;
             var schoolPrincipal = schoolData.SchoolPrincipal;
 
-            if (schoolData == null)
-            {
-                // return HttpNotFound("id could not be found");
-                schoolAttributes.Add("Error","School Not Found"); 
-                return Json(schoolAttributes, JsonRequestBehavior.AllowGet);
-            }
+            
             schoolAttributes.Add("schoolName", schoolName);
             schoolAttributes.Add("Address", schoolAddress);
             schoolAttributes.Add("Phone", schoolPhone);
@@ -83,6 +103,12 @@ namespace SeniorProjectPreReq.Controllers
             }
         }
         [AllowAnonymous]
+        public ActionResult allSchools()
+        {
+            List<SchoolPdata> all = dataContext.SchoolPdatas.ToList();
+            return Json(all, JsonRequestBehavior.AllowGet);
+        }
+        [AllowAnonymous]
         public ActionResult MiddleSchools()
         {
             List<SchoolPdata> MiddleSchools = dataContext.SchoolPdatas.Where(m => m.type.Name == "Middle School").ToList(); 
@@ -104,6 +130,15 @@ namespace SeniorProjectPreReq.Controllers
         public ActionResult CollaborationSchools()
         {
             var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Collaboration School").ToList();
+            var school = mSchool.First();
+            var TID = school.ID;
+            List<SchoolPdata> CollaborationSchools = dataContext.SchoolPdatas.Where(m => m.schoolTypeID == TID).ToList();
+            return Json(CollaborationSchools, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult prekSchools()
+        {
+            var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Pre-K Learning Center").ToList();
             var school = mSchool.First();
             var TID = school.ID;
             List<SchoolPdata> CollaborationSchools = dataContext.SchoolPdatas.Where(m => m.schoolTypeID == TID).ToList();
