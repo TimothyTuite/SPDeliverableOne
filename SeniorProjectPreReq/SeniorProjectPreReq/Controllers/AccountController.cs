@@ -205,8 +205,14 @@ namespace SeniorProjectPreReq.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+             
             if (ModelState.IsValid)
             {
+                var password = model.Password;
+                if(!password.Any(char.IsUpper) && !password.Any(char.IsSymbol)){
+                    TempData["message"] = "Password requires one uppercase letter and one symbol";
+                    return RedirectToAction("Register");
+                }
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
