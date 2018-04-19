@@ -15,6 +15,8 @@
             success: function (data) {
                 schoolData = data
                 console.log('success', data)
+                $("#dataPanel").show()
+                $("#messagePanel").hide()
                 $("#schoolName").text(schoolData.schoolName);
                 $("#schoolAddress").html('<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  ' + schoolData.Address);
                 $("#schoolPhone").html('<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  ' + schoolData.Phone);
@@ -29,7 +31,11 @@
     }
 </script>
 <br />
-
+<script>
+    $(document).ready(function () {
+        $("#dataPanel").hide(); 
+    });
+</script>
 <script>
     // <li onclick="getApiData(id)" class="list-group-item">schoolName<input style="float: right;" type="checkbox" name="compare" value="id"></li>
 
@@ -87,6 +93,11 @@
         -webkit-hyphens: auto;
         hyphens: auto;
     }
+
+    .carousel-inner > .item > img {
+        width: 640px;
+        height: 450px;
+    }
 </style>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -101,15 +112,14 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="~/Content/img/1_12.jpg" style="width:100%" class="img-responsive">
+            <img src="~/Content/img/JPEFlogo.jpg" style="width:100%" class="img-responsive">
             <div class="carousel-caption">
-                <h1>K - 12 Schools</h1>
                 <p></p>
             </div>
         </div>
 
         <div class="item">
-            <img src="~/Content/img/Elementry.jpg">
+            <img src="~/Content/img/ONExONE_2017_040.jpg" style="width:100%" class="img-responsive">
             <div class="carousel-caption">
                 <h1>Elementary Schools</h1>
                 <p></p>
@@ -117,7 +127,7 @@
         </div>
 
         <div class="item">
-            <img src="~/Content/img/MiddleSchool.jpg">
+            <img src="~/Content/img/ONExONE_2017_054.jpg" style="width:100%" class="img-responsive">
             <div class="carousel-caption">
                 <h1>Middle Schools</h1>
                 <p></p>
@@ -125,7 +135,7 @@
         </div>
 
         <div class="item">
-            <img src="~/Content/img/HighSchools.jpg">
+            <img src="~/Content/img/ONExONE_2017_026.jpg" style="width:100%" class="img-responsive">
             <div class="carousel-caption">
                 <h1>High Schools</h1>
                 <p></p>
@@ -150,10 +160,10 @@
 
 <div class="row text-center">
     <div class="col-sm-2 text-center">
-        <button onclick='getApiSchoolsByTypeAndUpdate("CollaborationSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Combination Schools</button>
+        <button onclick='getApiSchoolsByTypeAndUpdate("CollaborationSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px" title="Schools that are a combination of levels K-12">Combination Schools</button>
     </div>
     <div class="col-sm-2 text-center">
-        <button onclick='getApiSchoolsByTypeAndUpdate("prekSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Pre-Learning Centers</button>
+        <button onclick='getApiSchoolsByTypeAndUpdate("prekSchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px" title="Schools that are prior to Kindergarten (Pre-K)">Pre-Learning Centers</button>
     </div>
     <div class="col-sm-2 text-center">
         <button onclick='getApiSchoolsByTypeAndUpdate("ElementarySchools")' class="btn btn-info btn-block" style="background-color:#33C2DA;border-radius: 0px">Elementary Schools</button>
@@ -183,39 +193,46 @@
 <div class="row" style="height: 390px">
     <div class="col-md-4">
         <div class="panel panel-default" style="border-radius: 0px">
-            <div class="panel-body" style="height: 400px">
-                <h2 id="schoolName" style="text-align:center;height:50px">School Data</h2>
-                <hr />
-                <dl style="height:150px">
-                    @*<dt>
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
-                    </dt>*@
-                    <dd id="schoolAddress" style="font-size:20px">
-                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
-                    </dd>
-                    @*<dt>
-                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
-                    </dt>*@
-                    <dd id="schoolPhone" style="font-size:20px">
-                        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
-                    </dd>
-                    @*<dt>
-                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
-                    </dt>*@
-                    <dd style="font-size:20px;width:auto;">
-                        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="" class="dont-break-out">Visit their website!
-                        </a>
-                    </dd>
-                    @*<dt>
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
-                    </dt>*@
-                    <dd id="schoolPrincipal" style="font-size:20px">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
-                    </dd>
-                </dl>
-                <br />
-                <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA;border-radius: 0px" href="">Visit their Profile!</a>
-
+            <div  class="panel-body" style="height: 400px">
+                <div id="dataPanel">
+                    <h2 id="schoolName" style="text-align:center;height:50px">School Data</h2>
+                    <hr />
+                    <dl style="height:150px">
+                        @*<dt>
+                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
+                </dt>*@
+                        <dd id="schoolAddress" style="font-size:20px">
+                            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
+                        </dd>
+                        @*<dt>
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
+                </dt>*@
+                        <dd id="schoolPhone" style="font-size:20px">
+                            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
+                        </dd>
+                        @*<dt>
+                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
+                </dt>*@
+                        <dd style="font-size:20px;width:auto;">
+                            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="" class="dont-break-out">
+                                Visit their website!
+                            </a>
+                        </dd>
+                        @*<dt>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
+                </dt>*@
+                        <dd id="schoolPrincipal" style="font-size:20px">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
+                        </dd>
+                    </dl>
+                    <br />
+                    <a class="btn btn-info btn-block" id="profileButton" style="background-color:#33C2DA;border-radius: 0px" href="">Visit their Profile!</a>
+                </div>
+                <div id="messagePanel">
+                    <h2 id="welcome" style="text-align:center;height:50px">Welcome to the JPEF School Viewer</h2>
+                    <hr />
+                    <p>We hope that this tool helps you to find the Jacksonville area school that best meets the educational needs of your child. To get started simply select a type of school using the buttons above and then browse through the list to your right</p>
+                </div>
             </div>
         </div>
     </div>
