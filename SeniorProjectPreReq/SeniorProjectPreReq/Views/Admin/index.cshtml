@@ -55,6 +55,7 @@
     <div class="form-group">
         Search by Email: &nbsp; @Html.TextBox("searchStringUserNameOrEmail", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.Minimal)
     </div>
 }
 

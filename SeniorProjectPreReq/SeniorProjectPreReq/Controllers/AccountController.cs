@@ -240,6 +240,8 @@ namespace SeniorProjectPreReq.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            var ie = populateSchoolsList();
+            ViewData["schools"] = ie;
             return View(model);
         }
 
