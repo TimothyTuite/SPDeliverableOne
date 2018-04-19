@@ -24,9 +24,9 @@ namespace SeniorProjectPreReq.Controllers
             string joinQuery = "from ";
             try
             {
-                int intPage = 1;
-                int intPageSize = 5;
-                int intTotalPageCount = 0;
+                int intPage = 10;
+                int intPageSize = 10;
+                int intTotalPageCount = 30;
                 if (searchStringUserNameOrEmail != null)
                 {
                     intPage = 1;
@@ -83,6 +83,7 @@ namespace SeniorProjectPreReq.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Error: " + ex);
                 List<UserRoles.ExpandedUserDTO> col_UserDTO = new List<UserRoles.ExpandedUserDTO>();
+                
                 return View(col_UserDTO.ToPagedList(1, 25));
             }
         }
