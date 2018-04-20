@@ -243,7 +243,7 @@
                 <!-- /input-group -->
                 <div style="height: 380px; overflow-y: scroll;border-radius: 0px">
                 
-                        <ul id="ViewSchoolList" class="list-group" style="border-radius: 0px">
+                        <ul id="ViewSchoolList" class="list-group list-group-flush" style="border-radius: 0px">
                             @foreach (var item in Model)
                             {
                                 <li onclick="checkForCheckbox(),getApiData(@item.ID)" class="list-group-item">@Html.DisplayFor(x => item.SchoolName)<input style="float: right;" type="checkbox" name="compare" value="@item.ID"></li>

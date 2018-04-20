@@ -5,63 +5,69 @@
 }
 
 <h2>Compare your schools!</h2>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvvvF5Dprwvrbc3wq5vPED58kn4kSNzE8&callback=initMap">
+</script>
+<script>
+    var geocoder;
+    var map;
+    var addresses = [];
+    var names = [];
+    names.push('@Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)');
+    names.push('@Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolName)');
+    names.push('@Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolName)');
+    addresses.push("mapOne");
+    addresses.push("mapTwo");
+    addresses.push("mapThree");
+    function codeAddress(id,name) {
+        var address = document.getElementById(id + "Address").innerText;
+        console.log("address: ", address);
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    title: name
+                });
+                google.maps.event.addListener(marker, 'mouseover', function () {
+                    infowindow.open(map, marker);
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+    function initMap() {
+        geocoder = new google.maps.Geocoder();
+        //test start center 30.3270763,-81.656778,20z
+        var uluru = { lat: 30.3270763, lng: -81.656778 };
+        map = new google.maps.Map(document.getElementById("mapOne"), {
+            zoom: 9,
+            center: uluru
+        });
+        for (var x = 0; x < 3; x++) {
+            codeAddress(addresses[x],names[x]);
+        }
 
+    }
+    $(document).ready(function () {
+        initMap
+    });
+</script>
+<div id="mapOne" style="height: 200px; width: calc(100% + 30px); margin-left: -15px;  margin-right: -15px;"></div>
 <div class="row">
     @if (Model.schoolOne != null)
     {
     <div class="col-md-4">
         <div>
-            <h4>@Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)</h4>
+          
+            <h2>@Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)</h2>
             <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.schoolTypeID)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolOne.generalSchoolData.type.Name)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolAddress)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolAddress)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolPrincipal)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolPrincipal)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolPhone)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolPhone)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolOne.generalSchoolData.SchoolWebsite)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolWebsite)
-                </dd>
-            </dl>
+            <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="mapOneAddress">@Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolAddress)</span></h4>
+            <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolPrincipal)</h4>
+            <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolPhone)</h4>
+            <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolWebsite)</h4>
 
             <iframe align="middle" width="360" height="315" src=@Model.schoolOne.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
@@ -106,57 +112,12 @@
     {
     <div class="col-md-4">
         <div>
-            <h4>@Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolName)</h4>
+            <h2>@Html.DisplayFor(model => model.schoolOne.generalSchoolData.SchoolName)</h2>
             <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.schoolTypeID)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.type.Name)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolAddress)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolAddress)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolPrincipal)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolPrincipal)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolPhone)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolPhone)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolTwo.generalSchoolData.SchoolWebsite)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolWebsite)
-                </dd>
-            </dl>
+            <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="mapTwoAddress">@Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolAddress)</span></h4>
+            <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolPrincipal)</h4>
+            <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolPhone)</h4>
+            <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolTwo.generalSchoolData.SchoolWebsite)</h4>
 
             <iframe align="middle" width="360" height="315" src=@Model.schoolTwo.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
@@ -200,57 +161,12 @@
     {
     <div class="col-md-4">
         <div>
-            <h4>@Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolName)</h4>
+            <h2>@Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolName)</h2>
             <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.schoolTypeID)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolThree.generalSchoolData.type.Name)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolAddress)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolAddress)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolPrincipal)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolPrincipal)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolPhone)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolPhone)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.schoolThree.generalSchoolData.SchoolWebsite)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolWebsite)
-                </dd>
-            </dl>
+            <h4><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <span id="mapThreeAddress">@Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolAddress)</span></h4>
+            <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolPrincipal)</h4>
+            <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolPhone)</h4>
+            <h4><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> @Html.DisplayFor(model => model.schoolThree.generalSchoolData.SchoolWebsite)</h4>
 
             <iframe align="middle" width="360" height="315" src=@Model.schoolThree.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
