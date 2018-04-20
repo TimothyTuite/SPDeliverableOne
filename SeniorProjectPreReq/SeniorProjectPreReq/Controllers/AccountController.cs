@@ -23,6 +23,38 @@ namespace SeniorProjectPreReq.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationDbContext dataContext = new ApplicationDbContext();
 
+        [Authorize(Roles ="Administrator")]
+        public ActionResult Index()
+        {
+            List<UserRoles.ExpandedUserDTO> col_UserDTO = new List<UserRoles.ExpandedUserDTO>();
+            var result = dataContext.Users.ToList();
+            foreach (var item in result)
+            {
+                //This If Statment removes all the users that are JPEF Admins from the list view
+                if (!UserManager.GetRoles(item.Id).Contains("Administrator"))
+                {
+                    UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
+                    objUserDTO.UserName = item.UserName;
+                    objUserDTO.Email = item.Email;
+                    objUserDTO.FirstName = item.FirstName;
+                    objUserDTO.LastName = item.LastName;
+                    objUserDTO.school = item.school;
+                    objUserDTO.schoolID = item.schoolID;
+                    objUserDTO.LockoutEndDateUtc = item.LockoutEndDateUtc;
+                    col_UserDTO.Add(objUserDTO);
+                }
+            }
+            return View(col_UserDTO);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string username)
+        {
+            var user = dataContext.Users.Find(username);
+            dataContext.Users.Remove(user);
+            dataContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         private IEnumerable<SelectListItem> populateSchoolsList(object schoolData = null)
         {
@@ -49,6 +81,7 @@ namespace SeniorProjectPreReq.Controllers
         
             return View();
         }
+        [Authorize]
         public ActionResult UserHome()
         {
             var userId = User.Identity.GetUserId();
