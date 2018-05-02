@@ -12,6 +12,7 @@ namespace SeniorProjectPreReq.Models
     {
         public class ExpandedUserDTO
         {
+            public string ID { get; set; }
             [Key]
             [Display(Name = "User Name")]
             public string UserName { get; set; }

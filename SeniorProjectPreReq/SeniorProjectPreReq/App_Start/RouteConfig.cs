@@ -18,6 +18,11 @@ namespace SeniorProjectPreReq
                  defaults: new { controller = "API", action = "Index", id = UrlParameter.Optional , year = UrlParameter.Optional }
              );
             routes.MapRoute(
+                  name: "DeleteAccount",
+                  url: "Account/{action}/{email}/",
+                  defaults: new { controller = "Account", action = "Delete", email = ""}
+             );
+            routes.MapRoute(
                   name: "EditMetricForYear",
                   url: "principal/{action}/{year}/{MetricID}",
                   defaults: new { controller = "Principal", action = "EditMetricForYear", year = "", MetricID="" }

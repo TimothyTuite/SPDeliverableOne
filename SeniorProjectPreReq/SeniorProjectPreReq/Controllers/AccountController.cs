@@ -34,6 +34,7 @@ namespace SeniorProjectPreReq.Controllers
                 if (!UserManager.GetRoles(item.Id).Contains("Administrator"))
                 {
                     UserRoles.ExpandedUserDTO objUserDTO = new UserRoles.ExpandedUserDTO();
+                    objUserDTO.ID = item.Id;
                     objUserDTO.UserName = item.UserName;
                     objUserDTO.Email = item.Email;
                     objUserDTO.FirstName = item.FirstName;
@@ -47,10 +48,9 @@ namespace SeniorProjectPreReq.Controllers
             return View(col_UserDTO);
         }
 
-        [HttpPost]
-        public ActionResult Delete(string username)
+        public ActionResult Delete(string id)
         {
-            var user = dataContext.Users.Find(username);
+            var user = dataContext.Users.Find(id);
             dataContext.Users.Remove(user);
             dataContext.SaveChanges();
             return RedirectToAction("Index");

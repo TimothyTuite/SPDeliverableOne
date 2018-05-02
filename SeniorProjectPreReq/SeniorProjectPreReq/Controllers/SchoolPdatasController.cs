@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using PagedList;
 using System.Configuration; 
 using System.Web.Mvc;
 using SeniorProjectPreReq.Models;
@@ -20,10 +21,35 @@ namespace SeniorProjectPreReq.Controllers
 
         // GET: SchoolPdatas
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
-            var schoolPdatas = db.SchoolPdatas.Include(s => s.type);
-            return View(schoolPdatas.ToList());
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var schools = from s in db.SchoolPdatas
+                           select s;
+            schools = db.SchoolPdatas.Include(s => s.type);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                schools = schools.Where(s => s.SchoolName.Contains(searchString));
+                                       //|| s.SchoolPrincipal.Contains(searchString));
+                                       // Uncomment to add additional search parameters.
+            }
+
+            schools = schools.OrderBy(s => s.SchoolName);
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            return View(schools.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: SchoolPdatas/AllDetails/id
