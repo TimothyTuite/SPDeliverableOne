@@ -5,6 +5,7 @@
 }
 
 <h2>Compare your schools!</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvvvF5Dprwvrbc3wq5vPED58kn4kSNzE8&callback=initMap">
 </script>
@@ -55,6 +56,123 @@
         initMap
     });
 </script>
+<script>
+    var schoolIDs = []
+
+
+
+        function loadCanvas(divID,canvasID) {
+        var canvas = document.createElement('canvas');
+        div = document.getElementById(divID);
+        canvas.id = canvasID;
+        canvas.width = 50;
+        canvas.height = 50;
+        canvas.style.zIndex = 8;
+        canvas.style.position = "inline-block";
+        canvas.style.border = "1px solid";
+        div.appendChild(canvas)
+    }
+    function drawGridAndCanvases(divID, metrics) {
+        for (var x = 0; x < metrics.length; x++){
+            var div = document.getElementById(divID);
+            console.log(divID)
+            var row = document.createElement('div')
+            row.classList.add("row");
+            console.log(metrics[x], typeof metrics[x])
+            if (!(typeof metrics[x] === 'undefined')) {
+                    console.log("building canvas")
+                    var col = document.createElement('div')
+                    col.height = 400;
+                    col.width = 400
+                    var canvas = document.createElement('canvas');
+                    canvas.id = divID + metrics[x] + "C";
+                    canvas.width = 300;
+                    canvas.height = 300;
+
+                    canvas.style.position = "relative";
+                    canvas.style.border = "1px solid";
+                    col.appendChild(canvas)
+                    row.appendChild(col)
+                } else { console.log("undefined") }
+            div.appendChild(row)
+        }
+    }
+    $(document).ready(function () {
+        schoolIDs.push('@Html.DisplayFor(model => model.schoolOne.generalSchoolData.ID)');
+        schoolIDs.push('@Html.DisplayFor(model => model.schoolTwo.generalSchoolData.ID)');
+        schoolIDs.push('@Html.DisplayFor(model => model.schoolThree.generalSchoolData.ID)');
+        for (var x = 0; x < schoolIDs.length; x++) {
+            console.log(x.toString())
+            var xhr = $.ajax({
+                url: '/API/SchoolsMetrics/' + schoolIDs[x],
+                success: function (data) {
+                    console.log(data);
+                    var metrics = []
+
+                    for (d in data) {
+                        if (metrics.indexOf(data[d].MetricName) == -1) {
+                            metrics.push(data[d].MetricName)
+                        }
+                    }
+                    drawGridAndCanvases("Metrics" + x.toString(), metrics)
+                    for (m in metrics) {
+                        var array = []
+                        for (p in data) {
+                            if (data[p].MetricName == metrics[m]) {
+                                array.push(data[p])
+                            }
+                        }
+                        array.sort(function (a, b) {
+                            return a.year - b.year;
+                        })
+                        var years = []
+                        var values = []
+                        for (y in array) {
+                            years.push(array[y].year);
+                            values.push(array[y].value);
+                        }
+                        console.log("years", years);
+                        console.log("values", values)
+
+                        console.log(document.getElementById("metricsC"));
+                        new Chart(document.getElementById("Metrics" + x.toString() + metrics[m] + "C"), {
+                            type: 'bar',
+                            data: {
+                                labels: years,
+                                datasets: [
+                                    {
+                                        label: metrics[m],
+                                        backgroundColor: ["#d32941", "#1d3f5f", "#f5a81e", "#25bad1", "#09a54e"],
+                                        data: values,
+                                        ticks: {
+                                            min: 0
+                                        }
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: { display: false },
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                title: {
+                                    display: true,
+                                    text: metrics[m]
+                                }
+                            }
+                        });
+                    }
+
+
+                }
+            }); 
+
+
+
+            console.log(xhr);
+        //ends loop and ready 
+        }}); 
+    
+</script>
 <div id="mapOne" style="height: 200px; width: calc(100% + 30px); margin-left: -15px;  margin-right: -15px;"></div>
 <div class="row">
     @if (Model.schoolOne != null)
@@ -73,7 +191,7 @@
 
 
             <h4>Metrics</h4>
-            <div class="container">
+            <div id="Metrics1">
                 <ul class="list-group col-md-6">
                     @if (Model.schoolOne.allMetrics != null)
                     {
@@ -122,19 +240,8 @@
             <iframe align="middle" width="360" height="315" src=@Model.schoolTwo.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
             <h4>Metrics</h4>
-            <div class="container">
-                <ul class="list-group col-md-6">
-                    @if (Model.schoolTwo.allMetrics != null)
-                    {
-                        foreach (var i in Model.schoolTwo.allMetrics)
-                        {
-                            <li class="list-group-item" title="@Html.DisplayFor(model => i.metric.Description)">
-                                <span class="badge">@Html.DisplayFor(model => i.value)</span>
-                                @Html.DisplayFor(model => i.metric.MetricName)
-                            </li>
-                        }
-                    }
-                </ul>
+            <div id="Metrics2">
+                
             </div>
 
             <h4>Programs</h4>
@@ -171,19 +278,8 @@
             <iframe align="middle" width="360" height="315" src=@Model.schoolThree.schoolVideo frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
             <h4>Metrics</h4>
-            <div class="container">
-                <ul class="list-group col-md-6">
-                    @if(Model.schoolThree.allMetrics != null)
-                    { 
-                        foreach (var i in Model.schoolThree.allMetrics)
-                        {
-                            <li class="list-group-item" title="@Html.DisplayFor(model => i.metric.Description)">
-                                <span class="badge">@Html.DisplayFor(model => i.value)</span>
-                                @Html.DisplayFor(model => i.metric.MetricName)
-                            </li>
-                        }
-                    }
-                </ul>
+            <div id="Metrics3" class="container">
+                
             </div>
 
             <h4>Programs</h4>
