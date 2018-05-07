@@ -14,6 +14,7 @@ namespace SeniorProjectPreReq.Models
         public int ID { get; set; }
 
         [ForeignKey("school")]
+        [Display(Name = "School ID")]
         public int schoolID { get; set; }
 
         public virtual SchoolPdata school { get; set; }

@@ -19,6 +19,7 @@ namespace SeniorProjectPreReq.Models
         [Display(Name = "Program Description")]
         [MaxLength(450)]
         public string programDescription { get; set; }
+        [Display(Name = "School Type")]
         public int TypeID { get; set; }
 
         

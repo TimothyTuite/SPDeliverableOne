@@ -19,10 +19,11 @@ namespace SeniorProjectPreReq.Models
         [MaxLength(450)]
         public string Description { get; set; }
 
+        [Display(Name = "School Type")]
         public int schoolLevel { get; set; }
-
+        [Display(Name = "Metric Maximum")]
         public float rangeTop { get; set; }
-
+        [Display(Name = "Metric Minimum")]
         public float rangeBottom { get; set; }
     }
 }

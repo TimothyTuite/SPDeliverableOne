@@ -129,7 +129,7 @@ namespace SeniorProjectPreReq.Controllers
 
         public ActionResult CollaborationSchools()
         {
-            var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Collaboration School").ToList();
+            var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "combination School").ToList();
             var school = mSchool.First();
             var TID = school.ID;
             List<SchoolPdata> CollaborationSchools = dataContext.SchoolPdatas.Where(m => m.schoolTypeID == TID).ToList();
@@ -138,7 +138,7 @@ namespace SeniorProjectPreReq.Controllers
 
         public ActionResult prekSchools()
         {
-            var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Pre-K Learning Center").ToList();
+            var mSchool = dataContext.SchoolTypes.Where(m => m.Name == "Pre-Learning Center").ToList();
             var school = mSchool.First();
             var TID = school.ID;
             List<SchoolPdata> CollaborationSchools = dataContext.SchoolPdatas.Where(m => m.schoolTypeID == TID).ToList();

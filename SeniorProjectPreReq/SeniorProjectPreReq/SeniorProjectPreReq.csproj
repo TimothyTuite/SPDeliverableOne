@@ -215,13 +215,9 @@
     <Compile Include="Controllers\APIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PrincipalController.cs" />
-    <Compile Include="Migrations\201804052100165_modelsrequired.cs" />
-    <Compile Include="Migrations\201804052100165_modelsrequired.Designer.cs">
-      <DependentUpon>201804052100165_modelsrequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804052105490_modelsrequired2.cs" />
-    <Compile Include="Migrations\201804052105490_modelsrequired2.Designer.cs">
-      <DependentUpon>201804052105490_modelsrequired2.cs</DependentUpon>
+    <Compile Include="Migrations\201805022034101_init.cs" />
+    <Compile Include="Migrations\201805022034101_init.Designer.cs">
+      <DependentUpon>201805022034101_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\FormModels\AddProgram.cs" />
@@ -375,6 +371,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\JPEFSchools - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\SchoolFactsJax - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.js" />
     <Content Include="Scripts\Highcharts-4.0.1\js\adapters\standalone-framework.src.js" />
@@ -521,11 +519,8 @@
     <Folder Include="Views\AdminApprovals\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804052100165_modelsrequired.resx">
-      <DependentUpon>201804052100165_modelsrequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804052105490_modelsrequired2.resx">
-      <DependentUpon>201804052105490_modelsrequired2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805022034101_init.resx">
+      <DependentUpon>201805022034101_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -28,9 +28,10 @@ namespace SeniorProjectPreReq.Models
         [Required]
         [Display(Name = "Principal")]
         public string SchoolPrincipal { get; set; }
+
         [Required]
         [ForeignKey("type")]
-        [Display(Name = "School Level")]
+        [Display(Name = "School Type")]
         public int schoolTypeID { get; set; }
         public virtual SchoolType type { get; set; }
 

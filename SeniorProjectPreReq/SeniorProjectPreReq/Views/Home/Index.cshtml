@@ -23,7 +23,8 @@
                 $("#schoolWebsite").attr("href", schoolData.Website);
                 $("#schoolWebsite").text(schoolData.Website);
                 $("#schoolPrincipal").html('<span class="glyphicon glyphicon-user" aria-hidden="true"></span>  ' + schoolData.Principal);
-                $("#profileButton").text("Visit " + schoolData.schoolName + "'s profile!");
+                //$("#profileButton").text("Visit " + schoolData.schoolName + "'s profile!"); //Uncomment to make the profile button change with school name.
+                $("#profileButton").text("Visit this school's profile!");
             }
         })
         $("#profileButton").attr("href", "../SchoolPdatas/AllDetails/" + id);
@@ -195,25 +196,25 @@
         <div class="panel panel-default" style="border-radius: 0px">
             <div  class="panel-body" style="height: 400px">
                 <div id="dataPanel">
-                    <h2 id="schoolName" style="text-align:center;height:50px">School Data</h2>
+                    <h2 id="schoolName" style="text-align:center;height:50px;font-size:21px">School Data</h2>
                     <hr />
                     <dl style="height:150px">
                         @*<dt>
                     <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolAddress)
                 </dt>*@
-                        <dd id="schoolAddress" style="font-size:20px">
+                        <dd id="schoolAddress" style="font-size:16px">
                             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Address
                         </dd>
                         @*<dt>
                     <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPhone)
                 </dt>*@
-                        <dd id="schoolPhone" style="font-size:20px">
+                        <dd id="schoolPhone" style="font-size:16px">
                             <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Phone Number
                         </dd>
                         @*<dt>
                     <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolWebsite)
                 </dt>*@
-                        <dd style="font-size:20px;width:auto;">
+                        <dd style="font-size:16px;width:auto;">
                             <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>  <a id="schoolWebsite" href="" class="dont-break-out">
                                 Visit their website!
                             </a>
@@ -221,7 +222,7 @@
                         @*<dt>
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  @Html.DisplayNameFor(x => Model.schoolList.First().SchoolPrincipal)
                 </dt>*@
-                        <dd id="schoolPrincipal" style="font-size:20px">
+                        <dd id="schoolPrincipal" style="font-size:16px">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Principal
                         </dd>
                     </dl>
@@ -231,7 +232,7 @@
                 <div id="messagePanel">
                     <h2 id="welcome" style="text-align:center;height:50px">Welcome to the JPEF School Viewer</h2>
                     <hr />
-                    <p>We hope that this tool helps you to find the Jacksonville area school that best meets the educational needs of your child. To get started simply select a type of school using the buttons above and then browse through the list to your right</p>
+                    <p>We hope that this tool helps you to find the Jacksonville area school that best meets the educational needs of your child. To get started simply select a type of school using the buttons above and then browse through the list to your right.</p>
                 </div>
             </div>
         </div>
